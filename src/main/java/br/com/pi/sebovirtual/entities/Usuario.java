@@ -3,6 +3,8 @@ package br.com.pi.sebovirtual.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,10 +30,12 @@ public class Usuario extends BaseEntity {
 	private transient final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@Column(name = "email")
+	@Email(message = "Email incorreto")
+	@NotNull(message="Email é obrigatório")
 	private String email;
 	
 	@Column(name = "senha")
-	@JsonIgnore
+	@NotNull(message="Senha é obrigatória")
 	private String senha;
 	
 	@Column(name = "habilitado")

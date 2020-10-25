@@ -17,14 +17,17 @@ import br.com.pi.sebovirtual.services.UsuarioService;
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController extends BaseController<Usuario, UsuarioRepository, UsuarioService> {
-	// @Autowired
-	// private UsuarioService usuarioService;
+	
+	@Autowired // Adicionar só se quiser sobrescrever o padrão crud
+	private UsuarioService usuarioService;
 	
 	@PostMapping
+	// Sobrescreve o padrão crud e impede que o usuário coloque a própria autoridade
 	public ResponseEntity<Usuario> store(@Valid @RequestBody Usuario usuario) {
 		usuario.setHabilitado(true);
 		usuario.setAutoridade("USUARIO");
-		return ResponseEntity.ok(usuario);
+		Usuario newUsuario = usuarioService.store(usuario);
+		return ResponseEntity.ok(newUsuario);
 	}
 	/*
 	@Autowired
@@ -91,6 +94,6 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 		repository.save(database);
 		
 		return dadosUsuario;
-	}*/
+	}//*/
 
 }
