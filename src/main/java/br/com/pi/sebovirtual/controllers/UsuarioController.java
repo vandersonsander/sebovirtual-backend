@@ -17,8 +17,8 @@ import br.com.pi.sebovirtual.services.UsuarioService;
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController extends BaseController<Usuario, UsuarioRepository, UsuarioService> {
-	@Autowired
-	private UsuarioService usuarioService;
+	// @Autowired
+	// private UsuarioService usuarioService;
 	
 	@PostMapping
 	public ResponseEntity<Usuario> store(@Valid @RequestBody Usuario usuario) {
