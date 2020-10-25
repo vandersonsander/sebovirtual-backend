@@ -1,5 +1,11 @@
 package br.com.pi.sebovirtual.controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +17,15 @@ import br.com.pi.sebovirtual.services.UsuarioService;
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController extends BaseController<Usuario, UsuarioRepository, UsuarioService> {
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@PostMapping
+	public ResponseEntity<Usuario> store(@Valid @RequestBody Usuario usuario) {
+		usuario.setHabilitado(true);
+		usuario.setAutoridade("USUARIO");
+		return ResponseEntity.ok(usuario);
+	}
 	/*
 	@Autowired
 	private UsuarioRepository repository;
