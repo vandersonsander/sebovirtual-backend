@@ -20,11 +20,12 @@ import io.swagger.annotations.Api;
 @Api(tags = "Login", description = "Autenticações do usuário")
 public class LoginController {
 	@Autowired
-	private UsuarioServiceImpl usuarioService;
+	private UsuarioServiceImpl usuarioServiceImpl;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
-		String token = usuarioService.login(loginDTO);
+	public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody LoginDTO loginDTO)
+			throws Exception {
+		String token = usuarioServiceImpl.login(loginDTO);
 		return ResponseEntity.ok(new JwtResponseDTO(token)); // retorna para o usuário o token
 	}
 }

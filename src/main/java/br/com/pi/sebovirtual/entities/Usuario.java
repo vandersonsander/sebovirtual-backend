@@ -26,9 +26,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Usuario extends BaseEntity {
-	@JsonIgnore // Campos que não serão mostrados para o usuário
-	private transient final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	
 	@Column(name = "email")
 	@Email(message = "Email incorreto")
 	@NotNull(message="Email é obrigatório")
@@ -49,6 +46,7 @@ public class Usuario extends BaseEntity {
 	// Sobrescreve o setter setSenha para salvar a senha
 	// Criptografada
 	public void setSenha(String senha) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		this.senha = passwordEncoder.encode(senha);
 	}
 
