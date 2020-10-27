@@ -69,7 +69,7 @@ public abstract class BaseController<Entity extends BaseEntity,
 					try {
 						bodyField = method.invoke(entity, new Object[] {});
 					
-					// Valor atual do BD
+						// Valor atual do BD
 						Object entityField = method.invoke(currentEntity, new Object[] {});
 						if (bodyField != null // Não pode ser null
 								&& !bodyField.equals(entityField)) { // Só atualiza se o valor for diferente

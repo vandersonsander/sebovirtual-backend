@@ -14,18 +14,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Table(name="Usuario")
-@NoArgsConstructor 
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @ToString
 public class Usuario extends BaseEntity {
+
 	@Column(name = "email")
 	@Email(message = "Email incorreto")
 	@NotNull(message="Email é obrigatório")
@@ -43,10 +44,23 @@ public class Usuario extends BaseEntity {
 	@JsonIgnore
 	private String autoridade;
 	
-	// Sobrescreve o setter setSenha para salvar a senha
-	// Criptografada
-	public void setSenha(String senha) {
+	// Verifica se a senha está criptografada
+	// se a senha não estiver a condição dá false
+	// e faz a criptografia
+	// O mesmo serve para atualizar a senha se a senha
+	// for igual a do banco ele não altera a criptografia
+	// caso não seja, ele faz a criptografia
+	public void setSenha(String senha, Usuario usuario) {
+		if (senha == null) {
+			this.senha = usuario.getSenha();
+			return;
+		}
+		if (usuario == null) return;
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if (passwordEncoder.matches(senha, usuario.getSenha())) {
+			this.senha = usuario.getSenha();
+			return;
+		}
 		this.senha = passwordEncoder.encode(senha);
 	}
 
