@@ -51,7 +51,10 @@ public class Usuario extends BaseEntity {
 	// for igual a do banco ele não altera a criptografia
 	// caso não seja, ele faz a criptografia
 	public void setSenha(String senha, Usuario usuario) {
-		if (senha == null) return;
+		if (senha == null) {
+			this.senha = usuario.getSenha();
+			return;
+		}
 		if (usuario == null) return;
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (passwordEncoder.matches(senha, usuario.getSenha())) {

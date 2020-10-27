@@ -1,5 +1,7 @@
 package br.com.pi.sebovirtual.controllers;
 
+import java.util.NoSuchElementException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,11 +91,16 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 		
 		if (usuario.getEmail() != null &&
 				!usuario.getEmail().equals(database.getEmail())) {
-			Usuario usuarioExists = usuarioService
-					.findByEmail(usuario.getEmail()).get();
-			if (usuarioExists != null) {
-				throw new RuntimeException("Email já existe");
-				//return ResponseEntity.status(401).body(null);
+			try {
+				Usuario usuarioExists = usuarioService
+						.findByEmail(usuario.getEmail()).get();
+				if (usuarioExists != null) {
+					throw new RuntimeException("Email já existe");
+					//return ResponseEntity.status(401).body(null);
+				}
+			} catch (NoSuchElementException e) {
+			} catch (RuntimeException e) {
+				
 			}
 		}
 		
