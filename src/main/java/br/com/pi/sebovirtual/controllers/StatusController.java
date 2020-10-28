@@ -9,7 +9,7 @@ import br.com.pi.sebovirtual.resource.BaseController;
 import br.com.pi.sebovirtual.services.StatusService;
 
 @RestController
-@RequestMapping
+@RequestMapping("status")
 public class StatusController extends BaseController
 	<Status, StatusRepository, StatusService> {
 
