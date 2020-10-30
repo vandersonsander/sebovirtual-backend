@@ -1,11 +1,12 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,28 +17,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+@Entity
+@Table(name="Tipo_Metodo_Pagamento")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Status extends BaseEntity {
+@Getter @Setter
+@ToString
+public class TipoMetodoPagamento extends BaseEntity {
 	
+	/**
+	 * Nome do método de pagamento.
+	 */
+	@Column(name = "nome")	
 	private String nome;
-
-	@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
-	private List<HistoricoAnuncio> historicoAnuncio;
-
-	/*@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
-	private Set<HistoricoEndereco> enderecos = 
-		new HashSet<HistoricoEndereco>();*/
-
-	/*@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
+	
+	@OneToMany(mappedBy = "tipo_metodo_pagamento")
+	@JsonIgnoreProperties("tipo_metodo_pagamento")
 	private Set<HistoricoMetodoPagamento> pagamentos = 
-		new HashSet<HistoricoMetodoPagamento>();*/
-
+		new HashSet<HistoricoMetodoPagamento>();
 }
