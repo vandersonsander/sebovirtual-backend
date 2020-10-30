@@ -30,6 +30,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+//@MappedSuperclass
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends BaseEntity {
 
 	@Column(name = "email")
