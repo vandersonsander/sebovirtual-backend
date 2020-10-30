@@ -1,11 +1,17 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -21,6 +27,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 public class Pedido extends BaseEntity {
+	
 	@NotNull
 	private LocalDate data;
 	@NotNull
@@ -29,20 +36,24 @@ public class Pedido extends BaseEntity {
 	private String status;
 
 	@JoinColumn(name = "id_avaliacao")
+	@JsonIgnoreProperties("pedido")
 	private Avaliacao avaliacao;
 
 	@NotNull
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "fk_id_usuario")
+	@JsonIgnoreProperties("pedido")
 	private Usuario usuario;
 
 	@NotNull
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "fk_id_metodo_de_pagamento")
-	private Integer metodoPagamento;
-
+	@JsonIgnoreProperties("pedido")
+	private HistoricoMetodoPagamento metodoPagamento;
+	
 	@NotNull
 	@OneToMany
 	@JoinColumn(name = "fk_id_endereco")
-	private Integer endereco;
+	@JsonIgnoreProperties("pedido")
+	private HistoricoEndereco endereco;
 }

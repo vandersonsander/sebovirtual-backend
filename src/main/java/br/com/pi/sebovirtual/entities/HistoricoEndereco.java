@@ -1,11 +1,14 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -117,11 +120,9 @@ public class HistoricoEndereco extends BaseEntity {
 	
 	/**
 	 * Conjunto de pedidos enviados para este endereço.
-	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
-	 * no repositório.
 	 */
-	/*@OneToMany(mappedBy = "Historico_Endereco")
+	@OneToMany(mappedBy = "Historico_Endereco")
 	@JsonIgnoreProperties("Historico_Endereco")
-	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
+	private Set<Pedido> pedidos = new HashSet<Pedido>();
 	
 }
