@@ -37,4 +37,4 @@ build/
 src/.DS_Store
 
 ### Application.properties ###
-**/application.properties
+src/main/resources/application.properties
