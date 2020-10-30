@@ -37,47 +37,7 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 		Usuario newUsuario = usuarioService.store(usuario);
 		return ResponseEntity.ok(newUsuario);
 	}
-	/*
-	@Autowired
-	private UsuarioRepository repository;
-	
-	@GetMapping
-	public Iterable<Usuario> getUsuarios() {
-		return repository.findAll();
-	}
-	
-	@GetMapping("/{id}")
-	public Optional<Usuario> getById(@PathVariable int id) {
-		return repository.findById(id);
-	}
-	
-	/*@GetMapping("/nome/{nome}")
-	public Usuario getByNome(@PathVariable String nome) {
-		return repository.findOneByNome(nome);
-	}*/
 
-	/*@GetMapping("/email/{email}")
-	public Usuario getByEmail(@PathVariable String email) {
-		return repository.findOneByEmail(email);
-	}*//*
-	@PostMapping
-	public Usuario addUsuario(@RequestBody Usuario usuario) {
-//		System.out.println(usuario.getId_usuario());/*
-		System.out.println(usuario.getEmail());
-		System.out.println(usuario.getSenha());
-		String senhaCripto = passwordEncoder.encode(usuario.getSenha());
-		System.out.println(usuario.getHabilitado());
-		System.out.println(usuario.getAutoridade());
-		usuario.setSenha(senhaCripto);
-//		repository.save(usuario);
-		return usuario; 
-	}
-	
-	@DeleteMapping("/{id}")
-	public void deleteUsuario(@PathVariable int id) {
-		repository.deleteById(id);
-	}//*/
-	
 	@PutMapping("/{id}")
 	@Override
 	public ResponseEntity<Usuario> update(@Valid @PathVariable Integer id, 
@@ -112,6 +72,6 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 		usuario.setId(database.getId());
 		
 		return ResponseEntity.ok(usuarioService.store(usuario));
-	}//*/
+	}
 
 }
