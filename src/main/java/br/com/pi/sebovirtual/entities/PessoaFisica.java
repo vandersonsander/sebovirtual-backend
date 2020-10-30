@@ -6,7 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import br.com.pi.sebovirtual.resource.BaseEntity;
+import org.hibernate.validator.constraints.br.CPF;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Getter @Setter
 @ToString
-public class PessoaFisica extends BaseEntity {//Usuario {
+public class PessoaFisica extends Usuario {
 	
 	/**
 	 * Primeiro nome do usuário.
@@ -37,6 +38,7 @@ public class PessoaFisica extends BaseEntity {//Usuario {
 	 * CPF do usuário.
 	 */
 	@Column(name = "cpf")
+	@CPF(message = "CPF inválido")
 	private String cpf;
 	
 	/**
@@ -50,15 +52,5 @@ public class PessoaFisica extends BaseEntity {//Usuario {
 	 */
 	@Column(name = "sexo")
 	private String sexo;
-
-	/*public PessoaFisica(String email, String senha, Boolean habilitado, String autoridade,
-			Set<HistoricoEndereco> enderecos, Set<Telefone> telefones, Set<HistoricoMetodoPagamento> pagamentos,
-			String nome, String sobrenome, String cpf, LocalDate dataNascimento) {
-		super(email, senha, habilitado, autoridade, enderecos, telefones, pagamentos);
-		this.nome = nome;
-		this.sobrenome=sobrenome;
-		this.cpf=cpf;
-		this.dataNascimento = dataNascimento;
-	}*/
 
 }
