@@ -28,8 +28,6 @@ public abstract class BaseService<Entity extends BaseEntity,
 	}
 	
 	public Entity update(Integer id, Entity entity) {
-		this.getOne(id);
-		entity.setId(id);
 		return this.store(entity);
 	}
 	
