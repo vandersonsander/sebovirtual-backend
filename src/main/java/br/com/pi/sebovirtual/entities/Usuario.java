@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -13,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -27,11 +28,9 @@ import lombok.ToString;
 @Table(name="Usuario")
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @ToString
-//@MappedSuperclass
-//@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends BaseEntity {
 
 	@Column(name = "email")
@@ -43,13 +42,15 @@ public class Usuario extends BaseEntity {
 	@NotNull(message="Senha é obrigatória")
 	private String senha;
 	
-	@Column(name = "habilitado")
+	/*@Column(name = "habilitado")
 	@JsonIgnore
+	@NotNull(message="Habilitado é obrigatório")
 	private Boolean habilitado;
 	
 	@Column(name = "autoridade")
 	@JsonIgnore
-	private String autoridade;
+	@NotNull(message="Autoridade é obrigatório")
+	private String autoridade;*/
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
