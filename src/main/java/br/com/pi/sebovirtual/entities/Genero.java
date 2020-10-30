@@ -1,6 +1,11 @@
 package br.com.pi.sebovirtual.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -15,6 +20,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Genero extends BaseEntity {
+public class Genero extends BaseEntity {	
 	private String nome;
+	
+	@OneToMany(mappedBy = "genero")
+	@JsonIgnoreProperties("genero")
+	private List<Publicacao> publicacoes;
 }
