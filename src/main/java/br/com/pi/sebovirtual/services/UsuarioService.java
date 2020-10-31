@@ -12,9 +12,14 @@ import br.com.pi.sebovirtual.resource.BaseService;
 @Service
 public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioRepository repository;
 	
 	public Optional<Usuario> findByEmail(String email) {
-		return usuarioRepository.findByEmail(email);
+		return repository.findByEmail(email);
+	}
+	
+	@Override
+	public Usuario store(Usuario entity) {
+		return repository.save(entity);
 	}
 }

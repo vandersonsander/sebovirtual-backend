@@ -29,12 +29,13 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 	@PostMapping
 	// Sobrescreve o padrão crud e impede que o usuário coloque a própria autoridade
 	public ResponseEntity<Usuario> store(@Valid @RequestBody Usuario usuario) {
-		usuario.setHabilitado(true);
-		usuario.setAutoridade("USUARIO");
+		/*usuario.setHabilitado(true);
+		usuario.setAutoridade("USUARIO");*/
 		// Verifica se a senha está criptografada
 		// senão salva a senha criptografada
 		usuario.setSenha(usuario.getSenha(), usuario);
 		Usuario newUsuario = usuarioService.store(usuario);
+		System.out.println("AQUI_USUARIO_controller");
 		return ResponseEntity.ok(newUsuario);
 	}
 
@@ -67,8 +68,8 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 		// Faz uma comparação se a senha é igual a do banco
 		// senão salva a senha criptografada
 		usuario.setSenha(usuario.getSenha(), database);
-		usuario.setHabilitado(database.getHabilitado());
-		usuario.setAutoridade(database.getAutoridade());
+		/*usuario.setHabilitado(database.getHabilitado());
+		usuario.setAutoridade(database.getAutoridade());*/
 		usuario.setId(database.getId());
 		
 		return ResponseEntity.ok(usuarioService.store(usuario));

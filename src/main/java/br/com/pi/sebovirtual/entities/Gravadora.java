@@ -12,25 +12,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Idioma")
+@Table(name="Gravadora")
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter @Setter
 @ToString
-public class Idioma extends BaseEntity {
+public class Gravadora extends BaseEntity {
 	
 	/**
-	 * Nome do idioma.
+	 * Nome da gravadora.
 	 */
 	private String nome;
 	
-	@OneToMany(mappedBy = "idioma")
-	@JsonIgnoreProperties("idioma")
+	@OneToMany(mappedBy = "gravadora")
+	@JsonIgnoreProperties("gravadora")
 	private Set<Midia> midias = 
-		new HashSet<Midia>();	
+		new HashSet<Midia>();
+
 }

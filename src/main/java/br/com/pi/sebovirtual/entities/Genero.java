@@ -1,6 +1,7 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -20,10 +21,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Genero extends BaseEntity {	
+public class Genero extends BaseEntity {
 	private String nome;
 	
 	@OneToMany(mappedBy = "genero")
 	@JsonIgnoreProperties("genero")
-	private List<Publicacao> publicacoes;
+	private Set<Midia> midias = 
+		new HashSet<Midia>();
 }

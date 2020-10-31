@@ -17,20 +17,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Idioma")
+@Table(name="Formato_Midia")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 @ToString
-public class Idioma extends BaseEntity {
+public class FormatoMidia extends BaseEntity {
 	
 	/**
-	 * Nome do idioma.
+	 * Nome do formato de mídia.
 	 */
 	private String nome;
 	
-	@OneToMany(mappedBy = "idioma")
-	@JsonIgnoreProperties("idioma")
+	/*@OneToMany(mappedBy = "formatomidia")
+	@JsonIgnoreProperties("formatomidia")
 	private Set<Midia> midias = 
-		new HashSet<Midia>();	
+		new HashSet<Midia>();*/
+
 }
