@@ -44,4 +44,8 @@ public class Publicacao extends Produto {
 	@JoinColumn(name = "fk_id_genero")
 	@JsonIgnoreProperties("publicacoes")
 	private Genero genero;
+//	
+//	public void setTitulo(String titulo) {
+//		super.setTitulo(titulo);
+//	}
 }
