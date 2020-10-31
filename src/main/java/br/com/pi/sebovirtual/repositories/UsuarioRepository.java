@@ -8,11 +8,7 @@ import br.com.pi.sebovirtual.resource.BaseRepository;
 
 public interface UsuarioRepository extends BaseRepository<Usuario>{
 
-	//Usuario findOneByNome(String nome);
-	
 	Usuario findOneByEmail(String email);
 	Optional<Usuario> findByEmail(String email);
-
-	//List<Usuario> findByNome(String nome);
 
 }
