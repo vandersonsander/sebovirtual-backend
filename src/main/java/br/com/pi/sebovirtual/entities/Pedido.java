@@ -52,8 +52,8 @@ public class Pedido extends BaseEntity {
 	private HistoricoMetodoPagamento metodoPagamento;
 	
 	@NotNull
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "fk_id_endereco")
-	@JsonIgnoreProperties("pedido")
+	@JsonIgnoreProperties("pedidos")
 	private HistoricoEndereco endereco;
 }

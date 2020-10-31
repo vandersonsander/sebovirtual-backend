@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Historico_Endereco")
+@Table(name="historicoendereco")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -121,8 +122,10 @@ public class HistoricoEndereco extends BaseEntity {
 	/**
 	 * Conjunto de pedidos enviados para este endereço.
 	 */
-	@OneToMany(mappedBy = "Historico_Endereco")
-	@JsonIgnoreProperties("Historico_Endereco")
-	private Set<Pedido> pedidos = new HashSet<Pedido>();
+	/*
+	@OneToMany(mappedBy = "historicoEndereco")
+	@JsonIgnoreProperties("historicoEndereco")
+	// private Set<Pedido> pedidos = new HashSet<Pedido>();
+	private List<Pedido> pedidos;*/
 	
 }
