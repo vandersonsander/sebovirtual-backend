@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,25 +12,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Idioma")
+@Table(name="Legenda")
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter @Setter
 @ToString
-public class Idioma extends BaseEntity {
+public class Legenda extends BaseEntity {
 	
 	/**
-	 * Nome do idioma.
+	 * Legenda da midia.
 	 */
 	private String nome;
 	
-	@OneToMany(mappedBy = "idioma")
-	@JsonIgnoreProperties("idioma")
+	@ManyToMany(mappedBy = "legendas")
+	@JsonIgnoreProperties("legenda")
 	private Set<Midia> midias = 
-		new HashSet<Midia>();	
+		new HashSet<Midia>();
+
 }

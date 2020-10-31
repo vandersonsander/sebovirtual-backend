@@ -24,12 +24,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@MappedSuperclass
 public class Produto extends BaseEntity {
 	@NotNull(message = "O título é obrigatório")
 	protected String titulo;
 	
 	@OneToMany(mappedBy = "produto")
 	@JsonIgnoreProperties("produto")
+
 	protected List<HistoricoAnuncio> historicoAnuncio;
 }
