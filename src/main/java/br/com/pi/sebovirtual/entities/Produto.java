@@ -3,8 +3,9 @@ package br.com.pi.sebovirtual.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,15 +23,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto extends BaseEntity {
 	@NotNull(message = "O título é obrigatório")
-	private String titulo;
+	protected String titulo;
 	
 	@OneToMany(mappedBy = "produto")
 	@JsonIgnoreProperties("produto")
-	private List<HistoricoAnuncio> historicoAnuncio;
-	
-	@OneToOne(mappedBy = "produto")
-	@JsonIgnoreProperties("produto")
-	private Publicacao publicacao;
+
+	protected List<HistoricoAnuncio> historicoAnuncio;
 }

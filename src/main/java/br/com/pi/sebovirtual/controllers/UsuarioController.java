@@ -1,7 +1,5 @@
 package br.com.pi.sebovirtual.controllers;
 
-import java.util.NoSuchElementException;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,27 +40,24 @@ public class UsuarioController extends BaseController<Usuario, UsuarioRepository
 	@PutMapping("/{id}")
 	@Override
 	public ResponseEntity<Usuario> update(@Valid @PathVariable Integer id, 
-			@RequestBody Usuario usuario) throws Exception {
+			@RequestBody Usuario usuario)  {
 		Usuario database = usuarioService.getOne(id);
+		try {
+			if (database == null) {
+				throw new NotFoundException("Usuário não encontrado");
+				//return ResponseEntity.status(404).body();
+			}
 		
-		if (database == null) {
-			throw new NotFoundException("Usuário não encontrado");
-			//return ResponseEntity.status(404).body();
-		}
-		
-		if (usuario.getEmail() != null &&
-				!usuario.getEmail().equals(database.getEmail())) {
-			try {
+			if (usuario.getEmail() != null &&
+					!usuario.getEmail().equals(database.getEmail())) {
 				Usuario usuarioExists = usuarioService
 						.findByEmail(usuario.getEmail()).get();
 				if (usuarioExists != null) {
 					throw new RuntimeException("Email já existe");
-					//return ResponseEntity.status(401).body(null);
 				}
-			} catch (NoSuchElementException e) {
-			} catch (RuntimeException e) {
-				
 			}
+		} catch (RuntimeException | NotFoundException e) {
+			return null;
 		}
 		
 		// Faz uma comparação se a senha é igual a do banco

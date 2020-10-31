@@ -3,11 +3,9 @@ package br.com.pi.sebovirtual.entities;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Publicacao extends BaseEntity {
-
-	@OneToOne
-	@JoinColumn(name = "id")
-	@JsonIgnoreProperties("publicacao")
-	private Produto produto;
-
+public class Publicacao extends Produto {
 	private String ano;
 	private Integer quantidadePaginas;
 	private String tipoCapa;
@@ -52,4 +44,8 @@ public class Publicacao extends BaseEntity {
 	@JoinColumn(name = "fk_id_genero")
 	@JsonIgnoreProperties("publicacoes")
 	private Genero genero;
+//	
+//	public void setTitulo(String titulo) {
+//		super.setTitulo(titulo);
+//	}
 }
