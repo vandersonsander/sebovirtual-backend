@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi.sebovirtual.dto.JwtResponseDTO;
 import br.com.pi.sebovirtual.dto.LoginDTO;
+import br.com.pi.sebovirtual.services.UsuarioService;
 import br.com.pi.sebovirtual.services.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
 
@@ -21,11 +22,16 @@ import io.swagger.annotations.Api;
 public class LoginController {
 	@Autowired
 	private UsuarioServiceImpl usuarioServiceImpl;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody LoginDTO loginDTO)
 			throws Exception {
 		String token = usuarioServiceImpl.login(loginDTO);
-		return ResponseEntity.ok(new JwtResponseDTO(token)); // retorna para o usuário o token
+		JwtResponseDTO jwtDTO = new JwtResponseDTO();
+		jwtDTO.setToken(token);
+		jwtDTO.setId(usuarioService.findByEmail(loginDTO.getEmail()).get().getId());
+		return ResponseEntity.ok(jwtDTO); // retorna para o usuário o token
 	}
 }

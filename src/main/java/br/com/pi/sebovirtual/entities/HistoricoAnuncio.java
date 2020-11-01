@@ -4,9 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,11 +28,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class HistoricoAnuncio extends BaseEntity {	
+@Inheritance(strategy = InheritanceType.JOINED)
+public class HistoricoAnuncio extends BaseEntity {
+	@Version
 	private Integer idAnuncio;
 	private Integer estoque;
 	private String titulo;
 	private Double preco;
+	
+	@LastModifiedDate
 	private LocalDate dataModificacao;
 	
 	@ManyToOne
@@ -55,7 +64,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	private List<Imagem> imagens;
 	
 	// Overload do método setDataModificacao
-	public void setDataModificacao(String dataModificacao) {
-		this.dataModificacao = LocalDate.parse(dataModificacao);
-	}
+//	public void setDataModificacao(String dataModificacao) {
+//		this.dataModificacao = LocalDate.parse(dataModificacao);
+//	}
 }
