@@ -67,6 +67,18 @@ public class Usuario extends BaseEntity {
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();
 
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Pedido> pedidos = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
+	
 	// Verifica se a senha está criptografada
 	// se a senha não estiver a condição dá false
 	// e faz a criptografia

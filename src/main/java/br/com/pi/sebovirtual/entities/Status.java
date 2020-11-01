@@ -30,14 +30,14 @@ public class Status extends BaseEntity {
 	@JsonIgnoreProperties("status")
 	private List<HistoricoAnuncio> historicoAnuncio;
 
-	/*@OneToMany(mappedBy = "status")
+	@OneToMany(mappedBy = "status")
 	@JsonIgnoreProperties("status")
 	private Set<HistoricoEndereco> enderecos = 
-		new HashSet<HistoricoEndereco>();*/
+		new HashSet<HistoricoEndereco>();
 
-	/*@OneToMany(mappedBy = "status")
+	@OneToMany(mappedBy = "status")
 	@JsonIgnoreProperties("status")
 	private Set<HistoricoMetodoPagamento> pagamentos = 
-		new HashSet<HistoricoMetodoPagamento>();*/
+		new HashSet<HistoricoMetodoPagamento>();
 
 }

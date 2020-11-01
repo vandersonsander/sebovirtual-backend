@@ -18,7 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Historico_Endereco")
+@Table(name="historicoendereco")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -117,11 +117,11 @@ public class HistoricoEndereco extends BaseEntity {
 	
 	/**
 	 * Conjunto de pedidos enviados para este endereço.
-	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
-	 * no repositório.
 	 */
-	/*@OneToMany(mappedBy = "Historico_Endereco")
-	@JsonIgnoreProperties("Historico_Endereco")
-	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
+	/*
+	@OneToMany(mappedBy = "historicoEndereco")
+	@JsonIgnoreProperties("historicoEndereco")
+	// private Set<Pedido> pedidos = new HashSet<Pedido>();
+	private List<Pedido> pedidos;*/
 	
 }
