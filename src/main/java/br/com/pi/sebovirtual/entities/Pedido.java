@@ -1,13 +1,10 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -30,25 +27,28 @@ public class Pedido extends BaseEntity {
 	
 	@NotNull
 	private LocalDate data;
+	
 	@NotNull
 	private Float valor_total;
+	
 	@NotNull
 	private String status;
 
+	@ManyToOne
 	@JoinColumn(name = "id_avaliacao")
-	@JsonIgnoreProperties("pedido")
+	@JsonIgnoreProperties("pedidos")
 	private Avaliacao avaliacao;
 
 	@NotNull
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
-	@JsonIgnoreProperties("pedido")
+	@JsonIgnoreProperties("pedidos")
 	private Usuario usuario;
 
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "fk_id_metodo_de_pagamento")
-	@JsonIgnoreProperties("pedido")
+	@JsonIgnoreProperties("pedidos")
 	private HistoricoMetodoPagamento metodoPagamento;
 	
 	@NotNull

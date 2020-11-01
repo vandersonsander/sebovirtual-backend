@@ -1,12 +1,10 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -69,9 +67,17 @@ public class Usuario extends BaseEntity {
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();
 
-	@ManyToOne
+	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
-	private List<FaleConosco> contatosFaleConosco;
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Pedido> pedidos = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
 	
 	// Verifica se a senha está criptografada
 	// se a senha não estiver a condição dá false

@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,11 +31,12 @@ public class FaleConosco extends BaseEntity {
 	private String email;
 	
 	@NotNull
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "fk_id_telefone")
+	@JsonIgnoreProperties("contatosFaleConosco")
 	private Telefone telefone;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
 	@JsonIgnoreProperties("contatosFaleConosco")
 	private Usuario usuario;
