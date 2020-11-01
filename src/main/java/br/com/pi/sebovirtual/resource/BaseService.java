@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.pi.sebovirtual.util.Utils;
+
 public abstract class BaseService<Entity extends BaseEntity,
 	Repository extends BaseRepository<Entity>>{
 	@Autowired
@@ -28,9 +30,10 @@ public abstract class BaseService<Entity extends BaseEntity,
 	}
 	
 	public Entity update(Integer id, Entity entity) {
-		this.getOne(id);
+		Entity updateEntity = this.getOne(id);
 		entity.setId(id);
-		return this.store(entity);
+		Utils.updateProperties(entity, updateEntity, true);
+		return this.store(updateEntity);
 	}
 	
 	public void destroy(Integer id) {

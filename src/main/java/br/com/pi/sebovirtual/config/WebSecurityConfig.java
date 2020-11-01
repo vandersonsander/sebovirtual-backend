@@ -56,6 +56,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 					.antMatchers(HttpMethod.POST, "/usuario")
 						.permitAll()
+					.antMatchers(HttpMethod.POST, "/pessoafisica")
+						.permitAll()
+					.antMatchers(HttpMethod.POST, "/pessoajuridica")
+						.permitAll()
 					.antMatchers(HttpMethod.POST, "/login")
 						.permitAll()
 // Qualquer outra requisição deve ser checada
@@ -65,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement()
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 	
 	// liberação de arquivos estáticos (imagens, css, html, xml, json e outros)

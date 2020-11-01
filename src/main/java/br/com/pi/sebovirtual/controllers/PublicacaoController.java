@@ -12,5 +12,5 @@ import br.com.pi.sebovirtual.services.PublicacaoService;
 @RequestMapping("publicacao")
 public class PublicacaoController extends BaseController<Publicacao, PublicacaoRepository,
 	PublicacaoService> {
-
+	
 }

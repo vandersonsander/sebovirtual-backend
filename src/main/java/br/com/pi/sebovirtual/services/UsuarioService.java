@@ -20,6 +20,15 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	
 	@Override
 	public Usuario store(Usuario entity) {
-		return repository.save(entity);
+		System.out.println("store");
+		return super.store(entity);
 	}
+
+	@Override
+	public Usuario update(Integer id, Usuario entity) {
+		System.out.println("update");
+		return super.update(id, entity);
+	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +23,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 public class Status extends BaseEntity {
-	private String nome;
 	
+	private String nome;
+
+	@OneToMany(mappedBy = "status")
+	@JsonIgnoreProperties("status")
+	private List<HistoricoAnuncio> historicoAnuncio;
+
 	/*@OneToMany(mappedBy = "status")
 	@JsonIgnoreProperties("status")
 	private Set<HistoricoEndereco> enderecos = 
@@ -33,5 +39,5 @@ public class Status extends BaseEntity {
 	@JsonIgnoreProperties("status")
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();*/
-	
+
 }

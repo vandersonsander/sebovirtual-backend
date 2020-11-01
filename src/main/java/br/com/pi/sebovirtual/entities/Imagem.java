@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,9 +20,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 public class Imagem extends BaseEntity {
+	
 	private String url;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_id_anuncio")
-	private HistoricoAnuncio anuncio;
+	@JsonIgnoreProperties("imagens")
+	private HistoricoAnuncio historicoAnuncio;
 }

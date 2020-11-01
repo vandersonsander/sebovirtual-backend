@@ -8,5 +8,6 @@ import br.com.pi.sebovirtual.resource.BaseService;
 
 @Service
 public class ProdutoService extends BaseService<Produto, ProdutoRepository> {
+	
 
 }

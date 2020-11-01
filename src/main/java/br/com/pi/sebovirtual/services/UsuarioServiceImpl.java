@@ -36,7 +36,7 @@ public class UsuarioServiceImpl implements UserDetailsService {
 		
 		if (optional.isPresent()) {
 			Usuario usuario = optional.get();
-			
+			// Insere o id no jwtDTO
 			return new User(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
 		} else {
 			throw new UsernameNotFoundException("Usuário não encontrado com o email: " + email);
@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UserDetailsService {
 		} catch(DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch(BadCredentialsException e) {
-			throw new Exception("Senha está incorreta", e);
+			throw new Exception("Usuário ou senha incorretos", e);
 		}
 	}
 	
