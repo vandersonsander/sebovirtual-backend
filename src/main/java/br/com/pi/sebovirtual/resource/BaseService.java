@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.pi.sebovirtual.util.Utils;
 
 public abstract class BaseService<Entity extends BaseEntity,
-	Repository extends BaseRepository<Entity>>{
+	Repository extends BaseRepository<Entity>> {
 	@Autowired
 	private Repository repository;
 
@@ -26,7 +26,12 @@ public abstract class BaseService<Entity extends BaseEntity,
 	}
 	
 	public Entity store(Entity entity) {
-		return repository.save(entity);
+		try {
+			return repository.save(entity);
+		} catch(RuntimeException e) {
+			throw new ResponseStatusException(
+					HttpStatus.FORBIDDEN, "Erro ao cadastrar");
+		}
 	}
 	
 	public Entity update(Integer id, Entity entity) {
