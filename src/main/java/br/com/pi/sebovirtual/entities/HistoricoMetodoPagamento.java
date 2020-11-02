@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Historico_Metodo_Pagamento")
+@Table(name="historico_metodo_pagamento")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -79,8 +80,8 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
 	 * no repositório.
 	 */
-	/*@OneToMany(mappedBy = "Historico_Metodo_Pagamento")
-	@JsonIgnoreProperties("Historico_Metodo_Pagamento")
+	/*@OneToOne(mappedBy = "historico_metodo_pagamento")
+	@JsonIgnoreProperties("historico_metodo_pagamento")
 	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
 	
 }
