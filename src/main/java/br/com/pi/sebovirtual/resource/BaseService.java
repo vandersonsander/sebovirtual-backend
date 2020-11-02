@@ -21,7 +21,8 @@ public abstract class BaseService<Entity extends BaseEntity,
 	public Entity getOne(Integer id) {
 		Optional<Entity> entity = repository.findById(id);
 		if (!entity.isPresent())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entidade não foi encontrada");
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Entidade não foi encontrada");
 		return entity.get();
 	}
 	
