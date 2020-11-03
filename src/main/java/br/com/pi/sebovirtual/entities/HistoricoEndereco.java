@@ -18,7 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="historicoendereco")
+@Table(name="Historico_Endereco")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
