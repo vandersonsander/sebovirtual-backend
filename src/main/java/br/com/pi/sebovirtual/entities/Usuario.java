@@ -12,9 +12,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -67,24 +64,16 @@ public class Usuario extends BaseEntity {
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();
 
-	// Verifica se a senha está criptografada
-	// se a senha não estiver a condição dá false
-	// e faz a criptografia
-	// O mesmo serve para atualizar a senha se a senha
-	// for igual a do banco ele não altera a criptografia
-	// caso não seja, ele faz a criptografia
-	public void setSenha(String senha, Usuario usuario) {
-		if (senha == null) {
-			this.senha = usuario.getSenha();
-			return;
-		}
-		if (usuario == null) return;
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		if (passwordEncoder.matches(senha, usuario.getSenha())) {
-			this.senha = usuario.getSenha();
-			return;
-		}
-		this.senha = passwordEncoder.encode(senha);
-	}
-
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Pedido> pedidos = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
+	
 }
