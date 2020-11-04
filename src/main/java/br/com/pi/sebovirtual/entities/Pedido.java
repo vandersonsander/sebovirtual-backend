@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +45,7 @@ public class Pedido extends BaseEntity {
 	private Usuario usuario;
 
 	@NotNull
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "fk_id_metodo_de_pagamento")
 	@JsonIgnoreProperties("pedidos")
 	private HistoricoMetodoPagamento metodoPagamento;
