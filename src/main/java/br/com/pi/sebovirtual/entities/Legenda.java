@@ -1,13 +1,7 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -29,9 +23,10 @@ public class Legenda extends BaseEntity {
 	 */
 	private String nome;
 	
+	/* NÃO DESCOMENTE ESTE TRECHO DE CÓDIGO. EM TESTE!
 	@ManyToMany(mappedBy = "legendas")
 	@JsonIgnoreProperties("legenda")
 	private Set<Midia> midias = 
-		new HashSet<Midia>();
+		new HashSet<Midia>();*/
 
 }
