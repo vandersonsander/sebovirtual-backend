@@ -21,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="historico_metodo_pagamento")
+@Table(name="Historico_Metodo_Pagamento")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
