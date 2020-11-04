@@ -9,7 +9,7 @@ import br.com.pi.sebovirtual.resource.BaseController;
 import br.com.pi.sebovirtual.services.SubcategoriaService;
 
 @RestController
-@RequestMapping("subcategoria")
+@RequestMapping("motivo-devolucao")
 public class MotivoDevolucaoController extends BaseController
 	<Subcategoria, SubcategoriaRepository, SubcategoriaService> {
 
