@@ -551,11 +551,11 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Devolucao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `quantidade_devolvida` INT NOT NULL COMMENT 'Quantidade devolvida do anúncio. Por exemplo, o usuário pode ter comprado 2 unidades do anúncio, mas pode ter devolvido apenas 1 unidade.',
   `data_devolucao` DATETIME NOT NULL COMMENT 'Data do pedido de devolução.',
-  `Pedido_tem_Anuncio_id` INT NOT NULL,
+  `fk_id_pedido_tem_anuncio` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Devolucao_Pedido_tem_Anuncio1_idx` (`Pedido_tem_Anuncio_id` ASC) VISIBLE,
+  INDEX `fk_Devolucao_Pedido_tem_Anuncio1_idx` (`fk_id_pedido_tem_anuncio` ASC) VISIBLE,
   CONSTRAINT `fk_Devolucao_Pedido_tem_Anuncio1`
-    FOREIGN KEY (`Pedido_tem_Anuncio_id`)
+    FOREIGN KEY (`fk_id_pedido_tem_anuncio`)
     REFERENCES `sebo_virtual`.`Pedido_tem_Anuncio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
