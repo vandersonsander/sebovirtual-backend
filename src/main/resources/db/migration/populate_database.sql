@@ -7,8 +7,8 @@ VALUES
 INSERT INTO sebo_virtual.Pessoa_Fisica (id, nome, sobrenome, data_nascimento, cpf, sexo)
 VALUES 
 ((SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), "Juliana", "Aquino", "1981-06-01", "532.533.684-32", "F"),
-((SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), "Vanderson", "Sander", "1995-01-01", "913.646.577-16", "M"),
-((SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), "Guilherme", "Nunes", "2001-01-01", "313.514.618-93", "M");
+((SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), "Vanderson", "Sander", "1982-10-08", "913.646.577-16", "M"),
+((SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), "Guilherme", "Nunes", "1985-12-15", "313.514.618-93", "M");
 
 INSERT INTO sebo_virtual.Status (nome)
 VALUES 
@@ -116,3 +116,14 @@ VALUES
 ('2', '5', 'CD Flores da Ivete!!!', 
 '1 cd da Ivete Sangalopor R$ 28', '28', '2020-11-04 02:38:35', '1', '1', 
 '1', '1');
+
+INSERT INTO `sebo_virtual`.`Motivo_Devolucao` (`descricao`)
+VALUES
+('Chegou depois do prazo'),
+('Comprado por engano'),
+('Diferente do que foi pedido'),
+('Diferente da descrição do site'),
+('Está com defeito ou não funciona'),
+('Não é mais necessário'),
+('Não desejo informar o motivo'),
+('Produto danificado');

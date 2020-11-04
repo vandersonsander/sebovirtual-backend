@@ -663,7 +663,7 @@ ENGINE = InnoDB;
 -- Table `sebo_virtual`.`Motivo_Devolucao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Motivo_Devolucao` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -673,7 +673,7 @@ ENGINE = InnoDB;
 -- Table `sebo_virtual`.`Pedido_tem_Anuncio_Devolvido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pedido_tem_Anuncio_Devolvido` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `fk_id_pedido` INT NOT NULL,
   `fk_id_anuncio` INT NOT NULL,
   `quantidade_devolvida` INT NOT NULL,
