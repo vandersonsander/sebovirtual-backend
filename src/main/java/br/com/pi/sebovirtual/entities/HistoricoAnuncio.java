@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,13 +26,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class HistoricoAnuncio extends BaseEntity {
 	@Version
 	private Integer idAnuncio;
 	private Integer estoque;
 	private String titulo;
 	private Double preco;
+	private String descricao;
 	
 	@LastModifiedDate
 	private LocalDate dataModificacao;
