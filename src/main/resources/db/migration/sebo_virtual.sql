@@ -660,9 +660,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sebo_virtual`.`MotivoDevolucao`
+-- Table `sebo_virtual`.`Motivo_Devolucao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sebo_virtual`.`MotivoDevolucao` (
+CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Motivo_Devolucao` (
   `id` INT NOT NULL,
   `descricao` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`))
@@ -694,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pedido_tem_Anuncio_Devolvido` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pedido_tem_Anuncio_Devolvido_MotivoDevolucao1`
     FOREIGN KEY (`fk_id_motivo_devolucao`)
-    REFERENCES `sebo_virtual`.`MotivoDevolucao` (`id`)
+    REFERENCES `sebo_virtual`.`Motivo_Devolucao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
