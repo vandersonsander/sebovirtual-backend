@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -57,7 +58,8 @@ public class Telefone extends BaseEntity {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
-	@JsonIgnoreProperties("telefones")
+	//@JsonIgnoreProperties("{telefones, enderecos}")
+	@JsonIgnore
 	private Usuario usuario;
 
 	@OneToMany(mappedBy = "telefone")
