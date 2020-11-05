@@ -25,7 +25,7 @@ public class HistoricoAnuncioService
 		anuncio.setDataModificacao(java.time.LocalDate.now());
 		return super.store(anuncio);
 	}
-	
+
 	/*@Override
 	public HistoricoAnuncio update(Integer id, HistoricoAnuncio anuncio) {
 		if (anuncio.getP)

@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -60,5 +61,12 @@ public class HistoricoAnuncio extends BaseEntity {
 	@OneToMany(mappedBy = "historicoAnuncio")
 	@JsonIgnoreProperties("historicoAnuncio")
 	private List<Imagem> imagens;
+	
+	/**
+	 * Conjunto de anúncios do pedido.
+	 */
+	@OneToMany(mappedBy="historicoAnuncio")
+	@JsonIgnoreProperties("historicoAnuncio")
+	private Set<PedidoTemAnuncio> itens;
 	
 }
