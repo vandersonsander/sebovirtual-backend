@@ -11,22 +11,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="Legenda")
+@Table(name="Motivo_Devolucao")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter @Setter
 @ToString
-public class Legenda extends BaseEntity {
+public class MotivoDevolucao extends BaseEntity {
 	
 	/**
-	 * Legenda da midia.
+	 * Descrição do motivo de devolução.
 	 */
-	private String nome;
-	
-	/* NÃO DESCOMENTE ESTE TRECHO DE CÓDIGO. EM TESTE!
-	@ManyToMany(mappedBy = "legendas")
-	@JsonIgnoreProperties("legenda")
-	private Set<Midia> midias = 
-		new HashSet<Midia>();*/
+	private String descricao;
 
 }
