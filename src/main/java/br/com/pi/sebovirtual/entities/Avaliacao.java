@@ -31,7 +31,6 @@ public class Avaliacao extends BaseEntity {
 	private String comentarios;
 	private Integer anonimo;
 
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
 	@JsonIgnoreProperties("avaliacoes")

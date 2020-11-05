@@ -119,7 +119,7 @@ VALUES
 
 INSERT INTO `sebo_virtual`.`Motivo_Devolucao` (`descricao`)
 VALUES
-('Chegou depois do prazo'),
+('Chegou depois do prllllllazo'),
 ('Comprado por engano'),
 ('Diferente do que foi pedido'),
 ('Diferente da descrição do site'),
@@ -127,3 +127,15 @@ VALUES
 ('Não é mais necessário'),
 ('Não desejo informar o motivo'),
 ('Produto danificado');
+
+INSERT INTO sebo_virtual.Avaliacao (nota_descricao, nota_rapidez_envio, nota_embalagem, comentarios, anonimo, fk_id_usuario)
+VALUES 	
+(6, 10, 8, 'Muito boa a entrega', 1, 1),
+(2, 5, 4, 'Péssima entrega', 1, 2),
+(5, 7, 6, 'Entrega razoável', 1, 3);
+
+INSERT INTO sebo_virtual.Fale_Conosco (id, nome, email, fk_id_usuario, fk_id_telefone)
+VALUES 	
+((SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 'Juliana', 'juliana@gmail.com', 1, 1),
+((SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 'Vanderson', 'vanderson@gmail.com', 1, 1),
+((SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 'Guilherme', 'guilherme@gmail.com', 1, 1);
