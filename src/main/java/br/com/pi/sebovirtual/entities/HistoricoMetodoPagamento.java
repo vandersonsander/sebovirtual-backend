@@ -85,4 +85,3 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
 	
 }
-

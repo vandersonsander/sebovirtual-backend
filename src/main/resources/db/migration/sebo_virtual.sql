@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Usuario` (
   `email` VARCHAR(100) NOT NULL,
   `senha` VARCHAR(64) NOT NULL,
   `habilitado` TINYINT NOT NULL DEFAULT 1,
-  `autoridade` VARCHAR(20) NOT NULL,
+  `autoridade` VARCHAR(20) NOT NULL DEFAULT 'USUARIO',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -545,24 +545,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sebo_virtual`.`Devolucao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Devolucao` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `quantidade_devolvida` INT NOT NULL COMMENT 'Quantidade devolvida do anúncio. Por exemplo, o usuário pode ter comprado 2 unidades do anúncio, mas pode ter devolvido apenas 1 unidade.',
-  `data_devolucao` DATETIME NOT NULL COMMENT 'Data do pedido de devolução.',
-  `Pedido_tem_Anuncio_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Devolucao_Pedido_tem_Anuncio1_idx` (`Pedido_tem_Anuncio_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Devolucao_Pedido_tem_Anuncio1`
-    FOREIGN KEY (`Pedido_tem_Anuncio_id`)
-    REFERENCES `sebo_virtual`.`Pedido_tem_Anuncio` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `sebo_virtual`.`Autor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Autor` (
@@ -672,6 +654,47 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Usuario_favorita_Anuncio` (
   CONSTRAINT `fk_Usuario_has_HistoricoAnuncio_HistoricoAnuncio1`
     FOREIGN KEY (`fk_id_anuncio`)
     REFERENCES `sebo_virtual`.`Historico_Anuncio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sebo_virtual`.`Motivo_Devolucao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Motivo_Devolucao` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sebo_virtual`.`Pedido_tem_Anuncio_Devolvido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pedido_tem_Anuncio_Devolvido` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fk_id_pedido` INT NOT NULL,
+  `fk_id_anuncio` INT NOT NULL,
+  `quantidade_devolvida` INT NOT NULL,
+  `fk_id_motivo_devolucao` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Pedido_has_Historico_Anuncio_Historico_Anuncio1_idx` (`fk_id_anuncio` ASC) VISIBLE,
+  INDEX `fk_Pedido_has_Historico_Anuncio_Pedido1_idx` (`fk_id_pedido` ASC) VISIBLE,
+  INDEX `fk_Pedido_tem_Anuncio_Devolvido_MotivoDevolucao1_idx` (`fk_id_motivo_devolucao` ASC) VISIBLE,
+  CONSTRAINT `fk_Pedido_has_Historico_Anuncio_Pedido1`
+    FOREIGN KEY (`fk_id_pedido`)
+    REFERENCES `sebo_virtual`.`Pedido` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pedido_has_Historico_Anuncio_Historico_Anuncio1`
+    FOREIGN KEY (`fk_id_anuncio`)
+    REFERENCES `sebo_virtual`.`Historico_Anuncio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pedido_tem_Anuncio_Devolvido_MotivoDevolucao1`
+    FOREIGN KEY (`fk_id_motivo_devolucao`)
+    REFERENCES `sebo_virtual`.`Motivo_Devolucao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
