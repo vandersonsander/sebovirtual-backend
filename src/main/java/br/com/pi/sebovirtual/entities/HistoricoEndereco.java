@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -122,7 +123,8 @@ public class HistoricoEndereco extends BaseEntity {
 	 * Conjunto de pedidos enviados para este endereço.
 	 */
 	@OneToMany(mappedBy = "endereco")
-	@JsonIgnoreProperties("enderecos")
+	//@JsonIgnoreProperties("enderecos")
+	@JsonIgnore
 	private Set<Pedido> pedidos = new HashSet<Pedido>();
 	
 }
