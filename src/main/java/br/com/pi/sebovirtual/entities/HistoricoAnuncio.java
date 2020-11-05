@@ -61,8 +61,4 @@ public class HistoricoAnuncio extends BaseEntity {
 	@JsonIgnoreProperties("historicoAnuncio")
 	private List<Imagem> imagens;
 	
-	// Overload do método setDataModificacao
-//	public void setDataModificacao(String dataModificacao) {
-//		this.dataModificacao = LocalDate.parse(dataModificacao);
-//	}
 }
