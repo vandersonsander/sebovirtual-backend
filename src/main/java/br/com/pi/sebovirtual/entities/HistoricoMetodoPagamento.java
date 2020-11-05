@@ -1,12 +1,15 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -80,7 +83,7 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
 	 * no repositório.
 	 */
-	/*@OneToOne(mappedBy = "historico_metodo_pagamento")
+	/*@OneToOne
 	@JsonIgnoreProperties("historico_metodo_pagamento")
 	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
 	

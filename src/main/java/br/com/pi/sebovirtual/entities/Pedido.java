@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,11 +47,12 @@ public class Pedido extends BaseEntity {
 	@JsonIgnoreProperties("pedidos")
 	private Usuario usuario;
 
+	/*
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "fk_id_metodo_de_pagamento")
 	@JsonIgnoreProperties("pedidos")
-	private HistoricoMetodoPagamento metodoPagamento;
+	private HistoricoMetodoPagamento metodoPagamento;*/
 	
 	@NotNull
 	@ManyToOne
