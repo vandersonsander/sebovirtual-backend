@@ -61,6 +61,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<HistoricoEndereco> enderecos = 
 		new HashSet<HistoricoEndereco>();
 	
@@ -77,6 +78,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();
 	
@@ -93,6 +95,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<Pedido> pedidos = new HashSet<>();
 	
 	/**
@@ -100,6 +103,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
 	
 	/**

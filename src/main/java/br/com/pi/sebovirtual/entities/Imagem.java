@@ -27,4 +27,8 @@ public class Imagem extends BaseEntity {
 	@JoinColumn(name = "fk_id_anuncio")
 	@JsonIgnoreProperties("imagens")
 	private HistoricoAnuncio historicoAnuncio;
+	
+	public String getUrl() {
+		return "http://localhost:8080/upload/" + this.url;
+	}
 }
