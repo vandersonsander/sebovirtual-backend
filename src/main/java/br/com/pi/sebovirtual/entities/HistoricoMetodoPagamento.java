@@ -80,8 +80,6 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	
 	/**
 	 * Conjunto de pedidos usados com este método de pagamento.
-	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
-	 * no repositório.
 	 */
 	/*@OneToOne
 	@JsonIgnoreProperties("historico_metodo_pagamento")

@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -24,6 +24,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "Fale_Conosco")
 public class FaleConosco extends BaseEntity {
+	
 	@NotNull
 	@Column(name = "nome")
 	private String nome;
@@ -32,14 +33,15 @@ public class FaleConosco extends BaseEntity {
 	@Column(name = "email")
 	private String email;
 	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "fk_id_telefone")
-	@JsonIgnoreProperties("contatosFaleConosco")
-	private Telefone telefone;
-	
 	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
-	@JsonIgnoreProperties("contatosFaleConosco")
+	//@JsonIgnoreProperties("contatosFaleConosco")
+	@JsonIgnore
 	private Usuario usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_id_telefone")
+	//@JsonIgnoreProperties("contatosFaleConosco")
+	@JsonIgnore
+	private Telefone telefone;
 }
