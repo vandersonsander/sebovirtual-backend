@@ -1,6 +1,7 @@
 package br.com.pi.sebovirtual.services;
 
 import java.nio.file.Path;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.springframework.core.io.Resource;
@@ -9,15 +10,14 @@ import org.springframework.web.multipart.MultipartFile;
 public interface StorageService {
 	void init();
 	
-	void Store(MultipartFile file);
+	String store(MultipartFile file);
 	
 	Stream<Path> loadAll();
 	
 	Path load(String filename);
 	
 	Resource loadAsResource(String filename);
-	
-	void deleteAll();
-	
+
+	Stream<String> storeAll(MultipartFile[] file);
 	
 }
