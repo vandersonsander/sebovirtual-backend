@@ -87,7 +87,8 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
-	private Set<Avaliacao> avaliacoes = new HashSet<>();
+	@JsonIgnore
+	private Set<Avaliacao> avaliacoes = new HashSet<Avaliacao>();
 	
 	/**
 	 * Pedidos do usuário.

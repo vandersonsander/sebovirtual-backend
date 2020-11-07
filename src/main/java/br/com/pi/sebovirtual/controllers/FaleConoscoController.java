@@ -9,7 +9,7 @@ import br.com.pi.sebovirtual.resource.BaseController;
 import br.com.pi.sebovirtual.services.FaleConoscoService;
 
 @RestController
-@RequestMapping("faleconosco")
+@RequestMapping("fale-conosco")
 public class FaleConoscoController extends BaseController<FaleConosco, FaleConoscoRepository, FaleConoscoService> {
 
 }
