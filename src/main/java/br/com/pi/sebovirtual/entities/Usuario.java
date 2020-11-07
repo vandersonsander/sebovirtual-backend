@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -60,6 +61,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<HistoricoEndereco> enderecos = 
 		new HashSet<HistoricoEndereco>();
 	
@@ -76,6 +78,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<HistoricoMetodoPagamento> pagamentos = 
 		new HashSet<HistoricoMetodoPagamento>();
 	
@@ -91,6 +94,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<Pedido> pedidos = new HashSet<>();
 	
 	/**
@@ -98,6 +102,7 @@ public class Usuario extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
 	
 	/**
