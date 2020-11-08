@@ -65,6 +65,7 @@ public class Telefone extends BaseEntity {
 	 */
 	@OneToMany(mappedBy = "telefone")
 	@JsonIgnore
-	private Set<FaleConosco> contatosFaleConosco = new HashSet<>();
+	private Set<FaleConosco> contatosFaleConosco = 
+		new HashSet<FaleConosco>();
 
 }

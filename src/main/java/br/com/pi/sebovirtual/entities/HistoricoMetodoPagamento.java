@@ -77,10 +77,8 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	
 	/**
 	 * Conjunto de pedidos usados com este método de pagamento.
-	 * Descomentar as três linhas abaixo quando a entidade Pedido estiver 
-	 * no repositório.
 	 */
-	/*@OneToOne(mappedBy = "historico_metodo_pagamento")
+	/*@OneToOne
 	@JsonIgnoreProperties("historico_metodo_pagamento")
 	private Set<Pedido> pedidos = new HashSet<Pedido>();*/
 	
