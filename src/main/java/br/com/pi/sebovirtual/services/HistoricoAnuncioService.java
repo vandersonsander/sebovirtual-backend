@@ -13,6 +13,10 @@ public class HistoricoAnuncioService
 	extends BaseService<HistoricoAnuncio, HistoricoAnuncioRepository> {
 	@Autowired
 	private HistoricoAnuncioRepository anuncioRepository;
+	
+	// NÃO DESCOMENTAR E NEM APAGAR ESTE CÓDIGO. EM TESTE!
+	/*@Autowired
+	private UsuarioService usuarioService;*/
 
 	@Override
 	public HistoricoAnuncio store(HistoricoAnuncio anuncio) {
@@ -41,6 +45,29 @@ public class HistoricoAnuncioService
 			Utils.updateProperties(current, anuncio, true);
 			return super.store(anuncio);
 		}
+		
+		// NÃO DESCOMENTAR E NEM APAGAR ESTE CÓDIGO. EM TESTE!
+		// Atualiza os usuários que favoritaram este anúncio.
+		/*Collection<Usuario> novosUsuariosQueFavoritaram = 
+			new HashSet<Usuario>();
+		System.out.println("Qtde de usuarios antes: "+ current.getUsuarios().size());
+		if (!anuncio.getUsuarios().isEmpty()) {
+			
+			// Adiciona os novos usuários que favoritaram este anúncio.
+			novosUsuariosQueFavoritaram
+				.addAll(anuncio.getUsuarios()
+				.stream()
+				.map(u-> {
+					Usuario usuario = usuarioService.getOne(u.getId());
+					usuario.getAnuncios().add(current);
+					return usuario;
+				}).collect(Collectors.toList()));	
+			
+			current.getUsuarios().addAll(novosUsuariosQueFavoritaram);
+			
+			System.out.println("Qtde de novos usuarios: " + novosUsuariosQueFavoritaram.size());
+			System.out.println("Qtde de usuarios atuais: " + current.getUsuarios().size());
+		}*/
 		
 		return super.update(id, anuncio);
 	}

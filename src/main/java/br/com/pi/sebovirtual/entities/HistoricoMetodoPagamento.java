@@ -1,19 +1,16 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
@@ -59,7 +56,7 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_tipo_metodo_pag")
-	@JsonIgnoreProperties("pagamentos")	
+	@JsonIgnore(true)
 	private TipoMetodoPagamento tipo_metodo_pagamento;
 	
 	/**
@@ -67,7 +64,7 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_status")
-	@JsonIgnoreProperties("pagamentos")	
+	@JsonIgnore(true)
 	private Status status;	
 	
 	/**

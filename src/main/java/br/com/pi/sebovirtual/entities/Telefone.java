@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "telefone")
+@Table(name = "Telefone")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -58,12 +57,15 @@ public class Telefone extends BaseEntity {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
-	//@JsonIgnoreProperties("{telefones, enderecos}")
 	@JsonIgnore
 	private Usuario usuario;
 
+	/**
+	 * Chamados do fale conosco deste telefone.
+	 */
 	@OneToMany(mappedBy = "telefone")
-	@JsonIgnoreProperties("telefone")
-	private Set<FaleConosco> contatosFaleConosco = new HashSet<FaleConosco>();
+	@JsonIgnore
+	private Set<FaleConosco> contatosFaleConosco = 
+		new HashSet<FaleConosco>();
 
 }
