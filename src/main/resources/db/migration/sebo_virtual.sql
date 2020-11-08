@@ -69,7 +69,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Publicacao` (
   `id` INT NOT NULL,
-  `ano` YEAR(4) NULL,
+  `ano` DATE NULL,
   `quantidade_paginas` INT NULL,
   `tipo_capa` VARCHAR(45) NULL,
   `isbn10` VARCHAR(10) NULL,
@@ -640,12 +640,11 @@ ENGINE = InnoDB;
 -- Table `sebo_virtual`.`Usuario_favorita_Anuncio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Usuario_favorita_Anuncio` (
-  `id` INT NOT NULL AUTO_INCREMENT,
   `fk_id_usuario` INT NOT NULL,
   `fk_id_anuncio` INT NOT NULL,
   INDEX `fk_Usuario_has_HistoricoAnuncio_HistoricoAnuncio1_idx` (`fk_id_anuncio` ASC) VISIBLE,
   INDEX `fk_Usuario_has_HistoricoAnuncio_Usuario1_idx` (`fk_id_usuario` ASC) VISIBLE,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`fk_id_usuario`, `fk_id_anuncio`),
   CONSTRAINT `fk_Usuario_has_HistoricoAnuncio_Usuario1`
     FOREIGN KEY (`fk_id_usuario`)
     REFERENCES `sebo_virtual`.`Usuario` (`id`)

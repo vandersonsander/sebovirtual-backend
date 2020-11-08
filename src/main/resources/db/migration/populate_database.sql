@@ -127,3 +127,21 @@ VALUES
 ('Não é mais necessário'),
 ('Não desejo informar o motivo'),
 ('Produto danificado');
+
+INSERT INTO `sebo_virtual`.`Avaliacao` (`nota_descricao`, `nota_rapidez_envio`, `nota_embalagem`, `comentarios`, `anonimo`, `fk_id_usuario`)
+VALUES 	
+('6', '10', '8', 'Muito boa a entrega', '1', '1'),
+('2', '5', '4', 'Péssima entrega', '1', '2'),
+('5', '7', '6', 'Entrega razoável', '1', '3');
+
+INSERT INTO `sebo_virtual`.`Fale_Conosco` (`nome`, `email`, `fk_id_usuario`, `fk_id_telefone`)
+VALUES 	
+('Juliana', 'juliana@gmail.com', 1, 1),
+('Vanderson', 'vanderson@gmail.com', 1, 1),
+('Guilherme', 'guilherme@gmail.com', 1, 1);
+
+INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `id_avaliacao`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
+VALUES
+(now(), '500.0', 'Enviado', '1', '1', '1', '1'),
+(now(), '100.0', 'Cancelado', '2', '2', '2', '1'),
+(now(), '1200.0', 'Pendente', '3', '3', '2', '1');

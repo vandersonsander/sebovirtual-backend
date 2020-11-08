@@ -30,6 +30,7 @@ public class PessoaFisicaService extends BaseService<PessoaFisica, PessoaFisicaR
 		Usuario usuario = usuarioService.store(pessoaFisica);
 		pessoaFisica.setSenha(usuario.getSenha());
 		pessoaFisica.setEmail(usuario.getEmail());
+		pessoaFisica.setFavoritos(usuario.getFavoritos());
 		return super.store(pessoaFisica);
 	}
 	
@@ -39,6 +40,8 @@ public class PessoaFisicaService extends BaseService<PessoaFisica, PessoaFisicaR
 		// Valida senha e email de usuário
 		pessoaFisica.setSenha(usuario.getSenha());
 		pessoaFisica.setEmail(usuario.getEmail());
+		pessoaFisica.setFavoritos(usuario.getFavoritos());
+		System.out.println("Favoritos adicionados: " + pessoaFisica.getFavoritos().size() );
 		
 		return super.update(id, pessoaFisica);
 	}
