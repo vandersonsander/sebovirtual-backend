@@ -119,7 +119,7 @@ VALUES
 
 INSERT INTO `sebo_virtual`.`Motivo_Devolucao` (`descricao`)
 VALUES
-('Chegou depois do prllllllazo'),
+('Chegou depois do prazo'),
 ('Comprado por engano'),
 ('Diferente do que foi pedido'),
 ('Diferente da descrição do site'),
