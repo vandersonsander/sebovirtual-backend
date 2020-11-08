@@ -61,8 +61,8 @@ public class Pedido extends BaseEntity {
 	/**
 	 * Conjunto de anúncios do pedido.
 	 */
-	@NotNull
+	/*@NotNull
 	@OneToMany(mappedBy="pedido")
 	//@JsonIgnoreProperties("pedido")
-	private Set<PedidoTemAnuncio> itens;
+	private Set<PedidoTemAnuncio> itens;*/
 }

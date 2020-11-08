@@ -18,6 +18,9 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	@Autowired
 	private UsuarioRepository repository;
 	
+	@Autowired 
+	private HistoricoAnuncioService anuncioService;
+	
 	public Optional<Usuario> findByEmail(String email) {
 		return repository.findByEmail(email);
 	}
@@ -31,6 +34,7 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 		return super.store(entity);
 	}
 	
+	@Override
 	public Usuario update(Integer id, Usuario entity) {
 		Usuario current = super.getOne(id);
 		entity.setId(id);
@@ -49,8 +53,33 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 				current.getSenha()))
 			entity.setSenha(current.getSenha());
 		
-		Utils.updateProperties(entity, current, true);
-		return this.store(current);
+		/** NÃO DESCOMENTAR E NEM APAGAR ESTE CÓDIGO. EM TESTE
+		// Atualiza os anúncios favoritos. O ideaL é que os novos anúncios favoritos
+		// substituíssem os antigos, mas eles estão sendo adicionados.
+		Collection<HistoricoAnuncio> novosFavoritos = 
+			new HashSet<HistoricoAnuncio>();
+		//System.out.println("Qtde de favoritos antes: "+ current.getFavoritos().size());
+		if (!entity.getFavoritos().isEmpty()) {
+			
+			// Adiciona os novos anúncios favoritos.
+			novosFavoritos
+				.addAll(entity.getFavoritos()
+				.stream()
+				.map(a-> {
+					HistoricoAnuncio anuncio = anuncioService.getOne(a.getId());
+					anuncio.getUsuarios().add(current);
+					return anuncio;
+				}).collect(Collectors.toList()));	
+			
+			current.getFavoritos().addAll(novosFavoritos);
+			
+			//System.out.println("Qtde de novos favoritos: " + novosFavoritos.size());
+			//System.out.println("Qtde de favoritos atuais: " + current.getFavoritos().size());
+		}*/
+		// Não funciona para atualizar os favoritos
+		Utils.updateProperties(entity, current, true); 
+		return this.store(current); 
+	
 	}
 	
 	public Boolean emailExists(String email) {
