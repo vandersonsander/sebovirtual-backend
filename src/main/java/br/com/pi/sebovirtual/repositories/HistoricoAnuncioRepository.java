@@ -1,5 +1,7 @@
 package br.com.pi.sebovirtual.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
@@ -11,5 +13,10 @@ public interface HistoricoAnuncioRepository extends BaseRepository<HistoricoAnun
 					" FROM historico_anuncio",
 			nativeQuery=true)
 	Integer getNextIdAnuncio();
+	
+	@Query(
+			value="SELECT a FROM HistoricoAnuncio a " +
+			"where a.estoque = :query")//*/
+	List<HistoricoAnuncio> findQuery(int query);
 	
 }

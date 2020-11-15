@@ -19,11 +19,16 @@ public interface UsuarioRepository extends BaseRepository<Usuario>{
 	 * @param id Id do usuário.
 	 * @return Lista de anúncios favoritados pelo usuário.
 	 */
-	String query = "SELECT * FROM Historico_Anuncio " +
+	/*String query = "SELECT * FROM Historico_Anuncio " +
 			        "WHERE id IN " +
 			        "(SELECT fk_id_anuncio FROM Usuario_favorita_Anuncio " +
 			        "WHERE fk_id_usuario = :id)";	
 	@Query(value = query, nativeQuery = true)
-	List<Object[]> findFavoritesAds(int id);
+	List<Object[]> findFavoritesAds(int id);//*/
+	
+	String query2 = "SELECT u FROM Usuario u " +
+      "WHERE u.email = :email";	
+	@Query(value = query2)
+	List<Usuario> findFavoritesAds(String email);
 	
 }

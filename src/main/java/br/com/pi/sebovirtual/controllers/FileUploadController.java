@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ import br.com.pi.sebovirtual.services.StorageService;
 
 @RestController
 @RequestMapping("upload")
+@CrossOrigin
 public class FileUploadController {
 	
 	private final StorageService storageService;
@@ -49,9 +51,9 @@ public class FileUploadController {
 	public ResponseEntity<Resource> getOne(@PathVariable String filename) {
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-				"inline, filename=\"" + file.getFilename() + "\"")
+				"inline; filename=\"" + file.getFilename() + "\"")
 				.contentType(MediaType.IMAGE_PNG).body(file);
-	}
+	}//*/
 	
 	@PostMapping("{id}")
 	@Transactional
