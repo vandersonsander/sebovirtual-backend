@@ -46,7 +46,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_id_produto")
-	@JsonIgnoreProperties("historicoAnuncio")
+	@JsonIgnoreProperties("anuncios")
 	private Produto produto;
 	
 	@ManyToOne

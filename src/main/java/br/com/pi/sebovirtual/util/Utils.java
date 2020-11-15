@@ -37,29 +37,33 @@ public class Utils {
 		if (target == null) return;
 			
 		// Checks for methods
-		Method[] methods = target.getClass().getMethods();
-		Stream<Method> stream = Stream.of(methods);
-		stream.forEach((method) -> {
+		Method[] sourceMethods = source.getClass().getMethods();
+		Method[] targetMethods = target.getClass().getMethods();
+		Stream.of(targetMethods).forEach((method) -> {
 			String methodName = method.getName();
 			// We want get methods
 			if (methodName.startsWith("get")) {
 				// Changes name "getAttribute" to "setAttribute"
 				final String name = "set" + methodName.substring(3);
 				Object targetValue;
-				Object sourceValue;
+				Object sourceValue = null;
 				try {
 					// Invokes get method
 					targetValue = method.invoke(target, new Object[] {});
-					sourceValue = method.invoke(source, new Object[] {});
+					// Serch for the correspondent get method
+					Optional<Method> getValue = Stream.of(sourceMethods)
+						.filter((fMethod) -> fMethod.getName().equals(method.getName()))
+						.findFirst();
+					if (getValue.isPresent())
+						sourceValue = getValue.get().invoke(source, new Object[] {});
 					if (ignoreNullValues ? sourceValue !=  null : true
 							&& !sourceValue.equals(targetValue)) {
-						Stream<Method> findCorrespondentSet = Stream.of(methods);
 						// Search for the corresponding set method
-						Optional<Method> setMethod = findCorrespondentSet
+						Optional<Method> setValue = Stream.of(targetMethods)
 								.filter((fMethod) -> fMethod.getName().equals(name))
 								.findFirst();
-						if (setMethod.isPresent())
-							setMethod.get().invoke(target, sourceValue);
+						if (setValue.isPresent()) 
+							setValue.get().invoke(target, sourceValue);
 					}
 				} catch (IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException e) {

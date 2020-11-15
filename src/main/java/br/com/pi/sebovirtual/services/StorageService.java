@@ -1,7 +1,6 @@
 package br.com.pi.sebovirtual.services;
 
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.springframework.core.io.Resource;
