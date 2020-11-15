@@ -10,7 +10,7 @@ import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
 public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Integer> {
 	/**
 	 * Pesquisa Geral <br>
-	 * pesquisa por: título, descrição, autor, artista e marca de eletrônicos.
+	 * pesquisa por: título, descrição, autor, artista e marca de eletcrônicos.
 	 * Além de que o anúncio precisa de estar ativo e não ter sido editado
 	 * e ainda possuir estoque
 	 * 

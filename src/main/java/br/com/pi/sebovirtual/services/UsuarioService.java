@@ -27,6 +27,12 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	
 	@Override
 	public Usuario store(Usuario entity) {
+		// Verifica se o email que o usuário quer cadastrar
+		// já existe
+		if (entity.getId() == null)
+			if (emailExists(entity.getEmail()))
+				throw new ResponseStatusException(
+						HttpStatus.FORBIDDEN, "Email já existe");
 		// Verifica se já não há criptografia
 		if (!PasswordUtils.checksIfPasswordIsEncrypted(entity.getSenha()))
 			entity.setSenha(
