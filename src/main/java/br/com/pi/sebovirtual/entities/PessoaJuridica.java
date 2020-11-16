@@ -30,7 +30,7 @@ public class PessoaJuridica extends Usuario {
 	 * CNPJ da pessoa jurídica.
 	 */
 	@Column(name = "cnpj")
-	@CNPJ(message = "CNPJ inválido")
+	//@CNPJ(message = "CNPJ inválido")
 	private String cnpj;
 	
 	/**
