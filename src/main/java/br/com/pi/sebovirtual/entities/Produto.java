@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
-import javax.persistence.OneToMany;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,8 +28,10 @@ public class Produto extends BaseEntity {
 	@NotNull(message = "O título é obrigatório")
 	protected String titulo;
 	
+	@NotNull(message = "A categoria é obrigatória")
+	protected String categoria;
+	
 	@OneToMany(mappedBy = "produto")
 	@JsonIgnoreProperties("produto")
-
-	protected List<HistoricoAnuncio> historicoAnuncio;
+	protected List<HistoricoAnuncio> anuncios;
 }

@@ -1,7 +1,11 @@
 package br.com.pi.sebovirtual.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,5 +49,11 @@ public class Publicacao extends Produto {
 	@JoinColumn(name = "fk_id_genero")
 	@JsonIgnoreProperties("publicacoes")
 	private Genero genero;
-
+	
+	@ManyToMany
+	@JoinTable(
+			name = "Publicacao_Tem_Autor",
+			joinColumns = @JoinColumn(name = "fk_id_produto"),
+			inverseJoinColumns = @JoinColumn(name = "fk_id_autor"))
+	private List<Autor> autores;
 }

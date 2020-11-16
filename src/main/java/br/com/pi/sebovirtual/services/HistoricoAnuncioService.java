@@ -1,6 +1,9 @@
 package br.com.pi.sebovirtual.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
@@ -70,6 +73,10 @@ public class HistoricoAnuncioService
 		}*/
 		
 		return super.update(id, anuncio);
+	}
+	
+	public ResponseEntity<List<HistoricoAnuncio>> findByFilters(Integer query) {
+		return ResponseEntity.ok().body(anuncioRepository.findQuery(query));
 	}
 	
 }
