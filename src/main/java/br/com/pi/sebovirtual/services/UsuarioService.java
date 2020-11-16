@@ -3,7 +3,6 @@ package br.com.pi.sebovirtual.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,8 +18,8 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	@Autowired 
-	private HistoricoAnuncioService anuncioService;
+	/*@Autowired 
+	private HistoricoAnuncioService anuncioService;*/
 	
 	public Optional<Usuario> findByEmail(String email) {
 		return repository.findByEmail(email);
@@ -33,7 +32,7 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 		if (entity.getId() == null)
 			if (emailExists(entity.getEmail()))
 				throw new ResponseStatusException(
-						HttpStatus.FORBIDDEN, "Email já existe");
+						HttpStatus.FORBIDDEN, "Email já existe", new RuntimeException());
 		// Verifica se já não há criptografia
 		if (!PasswordUtils.checksIfPasswordIsEncrypted(entity.getSenha()))
 			entity.setSenha(
