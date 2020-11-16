@@ -17,7 +17,7 @@ public class PesquisaService {
 	@Autowired
 	private PesquisaRepository pesquisaRepository;
 	
-	public SearchDTO findByQuery(
+	public SearchDTO findByQuery (
 			@Nullable String query,
 			@Nullable String categoria,
 			@Nullable Integer pagina,
@@ -37,7 +37,7 @@ public class PesquisaService {
 		Sort sorteable = Sort.unsorted();
 		if (orderBy.equals("minPrice"))
 			sorteable = Sort.by(Sort.Direction.ASC, "preco");
-		else if (orderBy.equals("minPrice"))
+		else if (orderBy.equals("maxPrice"))
 			sorteable = Sort.by(Sort.Direction.DESC, "preco");
 		
 		Pageable pageable = PageRequest.of(pagina, resultsPerPage, sorteable);
