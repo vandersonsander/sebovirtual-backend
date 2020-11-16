@@ -28,11 +28,13 @@ public class PesquisaController {
 			@Nullable @RequestParam String[] cidade,
 			@Nullable @RequestParam Double precoMin,
 			@Nullable @RequestParam Double precoMax,
-			@Nullable @RequestParam String orderBy) {
+			@Nullable @RequestParam String orderBy,
+			@Nullable @RequestParam Integer resultadosPorPagina) {
 		return ResponseEntity.ok().body(anuncioService.findByQuery(
 				query,
 				categoria,
 				pagina,
-				orderBy));
+				orderBy,
+				resultadosPorPagina));
 	}
 }

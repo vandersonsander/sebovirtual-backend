@@ -21,7 +21,8 @@ public class PesquisaService {
 			@Nullable String query,
 			@Nullable String categoria,
 			@Nullable Integer pagina,
-			@Nullable String orderBy) {
+			@Nullable String orderBy,
+			@Nullable Integer resultsPerPage) {
 		if (query == null)
 			query = "";
 		query = query.replace(" ", "%");
@@ -31,13 +32,15 @@ public class PesquisaService {
 			pagina = 0;
 		if (orderBy == null)
 			orderBy = "";
+		if (resultsPerPage == null)
+			resultsPerPage = 16;
 		Sort sorteable = Sort.unsorted();
 		if (orderBy.equals("minPrice"))
 			sorteable = Sort.by(Sort.Direction.ASC, "preco");
 		else if (orderBy.equals("minPrice"))
 			sorteable = Sort.by(Sort.Direction.DESC, "preco");
 		
-		Pageable pageable = PageRequest.of(pagina, 16, sorteable);
+		Pageable pageable = PageRequest.of(pagina, resultsPerPage, sorteable);
 		SearchDTO search = new SearchDTO();
 		Page<HistoricoAnuncio> anuncios = 
 				pesquisaRepository.searchByQuery(query, categoria, pageable);
