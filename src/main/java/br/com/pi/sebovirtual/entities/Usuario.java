@@ -4,12 +4,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -95,7 +93,7 @@ public class Usuario extends BaseEntity {
 	 * Pedidos do usuário.
 	 */
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnore
+	@JsonIgnore(true)
 	private Set<Pedido> pedidos = 
 		new HashSet<Pedido>();
 	
@@ -118,9 +116,9 @@ public class Usuario extends BaseEntity {
 	/**
 	 * Anúncios favoritados pelo usuário.
 	 */
-    @ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+    /*@ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
     @JsonIgnore(true)
     private Collection<HistoricoAnuncio> favoritos = 
-    	new HashSet<HistoricoAnuncio>();
+    	new HashSet<HistoricoAnuncio>();*/
     
 }
