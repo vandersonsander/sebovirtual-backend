@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -25,13 +25,13 @@ public class PedidoTemAnuncio extends BaseEntity {
 	
 	@ManyToOne
     @JoinColumn(name = "id_pedido")
-	@JsonIgnoreProperties("itens")	
-    Pedido pedido;
+	@JsonIgnore(false)
+    private Pedido pedido;
 	
     @ManyToOne
     @JoinColumn(name = "id_anuncio")
-    @JsonIgnoreProperties("itens")
-    HistoricoAnuncio historicoAnuncio;
+    @JsonIgnore(false)
+    private HistoricoAnuncio historicoAnuncio;
  
 	@Column(name = "quantidade")
     private Integer quantidade;
