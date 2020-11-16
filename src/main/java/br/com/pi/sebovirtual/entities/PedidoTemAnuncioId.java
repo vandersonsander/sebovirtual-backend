@@ -1,11 +1,12 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,12 +17,27 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Getter @Setter
 @ToString
-@EqualsAndHashCode
-public class PedidoTemAnuncioKey implements Serializable {
-
+@Embeddable
+public class PedidoTemAnuncioId implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Column(name="id_pedido")
-	Long idPedido;
+	private Long idPedido;
 	
 	@Column(name="id_anuncio")
-	Long idAnuncio;
+	private Long idAnuncio;
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PedidoTemAnuncioId other = (PedidoTemAnuncioId) obj;
+        return Objects.equals(getIdPedido(), other.getIdPedido()) && 
+        	   Objects.equals(getIdAnuncio(), other.getIdAnuncio());
+    }
 }

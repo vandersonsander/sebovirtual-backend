@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +29,6 @@ import lombok.ToString;
 @Entity
 public class Pedido extends BaseEntity {
 
-	@NotNull
 	@Column(name = "data")
 	private LocalDate data;
 
@@ -43,33 +42,30 @@ public class Pedido extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "id_avaliacao")
-	//@JsonIgnoreProperties("pedidos")
-	@JsonIgnore
+	@JsonIgnore(false)
 	private Avaliacao avaliacao;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_id_usuario")
-	//@JsonIgnoreProperties("pedidos")
-	@JsonIgnore
+	@JsonIgnore(false)
 	private Usuario usuario;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "fk_id_metodo_de_pagamento")
-	//@JsonIgnoreProperties("pedidos")
-	@JsonIgnore
+	@JsonIgnore(false)
 	private HistoricoMetodoPagamento metodoPagamento;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_id_endereco")
-	//@JsonIgnoreProperties("pedidos")
-	@JsonIgnore
+	@JsonIgnore(false)
 	private HistoricoEndereco endereco;
 
 	/**
 	 * Conjunto de anúncios do pedido.
 	 */
-	@OneToMany(mappedBy = "pedido")
-	@JsonIgnore
-	private Set<PedidoTemAnuncio> itens = new HashSet<PedidoTemAnuncio>();
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	@JsonIgnore(false)
+	private Set<PedidoTemAnuncio> itens = 
+		new HashSet<>();
 
 }
