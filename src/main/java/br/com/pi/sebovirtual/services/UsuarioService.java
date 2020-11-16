@@ -2,12 +2,14 @@ package br.com.pi.sebovirtual.services;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.pi.sebovirtual.dto.AlterarSenhaDTO;
 import br.com.pi.sebovirtual.entities.Usuario;
 import br.com.pi.sebovirtual.repositories.UsuarioRepository;
 import br.com.pi.sebovirtual.resource.BaseService;
@@ -34,6 +36,7 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 			if (emailExists(entity.getEmail()))
 				throw new ResponseStatusException(
 						HttpStatus.FORBIDDEN, "Email já existe");
+
 		// Verifica se já não há criptografia
 		if (!PasswordUtils.checksIfPasswordIsEncrypted(entity.getSenha()))
 			entity.setSenha(
@@ -92,4 +95,22 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
 	public Boolean emailExists(String email) {
 		return findByEmail(email).isPresent();
 	}
+
+	public Usuario alterarSenha(Integer id, @Valid AlterarSenhaDTO alterarSenhaDTO) {
+		Usuario current = super.getOne(id);
+		
+		String senhaAtual = alterarSenhaDTO.getSenhaAtual();
+		String senhaNova = alterarSenhaDTO.getSenhaNova();
+		String encryptedPassword = current.getSenha();
+		// Compara se a senha atual digital digitada pelo usuário está correta,
+		// ou seja, se a senha é igual a senha salva no banco.
+		if (!PasswordUtils.comparesPassword(senhaAtual, encryptedPassword)) {
+			throw new ResponseStatusException(
+				HttpStatus.FORBIDDEN, "A senha enviada é diferente da senha atual.");
+		} else {
+			current.setSenha(PasswordUtils.encriptyPassword(senhaNova));
+		}
+		return this.update(id, current);
+	}
+	
 }

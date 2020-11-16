@@ -123,8 +123,7 @@ public class HistoricoEndereco extends BaseEntity {
 	 * Conjunto de pedidos enviados para este endereço.
 	 */
 	@OneToMany(mappedBy = "endereco")
-	//@JsonIgnoreProperties("enderecos")
-	@JsonIgnore
+	@JsonIgnore(true)
 	private Set<Pedido> pedidos = new HashSet<Pedido>();
 	
 }

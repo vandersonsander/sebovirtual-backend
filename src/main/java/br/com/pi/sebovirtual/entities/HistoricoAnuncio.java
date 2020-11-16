@@ -1,7 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,8 +8,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -75,19 +72,27 @@ public class HistoricoAnuncio extends BaseEntity {
 	/**
 	 * Conjunto de anúncios do pedido.
 	 */
-	@OneToMany(mappedBy="historicoAnuncio")
-	@JsonIgnoreProperties("historicoAnuncio")
-	private Set<PedidoTemAnuncio> itens;
+	@OneToMany(mappedBy="historicoAnuncio", cascade = CascadeType.ALL)
+	@JsonIgnore(true)
+	private Set<PedidoTemAnuncio> itens =
+		new HashSet<>();
 	
 	/**
 	 * Usuários que favoritaram este anúncio.
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	/*@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "Usuario_favorita_Anuncio",
             joinColumns = @JoinColumn(name = "fk_id_anuncio"),
             inverseJoinColumns = @JoinColumn(name = "fk_id_usuario")
     )
-    @JsonIgnore
-    private Collection<Usuario> usuarios = new HashSet<Usuario>();
+    @JsonIgnore(true)
+    private Collection<Usuario> usuarios = new HashSet<Usuario>();*/
+	
+	/*@ManyToMany(mappedBy = "anuncios", 
+			cascade = {
+					CascadeType.ALL
+			    })
+	@JsonIgnoreProperties({ "anuncios"})
+	private List<Pedido> pedidos;*/
 	
 }

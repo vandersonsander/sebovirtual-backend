@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Publicacao` (
   `tipo_capa` VARCHAR(45) NULL,
   `isbn10` VARCHAR(10) NULL,
   `isbn13` VARCHAR(13) NULL,
-  `idioma` VARCHAR(45) NOT NULL,
+  `edicao` VARCHAR(45) NULL,
   `fk_id_editora` INT NULL,
   `fk_id_formato_publicacao` INT NOT NULL,
   `fk_id_idioma` INT NOT NULL,
-  `fk_id_genero` INT NOT NULL,
+  `fk_id_genero` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Publicacao_Editora1_idx` (`fk_id_editora` ASC) VISIBLE,
   INDEX `fk_Publicacao_FormatoPublicacao1_idx` (`fk_id_formato_publicacao` ASC) VISIBLE,
@@ -308,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Metodo_Pagamento` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_metodo_pagamento` INT NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `data_modificacao` DATETIME NOT NULL,
+  `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fk_id_tipo_metodo_pag` INT NOT NULL,
   `fk_id_status` INT NOT NULL,
   `fk_id_usuario` INT NOT NULL,
@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Endereco` (
   `cidade` VARCHAR(45) NOT NULL,
   `estado` VARCHAR(2) NOT NULL,
   `apelido` VARCHAR(20) NOT NULL COMMENT 'Apelido para o endereço. Exemplos: minha casa, casa da minha mãe.',
-  `data_modificacao` DATETIME NOT NULL COMMENT 'Indica a data de criação/modificação do endereço.',
+  `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Indica a data de criação/modificação do endereço.',
   `fk_id_status` INT NOT NULL,
   `fk_id_usuario` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -395,7 +395,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pedido` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data` DATETIME NOT NULL COMMENT 'Data da realização do pedido.',
+  `data` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Data da realização do pedido.',
   `valor_total` FLOAT NOT NULL COMMENT 'Valor total do pedido.',
   `status` VARCHAR(20) NOT NULL,
   `id_avaliacao` INT NULL,
@@ -450,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Anuncio` (
   `titulo` VARCHAR(100) NOT NULL COMMENT 'Título do anúncio.',
   `descricao` VARCHAR(200) NULL,
   `preco` FLOAT NOT NULL,
-  `data_modificacao` DATETIME NOT NULL,
+  `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fk_id_usuario` INT NOT NULL,
   `fk_id_condicao` INT NOT NULL,
   `fk_id_produto` INT NOT NULL,
@@ -615,7 +615,7 @@ ENGINE = InnoDB;
 -- Table `sebo_virtual`.`Fale_Conosco`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Fale_Conosco` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `fk_id_usuario` INT NULL,
