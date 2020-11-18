@@ -1,13 +1,16 @@
 package br.com.pi.sebovirtual.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
+import br.com.pi.sebovirtual.entities.Status;
 import br.com.pi.sebovirtual.repositories.HistoricoAnuncioRepository;
+import br.com.pi.sebovirtual.repositories.StatusRepository;
 import br.com.pi.sebovirtual.resource.BaseService;
 import br.com.pi.sebovirtual.util.Utils;
 
@@ -17,20 +20,32 @@ public class HistoricoAnuncioService
 	@Autowired
 	private HistoricoAnuncioRepository anuncioRepository;
 	
+	@Autowired
+	private StatusRepository statusRepository;
+	
 	// NÃO DESCOMENTAR E NEM APAGAR ESTE CÓDIGO. EM TESTE!
 	/*@Autowired
 	private UsuarioService usuarioService;*/
 
 	@Override
 	public HistoricoAnuncio store(HistoricoAnuncio anuncio) {
-		Integer idAnuncio = anuncioRepository.getNextIdAnuncio();
+		// Obtém o id do usuário criador do anúncio.
+		Integer idUsuario = anuncio.getUsuario().getId();
+		
+		Integer idAnuncio = anuncioRepository.getNextIdAnuncio(idUsuario);
 		// Se o ID é igual a null
 		// significa que está cadastrando um novo anúncio
 		if (anuncio.getId() == null) 
 			anuncio.setIdAnuncio(
 					idAnuncio == null ? 1 : idAnuncio
 			);
-		anuncio.setDataModificacao(java.time.LocalDate.now());
+		// O novo registro possui status ativo.
+		Optional<Status> statusAtivo = 
+			statusRepository.findOneByNome(Status.ATIVO);
+		if (statusAtivo.isPresent()) {
+			anuncio.setStatus(statusAtivo.get());
+		}
+		anuncio.setDataModificacao(java.time.LocalDateTime.now());
 		return super.store(anuncio);
 	}
 
@@ -44,10 +59,18 @@ public class HistoricoAnuncioService
 		// anúncio mantento o mesmo "idAnuncio"
 		if (current.getItens() != null &&
 				!current.getItens().isEmpty()) {
+			System.out.println("tem pedido");
 			Utils.updateProperties(anuncio, current, true);
 			Utils.updateProperties(current, anuncio, true);
 			return super.store(anuncio);
 		}
+		
+		/*// O status do registro atual muda para editado.
+		Optional<Status> statusEditado = 
+			statusRepository.findOneByNome(Status.EDITADO);
+		if (statusEditado.isPresent()) {
+			current.setStatus(statusEditado.get()); // Muda o status para editado			
+		}*/
 		
 		// NÃO DESCOMENTAR E NEM APAGAR ESTE CÓDIGO. EM TESTE!
 		// Atualiza os usuários que favoritaram este anúncio.
@@ -72,7 +95,7 @@ public class HistoricoAnuncioService
 			System.out.println("Qtde de usuarios atuais: " + current.getUsuarios().size());
 		}*/
 		
-		return super.update(id, anuncio);
+		return this.update(id, anuncio);
 	}
 	
 	public ResponseEntity<List<HistoricoAnuncio>> findByFilters(Integer query) {
