@@ -1,6 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,22 +52,20 @@ public class HistoricoMetodoPagamento extends BaseEntity {
 	 * Data de modificação do método de pagamento.
 	 */
 	@Column(name = "data_modificacao")	
-	private LocalDate dataModificacao;
+	private LocalDateTime dataModificacao;
 	
 	/**
 	 * Tipo do método de pagamento.
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_tipo_metodo_pag")
-	@JsonIgnore(true)
-	private TipoMetodoPagamento tipo_metodo_pagamento;
+	private TipoMetodoPagamento tipoMetodoPagamento;
 	
 	/**
 	 * Status do método de pagamento.
 	 */
 	@ManyToOne
 	@JoinColumn(name = "fk_id_status")
-	@JsonIgnore(true)
 	private Status status;	
 	
 	/**
