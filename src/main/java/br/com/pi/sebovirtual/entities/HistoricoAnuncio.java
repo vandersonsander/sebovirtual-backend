@@ -1,6 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +39,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	private String descricao;
 	
 	@LastModifiedDate
-	private LocalDate dataModificacao;
+	private LocalDateTime dataModificacao;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_id_produto")

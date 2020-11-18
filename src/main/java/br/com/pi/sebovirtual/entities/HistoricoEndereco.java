@@ -1,6 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -101,7 +101,7 @@ public class HistoricoEndereco extends BaseEntity {
 	 * Data de modificação do endereço.
 	 */
 	@Column(name = "data_modificacao")	
-	private LocalDate dataModificacao;
+	private LocalDateTime dataModificacao;
 	
 	/**
 	 * Usuário proprietário do endereço.
