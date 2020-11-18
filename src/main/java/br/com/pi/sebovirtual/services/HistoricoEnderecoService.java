@@ -29,7 +29,8 @@ public class HistoricoEnderecoService
 		// Se o ID é igual a null, significa que está cadastrando um novo endereco
 		if (endereco.getIdEndereco() == null) {
 			// Obtém o próximo idEndereco e o define no objeto endereco.
-			endereco.setIdEndereco(enderecoRepository.getNextIdEndereco(idUsuario));
+			Integer idEndereco = enderecoRepository.getNextIdEndereco(idUsuario);
+			endereco.setIdEndereco(idEndereco == null ? 1 : idEndereco);
 		}
 		
 		// O novo registro possui status ativo.
@@ -46,7 +47,7 @@ public class HistoricoEnderecoService
 	@Override
 	public HistoricoEndereco update(Integer id, HistoricoEndereco endereco) {
 		HistoricoEndereco current = super.getOne(id);
-		
+
 		// O idEndereco não muda, pois apenas uma nova versão deste mesmo
 		// endereco é cadastrada. 
 		endereco.setIdEndereco(current.getIdEndereco());
