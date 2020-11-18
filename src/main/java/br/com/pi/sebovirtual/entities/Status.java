@@ -17,6 +17,10 @@ import lombok.ToString;
 @Entity
 public class Status extends BaseEntity {
 	
+	public static final String ATIVO = "ativo";
+	public static final String EDITADO = "editado";
+	public static final String EXCLUIDO = "excluido";
+	
 	private String nome;
 
 	/* NÃO DESCOMENTE ESTE TRECHO DE CÓDIGO. EM TESTE!
