@@ -9,7 +9,7 @@ import br.com.pi.sebovirtual.resource.BaseRepository;
 
 public interface HistoricoAnuncioRepository extends BaseRepository<HistoricoAnuncio> {
 
-	@Query(value = "SELECT MAX(id_endereco) + 1 AS next_id " + 
+	@Query(value = "SELECT MAX(id_anuncio) + 1 AS next_id " + 
 	               "FROM historico_anuncio " +
 		 	       "WHERE fk_id_usuario = :idUsuario", nativeQuery=true)
 	Integer getNextIdAnuncio(int idUsuario);
