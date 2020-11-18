@@ -45,12 +45,13 @@ public class HistoricoEnderecoService
 	}
 	
 	@Override
-	public HistoricoEndereco update(Integer id, HistoricoEndereco endereco) {
+	public HistoricoEndereco update(Integer id, HistoricoEndereco entity) {
 		HistoricoEndereco current = super.getOne(id);
 
 		// O idEndereco não muda, pois apenas uma nova versão deste mesmo
 		// endereco é cadastrada. 
-		endereco.setIdEndereco(current.getIdEndereco());
+		entity.setIdEndereco(current.getIdEndereco());
+		entity.setUsuario(current.getUsuario());
 		
 		// O status do registro atual muda para editado.
 		Optional<Status> statusEditado = 
@@ -60,7 +61,7 @@ public class HistoricoEnderecoService
 		}
 		
 		// Cria um novo registro para este endereço.
-		return this.store(endereco);
+		return this.store(entity);
 	}
 	
 	@Override
