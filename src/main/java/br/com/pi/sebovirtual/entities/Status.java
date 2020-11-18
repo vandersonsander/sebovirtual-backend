@@ -1,6 +1,13 @@
 package br.com.pi.sebovirtual.entities;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -23,19 +30,18 @@ public class Status extends BaseEntity {
 	
 	private String nome;
 
-	/* NÃO DESCOMENTE ESTE TRECHO DE CÓDIGO. EM TESTE!
 	@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
+	@JsonIgnore(true)
 	private List<HistoricoAnuncio> historicoAnuncio;
 
 	@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
+	@JsonIgnore(true)
 	private Set<HistoricoEndereco> enderecos = 
 		new HashSet<HistoricoEndereco>();
 
 	@OneToMany(mappedBy = "status")
-	@JsonIgnoreProperties("status")
+	@JsonIgnore(true)
 	private Set<HistoricoMetodoPagamento> pagamentos = 
-		new HashSet<HistoricoMetodoPagamento>();*/
+		new HashSet<HistoricoMetodoPagamento>();
 
 }
