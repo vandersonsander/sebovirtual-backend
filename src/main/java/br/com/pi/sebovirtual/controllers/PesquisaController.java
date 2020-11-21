@@ -23,6 +23,7 @@ public class PesquisaController {
 	public ResponseEntity<SearchDTO> getByQuery(
 			@Nullable @RequestParam String query,
 			@Nullable @RequestParam String categoria,
+			@Nullable @RequestParam String condicao,
 			@Nullable @RequestParam Integer pagina,
 			@Nullable @RequestParam String[] estado,
 			@Nullable @RequestParam String[] cidade,
@@ -33,6 +34,9 @@ public class PesquisaController {
 		return ResponseEntity.ok().body(anuncioService.findByQuery(
 				query,
 				categoria,
+				condicao,
+				precoMin,
+				precoMax,
 				pagina,
 				orderBy,
 				resultadosPorPagina));

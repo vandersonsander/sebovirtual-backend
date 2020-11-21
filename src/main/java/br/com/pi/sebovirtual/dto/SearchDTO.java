@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class SearchDTO {
 	private List<?> content;
+	private List<FilterDTO> filters;
 	private Long results;
 	private Integer pages;
 	private Integer currentPage;
