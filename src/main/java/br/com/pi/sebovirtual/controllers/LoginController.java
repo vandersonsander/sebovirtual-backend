@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi.sebovirtual.dto.JwtResponseDTO;
 import br.com.pi.sebovirtual.dto.LoginDTO;
+import br.com.pi.sebovirtual.entities.Usuario;
 import br.com.pi.sebovirtual.services.UsuarioService;
 import br.com.pi.sebovirtual.services.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
@@ -31,7 +32,15 @@ public class LoginController {
 		String token = usuarioServiceImpl.login(loginDTO);
 		JwtResponseDTO jwtDTO = new JwtResponseDTO();
 		jwtDTO.setToken(token);
-		jwtDTO.setId(usuarioService.findByEmail(loginDTO.getEmail()).get().getId());
+		Usuario usuario = usuarioService.findByEmail(loginDTO.getEmail()).get();
+		jwtDTO.setId(usuario.getId());
+		jwtDTO.setEmail(usuario.getEmail());
 		return ResponseEntity.ok(jwtDTO); // retorna para o usuário o token
+	}
+	
+	@PostMapping("/validate")
+	public ResponseEntity<?> validateToken()
+			throws Exception {
+		return ResponseEntity.ok(true);
 	}
 }
