@@ -51,7 +51,19 @@ public class HistoricoEnderecoService
 		// O idEndereco não muda, pois apenas uma nova versão deste mesmo
 		// endereco é cadastrada. 
 		entity.setIdEndereco(current.getIdEndereco());
-		entity.setUsuario(current.getUsuario());
+		//entity.setUsuario(current.getUsuario());
+		
+		if (entity.getPrincipal() == null) {
+			entity.setPrincipal(current.getPrincipal());
+		} else if (entity.getPrincipal() == true) {
+		    int userId = entity.getUsuario().getId(); 
+		    Integer idMainActive = enderecoRepository.
+		    	findMainActiveAddressByUser(userId);
+		    if (idMainActive != null && idMainActive != id)  {
+		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipal(false);
+		    }
+		}
 		
 		// O status do registro atual muda para editado.
 		Optional<Status> statusEditado = 
@@ -59,6 +71,7 @@ public class HistoricoEnderecoService
 		if (statusEditado.isPresent()) {
 			current.setStatus(statusEditado.get()); // Muda o status para editado			
 		}
+		current.setDataModificacao(java.time.LocalDateTime.now());
 		
 		// Cria um novo registro para este endereço.
 		return this.store(entity);
