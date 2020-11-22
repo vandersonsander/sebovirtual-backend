@@ -52,7 +52,36 @@ public class HistoricoEnderecoService
 		// endereco é cadastrada. 
 		entity.setIdEndereco(current.getIdEndereco());
 		//entity.setUsuario(current.getUsuario());
-		
+		if (entity.getNomeDestinatario() == null) {
+			entity.setNomeDestinatario(current.getNomeDestinatario());
+		}
+		if (entity.getCep() == null) {
+			entity.setCep(current.getCep());
+		}		
+		if (entity.getLogradouro() == null) {
+			entity.setLogradouro(current.getLogradouro());
+		}		
+		if (entity.getNumero() == null) {
+			entity.setNumero(current.getNumero());
+		}	
+		if (entity.getComplemento() == null) {
+			entity.setComplemento(current.getComplemento());
+		}
+		if (entity.getPontoReferencia() == null) {
+			entity.setPontoReferencia(current.getPontoReferencia());
+		}
+		if (entity.getBairro() == null) {
+			entity.setBairro(current.getBairro());
+		}
+		if (entity.getCidade() == null) {
+			entity.setCidade(current.getCidade());
+		}
+		if (entity.getEstado() == null) {
+			entity.setEstado(current.getEstado());
+		}
+		if (entity.getApelido() == null) {
+			entity.setApelido(current.getApelido());
+		}
 		if (entity.getPrincipal() == null) {
 			entity.setPrincipal(current.getPrincipal());
 		} else if (entity.getPrincipal() == true) {
