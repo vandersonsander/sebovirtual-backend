@@ -20,6 +20,7 @@ USE `sebo_virtual` ;
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Produto` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(100) NOT NULL,
+  `categoria` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -75,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Publicacao` (
   `isbn10` VARCHAR(10) NULL,
   `isbn13` VARCHAR(13) NULL,
   `edicao` VARCHAR(45) NULL,
+  `resumo` VARCHAR(200) NULL,
   `fk_id_editora` INT NULL,
   `fk_id_formato_publicacao` INT NOT NULL,
   `fk_id_idioma` INT NOT NULL,
@@ -248,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pessoa_Fisica` (
   `id` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
-  `cpf` VARCHAR(14) NOT NULL,
+  `cpf` VARCHAR(14) NULL,
   `data_nascimento` DATE NULL,
   `sexo` VARCHAR(1) NULL,
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
@@ -268,7 +270,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pessoa_Juridica` (
   `id` INT NOT NULL,
   `nome_fantasia` VARCHAR(100) NOT NULL,
-  `cnpj` VARCHAR(18) NOT NULL,
+  `cnpj` VARCHAR(18) NULL,
   `razao_social` VARCHAR(100) NULL,
   UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) VISIBLE,
   INDEX `fk_Pessoa_Juridica_Usuario1_idx` (`id` ASC) VISIBLE,
@@ -309,6 +311,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Metodo_Pagamento` (
   `id_metodo_pagamento` INT NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `principal` TINYINT NOT NULL DEFAULT 0,
   `fk_id_tipo_metodo_pag` INT NOT NULL,
   `fk_id_status` INT NOT NULL,
   `fk_id_usuario` INT NOT NULL,
@@ -351,6 +354,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Endereco` (
   `estado` VARCHAR(2) NOT NULL,
   `apelido` VARCHAR(20) NOT NULL COMMENT 'Apelido para o endereço. Exemplos: minha casa, casa da minha mãe.',
   `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Indica a data de criação/modificação do endereço.',
+  `principal` TINYINT NOT NULL DEFAULT 0 COMMENT 'Identifica se o endereço é o principal ou não.',
   `fk_id_status` INT NOT NULL,
   `fk_id_usuario` INT NOT NULL,
   PRIMARY KEY (`id`),
