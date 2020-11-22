@@ -216,70 +216,93 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 ('1', '10', 'Promoção Imperdível! CD A Festa da Ivete!!!', 
-'1 cd da Ivete Sangalo, A Festa, por R$ 24', '24', '2020-11-04 02:38:35', '1', '1', 
-'1', '1'),
-('2', '5', 'CD Flores da Ivete!!!', 
-'1 cd da Ivete Sangalopor R$ 28', '28', '2020-11-04 02:38:35', '1', '1', 
-'1', '1'),
+'1 cd da Ivete Sangalo, A Festa, por R$ 24', '24', now(), '1', '1', 
+'1', '1'), #1
+('1', '5', 'CD Flores da Ivete!!!', 
+'1 cd da Ivete Sangalopor R$ 28', '28', now(), '1', '1', 
+'1', '1'), #2
 #Livros
 (3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1), #3
 (4, 14, 'A Metamorfose', 'descricao', 12.8,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1), #4
 (5, 16, 'As Armas da Persuassão', 'descricao', 23.5,
   '2020-11-9', 1, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1), #%
 (6, 18, 'Clean Code', 'descricao', 88.2,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1), #6
 (7, 20, 'Contos da Meia Noite', 'descricao', 11.9, 
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1), #7
 (8, 25, 'Dom Casmurro', 'descricao', 11.9,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1), #8
 (9, 30, 'Esaú e Jacó', 'descricao', 11.9,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1), #9
 (10, 27, 'Helena', 'descricao', 13.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1), #10
 (11, 23, 'Histórias da Meia Noite', 'Seminovo, lacrado!', 21.3,
   '2020-11-9', 2, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1), #11
 (12, 23, 'Laranja Mecânica', 'descricao', 33.4,
   '2020-11-9', 2, 3,
-  (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1), #12
 (13, 23, 'Marley e Eu', 'descricao', 40.2,
   '2020-11-9', 2, 3,
-  (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1), #13
 (14, 33, 'Memorial de Aires', 'descricao', 12.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1), #14
 (15, 35, 'Memórias Póstumas de Brás Cubas', 'descricao', 9.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1), #15
 (16, 10, 'Do Mil ao Milhão - Sem cortar o cafezinho', 'descricao', 18.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1), #16
 (17, 28, 'Mindset', 'descricao', 40.2,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1), #17
 (18, 26, 'Quem Mexeu no Meu Queijo', 'descricao', 23.4,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1), #18
 (19, 29, 'Quincas Borba', 'Livro possui algumas dobras e amassados', 4.3,
   '2020-11-9', 3, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1), #19
 (20, 9, 'Senhora', 'Em ótimo estado de conservação', 10.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1), #20
 (21, 25, 'Vidas Secas', 'Edição especial autografada, para colecionadores', 152.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1);
+  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1); #21
   
+INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
+VALUES 
+('1A0k3KYSoTSS9w3+7ce0PEPNQA==.jpg', '1'), #A Festa
+('NZlrNA4NQISXqTbw+QK2kf6IFg==.jpg', '2'), #Flores
+('eQ6wA92kZxK0mDcJl8VtGSzbzow=.png', '3'), #A Mão e a Luva
+('KFbug0vDdtXk9xlu0qiH7mjpag==.png', '4'), #A Metamorfose
+('3T4f2ngJkJMYrqJkkT7byp14yg==.jpg', '5'), #As Armas da Persuassão
+('Yk2oOY8XkkQ7m8tRR2LoNzrVfg==.png', '6'), #Clean Code
+('4CJPGbQdL9JDTpScp0W4nV0=.jpg', '7'), #Contos da Meia Noite
+('9mBIY3J44AbZMJvACiIDqQZsOBg=.png', '8'), #Dom Casmurro
+('5Uz3tu0W14sMaKWBxa5iRsD0oKk=.png', '9'), #Esaú e Jacob
+('TKSKv91J9bsjkmRfJeAilc4=.png', '10'), #Helena
+('vkCvHV2D1W93aht6C0TMKS47hUk=.png', '11'), #História da Meia Noite
+('7KYhUCt3JKMtQKi3BWn0CyYG6A==.png', '12'), #Laranja Mecânica
+('OjGu7i6fiPWWWcewUx0gGM4HmLg=.png', '13'), #Marley & Eu
+('y1NsS7lq43JFEMaX6qXL8bvnSQ==.png', '14'), #Memorial de Aires
+('09rtHgZ7Vs9HWfcY5iBkWyH01g==.png', '16'), #Do Mil ao Milhão
+('dqtvleT4Nq3ahly4NHZ8SMhlCg==.png', '17'), #Mindset
+('4z9bAoUUltVUfAwtbj98wxVG.png', '18'), #Quem Mexeu no Meu Queijo?
+('RwzBvGQaqQ7Bhz0H5xMeSDGl0Q==.png', '19'), #Quincas Borba
+('dqOb5ol7Wdtk+frTtc6tLsG91bM=.png', '20'), #Senhora
+('mfwsqbCBMNuUbNg2vUf0j8gz0g==.png', '21'); #Vidas Secas
+
 #Autores
 INSERT INTO `Autor`
 (`nome`, `sobrenome`)
