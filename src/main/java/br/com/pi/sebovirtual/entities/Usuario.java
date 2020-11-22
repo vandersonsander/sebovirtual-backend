@@ -118,9 +118,9 @@ public class Usuario extends BaseEntity {
 	/**
 	 * Anúncios favoritados pelo usuário.
 	 */
-  @ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+  /*@ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
   @JsonIgnore(true)
   private Collection<HistoricoAnuncio> favoritos = 
-    	new HashSet<HistoricoAnuncio>();
+    	new HashSet<HistoricoAnuncio>();*/
     
 }
