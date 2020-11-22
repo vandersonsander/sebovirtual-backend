@@ -51,7 +51,7 @@ public class HistoricoMetodoPagamentoService extends
 		HistoricoMetodoPagamento current = super.getOne(id);
 
 		// O idMetodoPagamento não muda, pois apenas uma nova versão deste mesmo
-		// método de pagamento é cadastrada. 
+		// método de pagamento é cadastrada.
 		entity.setIdMetodoPagamento(current.getIdMetodoPagamento());
 		
 		// Completa os outros campos se esses estiverem nulos
@@ -63,6 +63,17 @@ public class HistoricoMetodoPagamentoService extends
 		}
 		if (entity.getUsuario() == null) {
 			entity.setUsuario(current.getUsuario());
+		}
+		if (entity.getPrincipal() == null) {
+			entity.setPrincipal(current.getPrincipal());
+		} else if (entity.getPrincipal() == true) {
+		    int userId = entity.getUsuario().getId(); 
+		    Integer idMainActive = metodoPagamentoRepository.
+		    	findMainActiveMethodPaymentByUser(userId);
+		    if (idMainActive != null && idMainActive != id)  {
+		    	HistoricoMetodoPagamento oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipal(false);
+		    }
 		}
 		
 		// O status do registro atual muda para editado.
