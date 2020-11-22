@@ -104,6 +104,12 @@ public class HistoricoEndereco extends BaseEntity {
 	private LocalDateTime dataModificacao;
 	
 	/**
+	  * Identifica se o endereço é o principal.
+	  */
+	@Column(name = "principal") 
+	private Boolean principal;
+	
+	/**
 	 * Usuário proprietário do endereço.
 	 */
 	@ManyToOne
