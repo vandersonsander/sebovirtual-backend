@@ -12,9 +12,9 @@ VALUES
 
 INSERT INTO sebo_virtual.Status (nome)
 VALUES 
-("Ativo"),
-("Editado"),
-("Excluido");
+("ativo"),
+("editado"),
+("excluido");
 
 INSERT INTO sebo_virtual.Tipo_Metodo_Pagamento (nome)
 VALUES 
@@ -24,21 +24,29 @@ VALUES
 INSERT INTO sebo_virtual.Historico_Metodo_Pagamento (id_metodo_pagamento, email, 
 data_modificacao, fk_id_tipo_metodo_pag, fk_id_status, fk_id_usuario)
 VALUES 
-(1, "juliana@gmail.com", now(), 1, 1, 1),
-(2, "juliana@gmail.com", now(), 1, 1, 1);
+("1", "juliana@gmail.com", now(), "1", "1", "1"),
+("2", "juliana@gmail.com", now(), "1", "1", "1"),
+("1", "vanderson@gmail.com", now(), "1", "1", "2"),
+("2", "vanderson@gmail.com", now(), "1", "1", "2"),
+("1", "guilherme@gmail.com", now(), "1", "1", "3"),
+("2", "guilherme@gmail.com", now(), "1", "1", "3");
 
 INSERT INTO sebo_virtual.Historico_Endereco (id_endereco, nome_destinatario, 
 cep, logradouro, numero, complemento, bairro, cidade, estado, apelido,
-data_modificacao, fk_id_status, fk_id_usuario)
+data_modificacao, fk_id_status, fk_id_usuario, principal)
 VALUES 
 ("1", "Juliana Aquino", "22431-004", "Avenida Bartolomeu Mitre", "990",
-"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1");
+"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1),
+("1", "Efigênia Aquino", "60532-620", "Rua 1004", "146",
+"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
+("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "450",
+"", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0);
 
 INSERT INTO sebo_virtual.Telefone (ddi, ddd, numero, tipo, fk_id_usuario)
 VALUES ("55", "21", "980228740", "celular", "1"),
 	   ("55", "21", "39888740", "contato", "1"),
-       ("55", "11", "945418250", "celular", "2"),
-       ("55", "11", "967305807", "celular", "2");
+       ("55", "11", "945418250", "contato", "2"),
+       ("55", "11", "945418250", "celular", "2");
 
 INSERT INTO sebo_virtual.Marca (nome)
 VALUES ("Sony"),
@@ -92,44 +100,44 @@ VALUES ("Usado"),
 ("Novo");
 
 #Cadastro de Produtos
-INSERT INTO `sebo_virtual`.`Produto` (`titulo`) VALUES 
+INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES 
 #CD's
-('A Festa'),
-('Flores'),
+('A Festa', 'cd'),
+('Flores', 'cd'),
 #Livros
-('A Mão e a Luva'),
-('A Metamorfose'),
-('As Armas da Persuassão'),
-('Clean Code'),
-('Contos da Meia Noite'),
-('Dom Casmurro'),
-('Esaú e Jacó'),
-('Helena'),
-('Histórias da Meia Noite'),
-('Laranja Mecânica'),
-('Marley e Eu'),
-('Memorial de Aires'),
-('Memórias Póstumas de Brás Cubas'),
-('Do Mil ao Milhão'),
-('Mindset'),
-('Quem Mexeu no Meu Queijo'),
-('Quincas Borba'),
-('Senhora'),
-('Vidas Secas'),
+('A Mão e a Luva', 'livro'),
+('A Metamorfose', 'livro'),
+('As Armas da Persuassão', 'livro'),
+('Clean Code', 'livro'),
+('Contos da Meia Noite', 'livro'),
+('Dom Casmurro', 'livro'),
+('Esaú e Jacó', 'livro'),
+('Helena', 'livro'),
+('Histórias da Meia Noite', 'livro'),
+('Laranja Mecânica', 'livro'),
+('Marley e Eu', 'livro'),
+('Memorial de Aires', 'livro'),
+('Memórias Póstumas de Brás Cubas', 'livro'),
+('Do Mil ao Milhão', 'livro'),
+('Mindset', 'livro'),
+('Quem Mexeu no Meu Queijo', 'livro'),
+('Quincas Borba', 'livro'),
+('Senhora', 'livro'),
+('Vidas Secas', 'livro'),
 #Eletrônicos
-('Super Nintendo'),
+('Super Nintendo', 'eletronico'),
 #Discos
-('Tim Maia'),
-('Trash in Texas'),
-('Elvis Presley'),
-('Evil Empire'),
-('Hillbilly Rawhide'),
-('Isso é Amor'),
-('Kiss'),
-('Mickey'),
-('Red Hot Mothers Milk'),
-('Some People Have Real Problems'),
-('Twist Uptown The Crystals');
+('Tim Maia', 'disco'),
+('Trash in Texas', 'disco'),
+('Elvis Presley', 'disco'),
+('Evil Empire', 'disco'),
+('Hillbilly Rawhide', 'disco'),
+('Isso é Amor', 'disco'),
+('Kiss', 'disco'),
+('Mickey', 'disco'),
+('Red Hot Mothers Milk', 'disco'),
+('Some People Have Real Problems', 'disco'),
+('Twist Uptown The Crystals', 'disco');
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
@@ -208,70 +216,93 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 ('1', '10', 'Promoção Imperdível! CD A Festa da Ivete!!!', 
-'1 cd da Ivete Sangalo, A Festa, por R$ 24', '24', '2020-11-04 02:38:35', '1', '1', 
-'1', '1'),
-('2', '5', 'CD Flores da Ivete!!!', 
-'1 cd da Ivete Sangalopor R$ 28', '28', '2020-11-04 02:38:35', '1', '1', 
-'1', '1'),
+'1 cd da Ivete Sangalo, A Festa, por R$ 24', '24', now(), '1', '1', 
+'1', '1'), #1
+('1', '5', 'CD Flores da Ivete!!!', 
+'1 cd da Ivete Sangalopor R$ 28', '28', now(), '1', '1', 
+'1', '1'), #2
 #Livros
 (3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1), #3
 (4, 14, 'A Metamorfose', 'descricao', 12.8,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1), #4
 (5, 16, 'As Armas da Persuassão', 'descricao', 23.5,
   '2020-11-9', 1, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1), #%
 (6, 18, 'Clean Code', 'descricao', 88.2,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1), #6
 (7, 20, 'Contos da Meia Noite', 'descricao', 11.9, 
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1), #7
 (8, 25, 'Dom Casmurro', 'descricao', 11.9,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1), #8
 (9, 30, 'Esaú e Jacó', 'descricao', 11.9,
   '2020-11-9', 1, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1), #9
 (10, 27, 'Helena', 'descricao', 13.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1), #10
 (11, 23, 'Histórias da Meia Noite', 'Seminovo, lacrado!', 21.3,
   '2020-11-9', 2, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1), #11
 (12, 23, 'Laranja Mecânica', 'descricao', 33.4,
   '2020-11-9', 2, 3,
-  (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1), #12
 (13, 23, 'Marley e Eu', 'descricao', 40.2,
   '2020-11-9', 2, 3,
-  (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1), #13
 (14, 33, 'Memorial de Aires', 'descricao', 12.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1), #14
 (15, 35, 'Memórias Póstumas de Brás Cubas', 'descricao', 9.5,
   '2020-11-9', 2, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1), #15
 (16, 10, 'Do Mil ao Milhão - Sem cortar o cafezinho', 'descricao', 18.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1), #16
 (17, 28, 'Mindset', 'descricao', 40.2,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1), #17
 (18, 26, 'Quem Mexeu no Meu Queijo', 'descricao', 23.4,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1), #18
 (19, 29, 'Quincas Borba', 'Livro possui algumas dobras e amassados', 4.3,
   '2020-11-9', 3, 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1), #19
 (20, 9, 'Senhora', 'Em ótimo estado de conservação', 10.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1),
+  (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1), #20
 (21, 25, 'Vidas Secas', 'Edição especial autografada, para colecionadores', 152.5,
   '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1);
+  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1); #21
   
+INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
+VALUES 
+('1A0k3KYSoTSS9w3+7ce0PEPNQA==.jpg', '1'), #A Festa
+('NZlrNA4NQISXqTbw+QK2kf6IFg==.jpg', '2'), #Flores
+('eQ6wA92kZxK0mDcJl8VtGSzbzow=.png', '3'), #A Mão e a Luva
+('KFbug0vDdtXk9xlu0qiH7mjpag==.png', '4'), #A Metamorfose
+('3T4f2ngJkJMYrqJkkT7byp14yg==.jpg', '5'), #As Armas da Persuassão
+('Yk2oOY8XkkQ7m8tRR2LoNzrVfg==.png', '6'), #Clean Code
+('4CJPGbQdL9JDTpScp0W4nV0=.jpg', '7'), #Contos da Meia Noite
+('9mBIY3J44AbZMJvACiIDqQZsOBg=.png', '8'), #Dom Casmurro
+('5Uz3tu0W14sMaKWBxa5iRsD0oKk=.png', '9'), #Esaú e Jacob
+('TKSKv91J9bsjkmRfJeAilc4=.png', '10'), #Helena
+('vkCvHV2D1W93aht6C0TMKS47hUk=.png', '11'), #História da Meia Noite
+('7KYhUCt3JKMtQKi3BWn0CyYG6A==.png', '12'), #Laranja Mecânica
+('OjGu7i6fiPWWWcewUx0gGM4HmLg=.png', '13'), #Marley & Eu
+('y1NsS7lq43JFEMaX6qXL8bvnSQ==.png', '14'), #Memorial de Aires
+('09rtHgZ7Vs9HWfcY5iBkWyH01g==.png', '16'), #Do Mil ao Milhão
+('dqtvleT4Nq3ahly4NHZ8SMhlCg==.png', '17'), #Mindset
+('4z9bAoUUltVUfAwtbj98wxVG.png', '18'), #Quem Mexeu no Meu Queijo?
+('RwzBvGQaqQ7Bhz0H5xMeSDGl0Q==.png', '19'), #Quincas Borba
+('dqOb5ol7Wdtk+frTtc6tLsG91bM=.png', '20'), #Senhora
+('mfwsqbCBMNuUbNg2vUf0j8gz0g==.png', '21'); #Vidas Secas
+
 #Autores
 INSERT INTO `Autor`
 (`nome`, `sobrenome`)

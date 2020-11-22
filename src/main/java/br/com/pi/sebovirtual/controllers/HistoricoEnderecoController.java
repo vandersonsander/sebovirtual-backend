@@ -27,5 +27,10 @@ public class HistoricoEnderecoController extends BaseController
 	public List<HistoricoEndereco> getAddressByUserId(@PathVariable int id) {
 		return enderecoRepository.findAllActiveAddressByUserId(id);
 	}
+	
+	@GetMapping("/usuario/principal/{id}")
+	public Integer getMainActiveAddressByUser(@PathVariable int id) {
+	  return enderecoRepository.findMainActiveAddressByUser(id);
+	}
 
 }

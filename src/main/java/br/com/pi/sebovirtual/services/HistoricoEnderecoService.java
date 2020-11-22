@@ -51,7 +51,48 @@ public class HistoricoEnderecoService
 		// O idEndereco não muda, pois apenas uma nova versão deste mesmo
 		// endereco é cadastrada. 
 		entity.setIdEndereco(current.getIdEndereco());
-		entity.setUsuario(current.getUsuario());
+		//entity.setUsuario(current.getUsuario());
+		if (entity.getNomeDestinatario() == null) {
+			entity.setNomeDestinatario(current.getNomeDestinatario());
+		}
+		if (entity.getCep() == null) {
+			entity.setCep(current.getCep());
+		}		
+		if (entity.getLogradouro() == null) {
+			entity.setLogradouro(current.getLogradouro());
+		}		
+		if (entity.getNumero() == null) {
+			entity.setNumero(current.getNumero());
+		}	
+		if (entity.getComplemento() == null) {
+			entity.setComplemento(current.getComplemento());
+		}
+		if (entity.getPontoReferencia() == null) {
+			entity.setPontoReferencia(current.getPontoReferencia());
+		}
+		if (entity.getBairro() == null) {
+			entity.setBairro(current.getBairro());
+		}
+		if (entity.getCidade() == null) {
+			entity.setCidade(current.getCidade());
+		}
+		if (entity.getEstado() == null) {
+			entity.setEstado(current.getEstado());
+		}
+		if (entity.getApelido() == null) {
+			entity.setApelido(current.getApelido());
+		}
+		if (entity.getPrincipal() == null) {
+			entity.setPrincipal(current.getPrincipal());
+		} else if (entity.getPrincipal() == true) {
+		    int userId = entity.getUsuario().getId(); 
+		    Integer idMainActive = enderecoRepository.
+		    	findMainActiveAddressByUser(userId);
+		    if (idMainActive != null && idMainActive != id)  {
+		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipal(false);
+		    }
+		}
 		
 		// O status do registro atual muda para editado.
 		Optional<Status> statusEditado = 
@@ -59,6 +100,7 @@ public class HistoricoEnderecoService
 		if (statusEditado.isPresent()) {
 			current.setStatus(statusEditado.get()); // Muda o status para editado			
 		}
+		current.setDataModificacao(java.time.LocalDateTime.now());
 		
 		// Cria um novo registro para este endereço.
 		return this.store(entity);

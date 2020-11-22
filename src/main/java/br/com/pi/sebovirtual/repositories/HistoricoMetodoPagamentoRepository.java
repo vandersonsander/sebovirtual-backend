@@ -29,6 +29,18 @@ public interface HistoricoMetodoPagamentoRepository extends
 			     "WHERE fk_id_usuario = :id and fk_id_status IN " +
 			     "(SELECT id from Status WHERE nome = '" + 
 			     Status.ATIVO + "')", nativeQuery = true)
-	List<HistoricoMetodoPagamento> findAllActivePaymentsMethodsByUserId(int id);
+	public List<HistoricoMetodoPagamento> findAllActivePaymentsMethodsByUserId(int id);
+	
+	/**
+	  * Retorna o método de pagamento principal de um usuário.
+	  * @param idUsuario Id do usuário.
+	  * @return Método de pagamento ativo principal desse usuário.
+	  */
+	 @Query(value="SELECT id FROM Historico_Metodo_Pagamento " +
+	              "WHERE fk_id_usuario = :userId AND principal = 1 AND "
+	              + "fk_id_status IN " + 
+	              "(SELECT id from Status WHERE nome = '" + 
+	        Status.ATIVO + "')", nativeQuery = true)
+	 public Integer findMainActiveMethodPaymentByUser(int userId);
 	
 }

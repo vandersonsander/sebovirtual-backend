@@ -27,5 +27,10 @@ public class HistoricoMetodoPagamentoController extends BaseController
 	public List<HistoricoMetodoPagamento> getPaymentMethodsByUserId(@PathVariable int id) {
 		return metodoPagamentoRepository.findAllActivePaymentsMethodsByUserId(id);
 	}
+	
+	@GetMapping("/usuario/principal/{id}")
+	public Integer getMainActiveMethodPaymentByUser(@PathVariable int id) {
+	  return metodoPagamentoRepository.findMainActiveMethodPaymentByUser(id);
+	}
 
 }

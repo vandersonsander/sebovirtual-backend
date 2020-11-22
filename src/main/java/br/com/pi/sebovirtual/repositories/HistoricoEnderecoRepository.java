@@ -28,6 +28,18 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 			     "WHERE fk_id_usuario = :id and fk_id_status IN " +
 			     "(SELECT id from Status WHERE nome = '" + 
 			     Status.ATIVO + "')", nativeQuery = true)
-	List<HistoricoEndereco> findAllActiveAddressByUserId(int id);
+	public List<HistoricoEndereco> findAllActiveAddressByUserId(int id);
+
+	/**
+	  * Retorna o método de pagamento principal de um usuário.
+	  * @param idUsuario Id do usuário.
+	  * @return Método de pagamento ativo principal desse usuário.
+	  */
+	 @Query(value="SELECT id FROM Historico_Endereco " +
+	              "WHERE fk_id_usuario = :userId AND principal = 1 AND "
+	              + "fk_id_status IN " + 
+	              "(SELECT id from Status WHERE nome = '" + 
+	              Status.ATIVO + "')", nativeQuery = true)
+	public Integer findMainActiveAddressByUser(int userId);
 	
 }
