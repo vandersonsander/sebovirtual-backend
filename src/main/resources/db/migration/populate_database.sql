@@ -12,9 +12,9 @@ VALUES
 
 INSERT INTO sebo_virtual.Status (nome)
 VALUES 
-("Ativo"),
-("Editado"),
-("Excluido");
+("ativo"),
+("editado"),
+("excluido");
 
 INSERT INTO sebo_virtual.Tipo_Metodo_Pagamento (nome)
 VALUES 
@@ -24,21 +24,29 @@ VALUES
 INSERT INTO sebo_virtual.Historico_Metodo_Pagamento (id_metodo_pagamento, email, 
 data_modificacao, fk_id_tipo_metodo_pag, fk_id_status, fk_id_usuario)
 VALUES 
-(1, "juliana@gmail.com", now(), 1, 1, 1),
-(2, "juliana@gmail.com", now(), 1, 1, 1);
+("1", "juliana@gmail.com", now(), "1", "1", "1"),
+("2", "juliana@gmail.com", now(), "1", "1", "1"),
+("1", "vanderson@gmail.com", now(), "1", "1", "2"),
+("2", "vanderson@gmail.com", now(), "1", "1", "2"),
+("1", "guilherme@gmail.com", now(), "1", "1", "3"),
+("2", "guilherme@gmail.com", now(), "1", "1", "3");
 
 INSERT INTO sebo_virtual.Historico_Endereco (id_endereco, nome_destinatario, 
 cep, logradouro, numero, complemento, bairro, cidade, estado, apelido,
-data_modificacao, fk_id_status, fk_id_usuario)
+data_modificacao, fk_id_status, fk_id_usuario, principal)
 VALUES 
 ("1", "Juliana Aquino", "22431-004", "Avenida Bartolomeu Mitre", "990",
-"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1");
+"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1),
+("1", "Efigênia Aquino", "60532-620", "Rua 1004", "146",
+"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
+("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "450",
+"", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0);
 
 INSERT INTO sebo_virtual.Telefone (ddi, ddd, numero, tipo, fk_id_usuario)
 VALUES ("55", "21", "980228740", "celular", "1"),
 	   ("55", "21", "39888740", "contato", "1"),
-       ("55", "11", "945418250", "celular", "2"),
-       ("55", "11", "967305807", "celular", "2");
+       ("55", "11", "945418250", "contato", "2"),
+       ("55", "11", "945418250", "celular", "2");
 
 INSERT INTO sebo_virtual.Marca (nome)
 VALUES ("Sony"),
@@ -92,44 +100,44 @@ VALUES ("Usado"),
 ("Novo");
 
 #Cadastro de Produtos
-INSERT INTO `sebo_virtual`.`Produto` (`titulo`) VALUES 
+INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES 
 #CD's
-('A Festa'),
-('Flores'),
+('A Festa', 'cd'),
+('Flores', 'cd'),
 #Livros
-('A Mão e a Luva'),
-('A Metamorfose'),
-('As Armas da Persuassão'),
-('Clean Code'),
-('Contos da Meia Noite'),
-('Dom Casmurro'),
-('Esaú e Jacó'),
-('Helena'),
-('Histórias da Meia Noite'),
-('Laranja Mecânica'),
-('Marley e Eu'),
-('Memorial de Aires'),
-('Memórias Póstumas de Brás Cubas'),
-('Do Mil ao Milhão'),
-('Mindset'),
-('Quem Mexeu no Meu Queijo'),
-('Quincas Borba'),
-('Senhora'),
-('Vidas Secas'),
+('A Mão e a Luva', 'livro'),
+('A Metamorfose', 'livro'),
+('As Armas da Persuassão', 'livro'),
+('Clean Code', 'livro'),
+('Contos da Meia Noite', 'livro'),
+('Dom Casmurro', 'livro'),
+('Esaú e Jacó', 'livro'),
+('Helena', 'livro'),
+('Histórias da Meia Noite', 'livro'),
+('Laranja Mecânica', 'livro'),
+('Marley e Eu', 'livro'),
+('Memorial de Aires', 'livro'),
+('Memórias Póstumas de Brás Cubas', 'livro'),
+('Do Mil ao Milhão', 'livro'),
+('Mindset', 'livro'),
+('Quem Mexeu no Meu Queijo', 'livro'),
+('Quincas Borba', 'livro'),
+('Senhora', 'livro'),
+('Vidas Secas', 'livro'),
 #Eletrônicos
-('Super Nintendo'),
+('Super Nintendo', 'eletronico'),
 #Discos
-('Tim Maia'),
-('Trash in Texas'),
-('Elvis Presley'),
-('Evil Empire'),
-('Hillbilly Rawhide'),
-('Isso é Amor'),
-('Kiss'),
-('Mickey'),
-('Red Hot Mothers Milk'),
-('Some People Have Real Problems'),
-('Twist Uptown The Crystals');
+('Tim Maia', 'disco'),
+('Trash in Texas', 'disco'),
+('Elvis Presley', 'disco'),
+('Evil Empire', 'disco'),
+('Hillbilly Rawhide', 'disco'),
+('Isso é Amor', 'disco'),
+('Kiss', 'disco'),
+('Mickey', 'disco'),
+('Red Hot Mothers Milk', 'disco'),
+('Some People Have Real Problems', 'disco'),
+('Twist Uptown The Crystals', 'disco');
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
