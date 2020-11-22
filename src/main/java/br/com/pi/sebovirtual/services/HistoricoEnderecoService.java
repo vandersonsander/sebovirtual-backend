@@ -51,7 +51,12 @@ public class HistoricoEnderecoService
 		// O idEndereco não muda, pois apenas uma nova versão deste mesmo
 		// endereco é cadastrada. 
 		entity.setIdEndereco(current.getIdEndereco());
-		//entity.setUsuario(current.getUsuario());
+		// Para forçar a criação de um novo registro, defino o id dele como null
+		entity.setId(null);
+
+		if (entity.getUsuario() == null) {
+			entity.setUsuario(current.getUsuario());
+		}
 		if (entity.getNomeDestinatario() == null) {
 			entity.setNomeDestinatario(current.getNomeDestinatario());
 		}
