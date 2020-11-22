@@ -27,7 +27,7 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 	@Query(value="SELECT * FROM Historico_Endereco " +
 			     "WHERE fk_id_usuario = :id and fk_id_status IN " +
 			     "(SELECT id from Status WHERE nome = '" + 
-			     Status.ATIVO + "')", nativeQuery = true)
+			     Status.ATIVO + "') ORDER BY data_modificacao DESC", nativeQuery = true)
 	public List<HistoricoEndereco> findAllActiveAddressByUserId(int id);
 
 	/**

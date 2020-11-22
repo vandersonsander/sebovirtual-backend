@@ -28,7 +28,7 @@ public interface HistoricoMetodoPagamentoRepository extends
 	@Query(value="SELECT * FROM Historico_Metodo_Pagamento " +
 			     "WHERE fk_id_usuario = :id and fk_id_status IN " +
 			     "(SELECT id from Status WHERE nome = '" + 
-			     Status.ATIVO + "')", nativeQuery = true)
+			     Status.ATIVO + "') ORDER BY data_modificacao DESC", nativeQuery = true)
 	public List<HistoricoMetodoPagamento> findAllActivePaymentsMethodsByUserId(int id);
 	
 	/**

@@ -53,6 +53,8 @@ public class HistoricoMetodoPagamentoService extends
 		// O idMetodoPagamento não muda, pois apenas uma nova versão deste mesmo
 		// método de pagamento é cadastrada.
 		entity.setIdMetodoPagamento(current.getIdMetodoPagamento());
+		// Para forçar a criação de um novo registro, defino o id dele como null
+		entity.setId(null);
 		
 		// Completa os outros campos se esses estiverem nulos
 		if (entity.getEmail() == null) {
