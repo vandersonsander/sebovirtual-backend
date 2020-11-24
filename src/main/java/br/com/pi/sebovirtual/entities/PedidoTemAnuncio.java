@@ -25,12 +25,12 @@ public class PedidoTemAnuncio extends BaseEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pedido")
-	@JsonIgnore(false)
+	@JsonIgnore(true)
     private Pedido pedido;
 	
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_anuncio")
-    @JsonIgnore(false)
+    @JsonIgnore(true)
     private HistoricoAnuncio historicoAnuncio;
  
 	@JoinColumn(name = "quantidade")
