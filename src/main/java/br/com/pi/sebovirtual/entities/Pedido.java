@@ -1,6 +1,6 @@
 package br.com.pi.sebovirtual.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ import lombok.ToString;
 public class Pedido extends BaseEntity {
 
 	@Column(name = "data")
-	private LocalDate data;
+	private LocalDateTime data;
 
 	@NotNull
 	@Column(name = "valor_total")
@@ -39,10 +39,13 @@ public class Pedido extends BaseEntity {
 	@NotNull
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "data_status")
+	private LocalDateTime data_status;
 
 	@ManyToOne
 	@JoinColumn(name = "id_avaliacao")
-	@JsonIgnore(false)
+	@JsonIgnore(true)
 	private Avaliacao avaliacao;
 
 	@ManyToOne
@@ -66,6 +69,6 @@ public class Pedido extends BaseEntity {
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	@JsonIgnore(false)
 	private Set<PedidoTemAnuncio> itens = 
-		new HashSet<>();
+		new HashSet<PedidoTemAnuncio>();
 
 }
