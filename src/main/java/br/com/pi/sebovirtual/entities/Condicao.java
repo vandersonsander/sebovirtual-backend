@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -23,7 +24,7 @@ import lombok.ToString;
 public class Condicao extends BaseEntity {
 	private String descricao;
 	
-	@OneToMany(mappedBy = "condicao")
+	@OneToMany(mappedBy = "condicao", cascade=CascadeType.ALL)
 	@JsonIgnoreProperties("condicao")
 	private List<HistoricoAnuncio> historicoAnuncio; 
 }
