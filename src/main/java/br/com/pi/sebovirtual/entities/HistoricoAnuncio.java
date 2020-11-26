@@ -41,7 +41,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	@LastModifiedDate
 	private LocalDateTime dataModificacao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_produto")
 	@JsonIgnoreProperties("anuncios")
 	private Produto produto;
