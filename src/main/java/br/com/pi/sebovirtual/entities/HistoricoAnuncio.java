@@ -46,12 +46,12 @@ public class HistoricoAnuncio extends BaseEntity {
 	@JsonIgnoreProperties("anuncios")
 	private Produto produto;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_condicao")
 	@JsonIgnoreProperties("historicoAnuncio")
 	private Condicao condicao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_status")
 	@JsonIgnoreProperties("historicoAnuncio")
 	private Status status;
@@ -59,7 +59,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	/**
 	 * Usuário que criou o anúncio.
 	 */
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_usuario")
 	@JsonIgnoreProperties("historicoAnuncio")
 	@JsonIgnore(false)
