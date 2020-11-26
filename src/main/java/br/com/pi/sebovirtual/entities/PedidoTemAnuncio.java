@@ -1,7 +1,7 @@
 package br.com.pi.sebovirtual.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,14 +23,14 @@ import lombok.ToString;
 @ToString
 public class PedidoTemAnuncio extends BaseEntity {
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pedido")
 	@JsonIgnore(true)
     private Pedido pedido;
 	
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_anuncio")
-    @JsonIgnore(true)
+    @JsonIgnore(false)
     private HistoricoAnuncio historicoAnuncio;
  
 	@JoinColumn(name = "quantidade")

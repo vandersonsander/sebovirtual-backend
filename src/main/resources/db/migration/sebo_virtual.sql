@@ -403,6 +403,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Pedido` (
   `valor_total` FLOAT NOT NULL COMMENT 'Valor total do pedido.',
   `status` VARCHAR(20) NOT NULL,
   `id_avaliacao` INT NULL,
+  `data_status` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fk_id_usuario` INT NOT NULL,
   `fk_id_metodo_de_pagamento` INT NOT NULL,
   `fk_id_endereco` INT NOT NULL,
