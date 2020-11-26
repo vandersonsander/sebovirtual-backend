@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -30,27 +31,27 @@ public class Publicacao extends Produto {
 	private String isbn13;
 	private String edicao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_idioma")
 	@JsonIgnoreProperties("publicacoes")
 	private Idioma idioma;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_editora")
 	@JsonIgnoreProperties("publicacoes")
 	private Editora editora;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_formato_publicacao")
 	@JsonIgnoreProperties("publicacoes")
 	private FormatoPublicacao formatoPublicacao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_genero")
 	@JsonIgnoreProperties("publicacoes")
 	private Genero genero;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name = "Publicacao_Tem_Autor",
 			joinColumns = @JoinColumn(name = "fk_id_produto"),
