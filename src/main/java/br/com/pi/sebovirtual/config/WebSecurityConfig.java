@@ -70,6 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						.permitAll()
 					.antMatchers(HttpMethod.GET, "/upload/**")
 						.permitAll()
+					.antMatchers(HttpMethod.POST, "/pessoafisica/cadastro/**")
+						.permitAll()
 // Qualquer outra requisição deve ser checada
 				.anyRequest()
 					.authenticated()
