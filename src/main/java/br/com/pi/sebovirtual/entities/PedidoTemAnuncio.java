@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.pi.sebovirtual.resource.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,8 @@ public class PedidoTemAnuncio extends BaseEntity {
 	
 	@ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pedido")
-	@JsonIgnore(true)
+	@JsonIgnore(false)
+	@JsonIgnoreProperties("itens")
     private Pedido pedido;
 	
     @ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
