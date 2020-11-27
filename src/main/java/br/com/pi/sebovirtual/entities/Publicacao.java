@@ -31,7 +31,7 @@ public class Publicacao extends Produto {
 	private String isbn13;
 	private String edicao;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_idioma")
 	@JsonIgnoreProperties("publicacoes")
 	private Idioma idioma;
@@ -41,12 +41,12 @@ public class Publicacao extends Produto {
 	@JsonIgnoreProperties("publicacoes")
 	private Editora editora;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_formato_publicacao")
 	@JsonIgnoreProperties("publicacoes")
 	private FormatoPublicacao formatoPublicacao;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_genero")
 	@JsonIgnoreProperties("publicacoes")
 	private Genero genero;
