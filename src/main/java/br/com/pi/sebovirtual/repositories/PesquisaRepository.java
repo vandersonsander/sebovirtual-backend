@@ -40,7 +40,7 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "AND a.estoque > 0 "
 			+ "AND pd.categoria LIKE %?2% "
 			+ "AND c.descricao LIKE %?3% "
-			+ "AND (a.preco >= ?4 AND a.preco <= ?5) ";
+			+ "AND (a.preco >= ?4 AND a.preco <= ?5)";
 	@Query(value = "SELECT a " + queryJoin)
 	Page<HistoricoAnuncio> searchByQuery(
 			String query, 

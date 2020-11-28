@@ -35,6 +35,7 @@ public class LoginController {
 		Usuario usuario = usuarioService.findByEmail(loginDTO.getEmail()).get();
 		jwtDTO.setId(usuario.getId());
 		jwtDTO.setEmail(usuario.getEmail());
+		jwtDTO.setUsuario(usuario);
 		return ResponseEntity.ok(jwtDTO); // retorna para o usuário o token
 	}
 	
