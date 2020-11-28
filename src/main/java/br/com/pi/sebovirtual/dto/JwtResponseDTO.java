@@ -1,5 +1,6 @@
 package br.com.pi.sebovirtual.dto;
 
+import br.com.pi.sebovirtual.entities.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JwtResponseDTO {
 	private Integer id;
+	private Usuario usuario;
 	private String email;
 	private String token;
 }
