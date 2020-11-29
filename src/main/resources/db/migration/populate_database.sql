@@ -40,7 +40,7 @@ VALUES
 ("1", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
 "4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
 ("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
-"", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0),
+"", "Parangaba", "Fortaleza", "CE", "Sogra", now(), "1", "1", 0),
 ("1", "Vanderson Sander", "04116-040", "Rua Domingos Soto", "1000",
 "", "Jardim Vila Mariana", "São Paulo", "SP", "Casa", now(), "1", "2", 1),
 ("1", "Vanderson Sander", "05409-010", "Rua Oscar Freire", "1291",

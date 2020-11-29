@@ -24,13 +24,34 @@ public class HistoricoEnderecoService
 	@Override
 	public HistoricoEndereco store(HistoricoEndereco endereco) {
 		// Obtém o id do usuário dono do endereço.
-		Integer idUsuario = endereco.getUsuario().getId();
+		Integer userId = endereco.getUsuario().getId();
 		
 		// Se o ID é igual a null, significa que está cadastrando um novo endereco
+		Integer idEndereco;
 		if (endereco.getIdEndereco() == null) {
-			// Obtém o próximo idEndereco e o define no objeto endereco.
-			Integer idEndereco = enderecoRepository.getNextIdEndereco(idUsuario);
-			endereco.setIdEndereco(idEndereco == null ? 1 : idEndereco);
+			idEndereco = 1;
+		} else {
+			// Obtém o próximo idEndereco.
+			idEndereco = endereco.getIdEndereco() + 1;// = enderecoRepository.getNextIdEndereco(idUsuario);
+			//idEndereco = (idEndereco == null ? 1 : idEndereco);
+		}
+		endereco.setIdEndereco(idEndereco);
+		
+		if (endereco.getPrincipal() == true) {
+		    Integer idMainActive = enderecoRepository.
+		    	findMainActiveAddressByUser(userId);
+		    if (idMainActive != null)  {
+		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipal(false);
+		    }
+		}
+		if (endereco.getPrincipalParaEnvio() == true) {
+		    Integer idMainActive = enderecoRepository.
+		    	findMainActiveShippingAddressByUser(userId);
+		    if (idMainActive != null)  {
+		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipalParaEnvio(false);
+		    }
 		}
 		
 		// O novo registro possui status ativo.
@@ -96,6 +117,17 @@ public class HistoricoEnderecoService
 		    if (idMainActive != null && idMainActive != id)  {
 		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
 		    	oldMainActive.setPrincipal(false);
+		    }
+		}
+		if (entity.getPrincipalParaEnvio() == null) {
+			entity.setPrincipalParaEnvio(current.getPrincipalParaEnvio());
+		} else if (entity.getPrincipalParaEnvio() == true) {
+		    int userId = entity.getUsuario().getId(); 
+		    Integer idMainActive = enderecoRepository.
+		    	findMainActiveShippingAddressByUser(userId);
+		    if (idMainActive != null && idMainActive != id)  {
+		    	HistoricoEndereco oldMainActive = super.getOne(idMainActive);
+		    	oldMainActive.setPrincipalParaEnvio(false);
 		    }
 		}
 		
