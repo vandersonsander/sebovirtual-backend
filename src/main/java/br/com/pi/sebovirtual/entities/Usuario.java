@@ -63,7 +63,7 @@ public class Usuario extends BaseEntity {
 	 * Endereços do usuário.
 	 */
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnore
+	@JsonIgnoreProperties("usuario")
 	private Set<HistoricoEndereco> enderecos = 
 		new HashSet<HistoricoEndereco>();
 	
