@@ -431,23 +431,23 @@ VALUES
 ('Vanderson', 'vanderson@gmail.com', 1, 1),
 ('Guilherme', 'guilherme@gmail.com', 1, 1);
 
-# Pedido que o usuário 1 fez
 INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `id_avaliacao`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
 VALUES
-(now(), '23.5', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1, 1),     #R$ 13.5 + 10 (frete)
-(now(), '31.3', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), null, 1, 1, 2),  # R$ 21.3 + 10 (frete)
-(now(), '33.4', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), null, 1, 2, 3), #frete grátis
-(now(), '52.7', 'Confirmado', now(), null, 1, 2, 1),                          #frete grátis
-('2020-05-02', '19.5', 'Entregue', '2020-05-05', null, 1, 1, 2),              #R$ 9.5 + 10 (frete)
-('2020-06-01', '98.9', 'Entregue', '2020-06-05', null, 1, 1, 3),              #frete grátis
+# Pedido que o usuário 1 fez
+('2020-01-01', '23.5', 'Entregue', '2020-01-05', 1, 1, 1, 1),     #R$ 13.5 + 10 (frete)
+('2020-05-02', '31.3', 'Entregue', '2020-05-05', null, 1, 1, 2),  # R$ 21.3 + 10 (frete)
+('2020-06-07', '33.4', 'Cancelado', '2020-06-07', null, 1, 2, 3), #frete grátis
+('2020-08-27', '52.7', 'Entregue', '2020-08-31', null, 1, 2, 1),  #frete grátis
+('2020-11-01', '19.5', 'Cancelado', '2020-11-01', null, 1, 1, 2),               #R$ 9.5 + 10 (frete)
+(now(), '98.9', 'Confirmado', now(), null, 1, 1, 3),              #frete grátis
 # Pedido que o usuário 2 fez
-(now(), '33.6', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 2, 2, 3, 4),    # 7 - frete grátis
-(now(), '23.5', 'Confirmado', DATE_ADD(now(), INTERVAL 1 DAY), 3, 3, 3, 4),   # 8 - 23.5
-('2020-06-01', '88.2', 'Entregue', '2020-06-05', null, 2, 4, 4),              # 9 - 88.20
-('2020-02-02', '21.9', 'Entregue', '2020-02-12', null, 2, 4, 4),              # 10 - 11.90 + 10
-('2020-01-01', '23.8', 'Cancelado', '2020-01-10', null, 2, 3, 5),             # 11 - 23.8
-('2019-12-10', '24.3', 'Entregue', '2019-12-19', null, 2, 3, 5),              # 12 - 4.3 + 10
-('2019-12-05', '163', 'Entregue', '2019-12-07', null, 2, 4, 5);               # 13 - 11.90 + 10
+('2019-12-05', '33.6', 'Cancelado', '2019-12-07', 2, 2, 3, 4),    # 7 - frete grátis
+('2019-12-10', '23.5', 'Entregue', '2019-12-19', 3, 3, 3, 4),     # 8 - 23.5
+('2020-01-01', '88.2', 'Entregue', '2020-01-05', null, 2, 4, 4),  # 9 - 88.20
+('2020-02-02', '21.9', 'Entregue', '2020-02-12', null, 2, 4, 4),  # 10 - 11.90 + 10
+('2020-09-01', '23.8', 'Cancelado', '2020-09-01', null, 2, 3, 5), # 11 - 23.8
+('2020-11-23', '24.3', 'Entregue', '2019-12-28', null, 2, 3, 5),  # 12 - 4.3 + 10
+(now(), '163', 'Confirmado', now(), null, 2, 4, 5);               # 13 - 11.90 + 10
 
 INSERT INTO `sebo_virtual`.`Pedido_tem_Anuncio` (`id_pedido`, `id_anuncio`, `quantidade`)
 VALUES
