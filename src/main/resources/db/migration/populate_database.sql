@@ -108,8 +108,8 @@ VALUES ("Usado"),
 #Cadastro de Produtos
 INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES 
 #CD's
-('A Festa', 'cd'),
-('Flores', 'cd'),
+('O carnaval', 'cd'),
+('The Wonder Of You', 'cd'),
 #Livros
 ('A Mão e a Luva', 'livro'),
 ('A Metamorfose', 'livro'),
@@ -147,8 +147,8 @@ INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
-((SELECT id from sebo_virtual.Produto WHERE titulo='A Festa'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '1', '1'),
-((SELECT id from sebo_virtual.Produto WHERE titulo='Flores'),'1', '2020-01-01', '10', '00:01:25', 'Ivete Sangalo', '1', '1', '1', '1');
+((SELECT id from sebo_virtual.Produto WHERE titulo='O carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '1', '1'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '1', '1');
 
 INSERT INTO `sebo_virtual`.`Midia_tem_Legenda` (`fk_id_produto`, `fk_id_legenda`) 
 VALUES 
@@ -221,11 +221,11 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `descricao`, `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
-('1', '10', 'Promoção Imperdível! CD A Festa da Ivete!!!', 
-'1 cd da Ivete Sangalo, A Festa, por R$ 24', '24', now(), '1', '1', 
+('1', '10', 'Promoção! CD O Carnaval de Ivete!!!', 
+'1 cd da Ivete Sangalo, O Carnaval', '24', now(), '1', '1', 
 '1', '1'), #1
-('1', '5', 'CD Flores da Ivete!!!', 
-'1 cd da Ivete Sangalopor R$ 28', '28', now(), '1', '1', 
+('1', '5', 'CD The Wonder Of You', 
+'1 cd do Elvis Presley - The Wonder Of You', '28', now(), '1', '1', 
 '1', '1'), #2
 #Livros
 (3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8,
