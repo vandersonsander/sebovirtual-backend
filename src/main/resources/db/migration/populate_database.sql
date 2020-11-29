@@ -40,7 +40,13 @@ VALUES
 ("1", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
 "4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
 ("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
-"", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0);
+"", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0),
+("1", "Vanderson Sander", "04116-040", "Rua Domingos Soto", "1000",
+"", "Jardim Vila Mariana", "São Paulo", "SP", "Casa", now(), "1", "2", 1),
+("1", "Vanderson Sander", "05409-010", "Rua Oscar Freire", "1291",
+"", "Pinheiros", "São Paulo", "SP", "Casa dos Avós", now(), "1", "2", 0),
+("1", "Guilherme Nunes", "01310-932", "Avenida Paulista", "2202",
+"", "Bela Vista", "São Paulo", "SP", "Casa dos Avós", now(), "1", "3", 1);
 
 INSERT INTO sebo_virtual.Telefone (ddi, ddd, numero, tipo, fk_id_usuario)
 VALUES ("55", "21", "980228740", "celular", "1"),
@@ -284,22 +290,23 @@ INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`)
 VALUES 
 ('1A0k3KYSoTSS9w3+7ce0PEPNQA==.jpg', '1'), #A Festa
 ('NZlrNA4NQISXqTbw+QK2kf6IFg==.jpg', '2'), #Flores
-('eQ6wA92kZxK0mDcJl8VtGSzbzow=.png', '3'), #A Mão e a Luva
+('eQ6wA92kZxK0mDcJl8VtGSzbzow=.jpg', '3'), #A Mão e a Luva
 ('KFbug0vDdtXk9xlu0qiH7mjpag==.png', '4'), #A Metamorfose
 ('3T4f2ngJkJMYrqJkkT7byp14yg==.jpg', '5'), #As Armas da Persuassão
 ('Yk2oOY8XkkQ7m8tRR2LoNzrVfg==.png', '6'), #Clean Code
 ('4CJPGbQdL9JDTpScp0W4nV0=.jpg', '7'), #Contos da Meia Noite
-('9mBIY3J44AbZMJvACiIDqQZsOBg=.png', '8'), #Dom Casmurro
-('5Uz3tu0W14sMaKWBxa5iRsD0oKk=.png', '9'), #Esaú e Jacob
-('TKSKv91J9bsjkmRfJeAilc4=.png', '10'), #Helena
-('vkCvHV2D1W93aht6C0TMKS47hUk=.png', '11'), #História da Meia Noite
+('9mBIY3J44AbZMJvACiIDqQZsOBg=.jpg', '8'), #Dom Casmurro
+('5Uz3tu0W14sMaKWBxa5iRsD0oKk=.jpg', '9'), #Esaú e Jacob - ok
+('TKSKv91J9bsjkmRfJeAilc4=.jpg', '10'), #Helena
+('vkCvHV2D1W93aht6C0TMKS47hUk=.jpg', '11'), #História da Meia Noite
 ('7KYhUCt3JKMtQKi3BWn0CyYG6A==.png', '12'), #Laranja Mecânica
 ('OjGu7i6fiPWWWcewUx0gGM4HmLg=.png', '13'), #Marley & Eu
-('y1NsS7lq43JFEMaX6qXL8bvnSQ==.png', '14'), #Memorial de Aires
+('y1NsS7lq43JFEMaX6qXL8bvnSQ==.jpg', '14'), #Memorial de Aires
+('y1NsS7lq43JFEMaX6qXL8bvnSQ2==.jpg', '15'), #Memórias Póstumas de Brás Cubas
 ('09rtHgZ7Vs9HWfcY5iBkWyH01g==.png', '16'), #Do Mil ao Milhão
 ('dqtvleT4Nq3ahly4NHZ8SMhlCg==.png', '17'), #Mindset
 ('4z9bAoUUltVUfAwtbj98wxVG.png', '18'), #Quem Mexeu no Meu Queijo?
-('RwzBvGQaqQ7Bhz0H5xMeSDGl0Q==.png', '19'), #Quincas Borba
+('RwzBvGQaqQ7Bhz0H5xMeSDGl0Q==.jpg', '19'), #Quincas Borba
 ('dqOb5ol7Wdtk+frTtc6tLsG91bM=.png', '20'), #Senhora
 ('mfwsqbCBMNuUbNg2vUf0j8gz0g==.png', '21'); #Vidas Secas
 
@@ -424,43 +431,44 @@ VALUES
 ('Vanderson', 'vanderson@gmail.com', 1, 1),
 ('Guilherme', 'guilherme@gmail.com', 1, 1);
 
+# Pedido que o usuário 1 fez
 INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `id_avaliacao`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
 VALUES
-(now(), '4.3', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1, 1),
-(now(), '23.5', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 2, 2, 2, 1),
-(now(), '40.2', 'Confirmado', DATE_ADD(now(), INTERVAL 1 DAY), 3, 3, 2, 1);
-
-INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
-VALUES
-(now(), '34.8', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1),
-(now(), '23.5', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 1, 2, 1),
-(now(), '18.5', 'Confirmado', now(), 1, 2, 1),
-('2020-05-02', '18.5', 'Entregue', '2020-05-10', 1, 1, 2),
-('2020-06-01', '4.3', 'Entregue', '2020-06-05', 1, 1, 1),
-('2020-06-01', '4.3', 'Entregue', '2020-06-05', 2, 1, 1),
-('2020-01-01', '4.3', 'Cancelado', '2020-01-10', 2, 1, 1),
-('2020-02-02', '88.2', 'Entregue', '2020-02-12', 2, 1, 1);
+(now(), '23.5', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1, 1),     #R$ 13.5 + 10 (frete)
+(now(), '31.3', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), null, 1, 1, 2),  # R$ 21.3 + 10 (frete)
+(now(), '33.4', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), null, 1, 2, 3), #frete grátis
+(now(), '52.7', 'Confirmado', now(), null, 1, 2, 1),                          #frete grátis
+('2020-05-02', '19.5', 'Entregue', '2020-05-05', null, 1, 1, 2),              #R$ 9.5 + 10 (frete)
+('2020-06-01', '98.9', 'Entregue', '2020-06-05', null, 1, 1, 3),              #frete grátis
+# Pedido que o usuário 2 fez
+(now(), '33.6', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 2, 2, 3, 4),    # 7 - frete grátis
+(now(), '23.5', 'Confirmado', DATE_ADD(now(), INTERVAL 1 DAY), 3, 3, 3, 4),   # 8 - 23.5
+('2020-06-01', '88.2', 'Entregue', '2020-06-05', null, 2, 4, 4),              # 9 - 88.20
+('2020-02-02', '21.9', 'Entregue', '2020-02-12', null, 2, 4, 4),              # 10 - 11.90 + 10
+('2020-01-01', '23.8', 'Cancelado', '2020-01-10', null, 2, 3, 5),             # 11 - 23.8
+('2019-12-10', '24.3', 'Entregue', '2019-12-19', null, 2, 3, 5),              # 12 - 4.3 + 10
+('2019-12-05', '163', 'Entregue', '2019-12-07', null, 2, 4, 5);               # 13 - 11.90 + 10
 
 INSERT INTO `sebo_virtual`.`Pedido_tem_Anuncio` (`id_pedido`, `id_anuncio`, `quantidade`)
 VALUES
-('1', '19', 1),
-('2', '5', 1),
-('3', '13', 1),
-('4', '10', 1),
-('4', '11', 1),
-('5', '12', 1),
+#Pedidos do usuário 1
+('1', '10', 1),
+('2', '11', 1),
+('3', '12', 1),
+('4', '13', 1),
+('4', '14', 1),
+('5', '15', 1),
 ('6', '16', 1),
-('7', '16', 1),
-('8', '19', 1),
-('9', '19', 1),
-('10', '6', 1);
-
-INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
-VALUES
-(now(), '35.7', 'Confirmado', now(), 1, 1, 1);
-
-INSERT INTO `sebo_virtual`.`Pedido_tem_Anuncio` (`id_pedido`, `id_anuncio`, `quantidade`)
-VALUES
-('11', '7', 1),
+('6', '17', 2),
+#Pedidos do usuário 2
+('7', '3', 1),
+('7', '4', 1),
+('8', '5', 1),
+('9', '6', 1),
+('10', '7', 1),
 ('11', '8', 1),
-('11', '9', 1);
+('11', '9', 1),
+('12', '18', 1),
+('12', '19', 1),
+('13', '20', 1),
+('13', '21', 1);

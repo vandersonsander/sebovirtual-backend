@@ -30,6 +30,7 @@ public class Publicacao extends Produto {
 	private String isbn10;
 	private String isbn13;
 	private String edicao;
+	private String resumo;
 	
 	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_idioma")
