@@ -355,6 +355,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Historico_Endereco` (
   `apelido` VARCHAR(20) NOT NULL COMMENT 'Apelido para o endereço. Exemplos: minha casa, casa da minha mãe.',
   `data_modificacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Indica a data de criação/modificação do endereço.',
   `principal` TINYINT NOT NULL DEFAULT 0 COMMENT 'Identifica se o endereço é o principal ou não.',
+  `principal_envio` TINYINT NOT NULL DEFAULT 0,
   `fk_id_status` INT NOT NULL,
   `fk_id_usuario` INT NOT NULL,
   PRIMARY KEY (`id`),

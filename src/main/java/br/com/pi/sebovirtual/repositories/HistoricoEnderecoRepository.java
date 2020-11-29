@@ -15,7 +15,7 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 	 * @param idUsuario Id do usuário.
 	 * @return O próximo idEndereco desse usuário.
 	 */
-	@Query(value = "SELECT MAX(id_endereco) + 1 AS next_id FROM Historico_Endereco " +
+	@Query(value = "SELECT MAX(id_endereco) AS next_id FROM Historico_Endereco " +
 			 	   "WHERE fk_id_usuario = :idUsuario", nativeQuery=true)
 	public Integer getNextIdEndereco(int idUsuario);
 	
@@ -31,9 +31,9 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 	public List<HistoricoEndereco> findAllActiveAddressByUserId(int id);
 
 	/**
-	  * Retorna o método de pagamento principal de um usuário.
+	  * Retorna o endereço principal de um usuário.
 	  * @param idUsuario Id do usuário.
-	  * @return Método de pagamento ativo principal desse usuário.
+	  * @return Endereço ativo principal desse usuário.
 	  */
 	 @Query(value="SELECT id FROM Historico_Endereco " +
 	              "WHERE fk_id_usuario = :userId AND principal = 1 AND "
@@ -41,5 +41,17 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 	              "(SELECT id from Status WHERE nome = '" + 
 	              Status.ATIVO + "')", nativeQuery = true)
 	public Integer findMainActiveAddressByUser(int userId);
+
+	/**
+	  * Retorna o endereço principal para envio de um usuário.
+	  * @param idUsuario Id do usuário.
+	  * @return Endereço ativo principal desse usuário.
+	  */
+	 @Query(value="SELECT id FROM Historico_Endereco " +
+	              "WHERE fk_id_usuario = :userId AND principal_envio = 1 AND "
+	              + "fk_id_status IN " + 
+	              "(SELECT id from Status WHERE nome = '" + 
+	              Status.ATIVO + "')", nativeQuery = true)
+	public Integer findMainActiveShippingAddressByUser(int userId);
 	
 }

@@ -32,5 +32,10 @@ public class HistoricoEnderecoController extends BaseController
 	public Integer getMainActiveAddressByUser(@PathVariable int id) {
 	  return enderecoRepository.findMainActiveAddressByUser(id);
 	}
+	
+	@GetMapping("/usuario/principal-envio/{id}")
+	public Integer getMainActiveShippingAddressByUser(@PathVariable int id) {
+	  return enderecoRepository.findMainActiveShippingAddressByUser(id);
+	}
 
 }
