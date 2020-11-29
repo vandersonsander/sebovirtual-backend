@@ -37,9 +37,9 @@ data_modificacao, fk_id_status, fk_id_usuario, principal)
 VALUES 
 ("1", "Juliana Aquino", "22431-004", "Avenida Bartolomeu Mitre", "990",
 "Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1),
-("1", "Efigênia Aquino", "60532-620", "Rua 1004", "146",
+("1", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
 "4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
-("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "450",
+("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
 "", "Parangaba", "Fortaleza", "CE", "Casa da Sogra", now(), "1", "1", 0);
 
 INSERT INTO sebo_virtual.Telefone (ddi, ddd, numero, tipo, fk_id_usuario)
@@ -424,8 +424,43 @@ VALUES
 ('Vanderson', 'vanderson@gmail.com', 1, 1),
 ('Guilherme', 'guilherme@gmail.com', 1, 1);
 
-INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `id_avaliacao`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
+INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `id_avaliacao`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
 VALUES
-(now(), '500.0', 'Enviado', 1, 1, 1, 1),
-(now(), '100.0', 'Cancelado', 2, 2, 2, 1),
-(now(), '1200.0', 'Pendente', 3, 3, 2, 1);
+(now(), '4.3', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1, 1),
+(now(), '23.5', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 2, 2, 2, 1),
+(now(), '40.2', 'Confirmado', DATE_ADD(now(), INTERVAL 1 DAY), 3, 3, 2, 1);
+
+INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
+VALUES
+(now(), '34.8', 'Entregue', DATE_ADD(now(), INTERVAL 2 DAY), 1, 1, 1),
+(now(), '23.5', 'Cancelado', DATE_ADD(now(), INTERVAL 1 DAY), 1, 2, 1),
+(now(), '18.5', 'Confirmado', now(), 1, 2, 1),
+('2020-05-02', '18.5', 'Entregue', '2020-05-10', 1, 1, 2),
+('2020-06-01', '4.3', 'Entregue', '2020-06-05', 1, 1, 1),
+('2020-06-01', '4.3', 'Entregue', '2020-06-05', 2, 1, 1),
+('2020-01-01', '4.3', 'Cancelado', '2020-01-10', 2, 1, 1),
+('2020-02-02', '88.2', 'Entregue', '2020-02-12', 2, 1, 1);
+
+INSERT INTO `sebo_virtual`.`Pedido_tem_Anuncio` (`id_pedido`, `id_anuncio`, `quantidade`)
+VALUES
+('1', '19', 1),
+('2', '5', 1),
+('3', '13', 1),
+('4', '10', 1),
+('4', '11', 1),
+('5', '12', 1),
+('6', '16', 1),
+('7', '16', 1),
+('8', '19', 1),
+('9', '19', 1),
+('10', '6', 1);
+
+INSERT INTO `sebo_virtual`.`Pedido` (`data`, `valor_total`, `status`, `data_status`, `fk_id_usuario`, `fk_id_metodo_de_pagamento`, `fk_id_endereco`)
+VALUES
+(now(), '35.7', 'Confirmado', now(), 1, 1, 1);
+
+INSERT INTO `sebo_virtual`.`Pedido_tem_Anuncio` (`id_pedido`, `id_anuncio`, `quantidade`)
+VALUES
+('11', '7', 1),
+('11', '8', 1),
+('11', '9', 1);
