@@ -1,5 +1,7 @@
 package br.com.pi.sebovirtual.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi.sebovirtual.dto.SearchDTO;
+import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
 import br.com.pi.sebovirtual.services.PesquisaService;
 
 @RestController
@@ -40,5 +43,17 @@ public class PesquisaController {
 				pagina,
 				orderBy,
 				resultadosPorPagina));
+	}
+	@GetMapping("mais-vendidos")
+	public ResponseEntity<List<HistoricoAnuncio>> getMaisVendidos() {
+		return ResponseEntity.ok().body(anuncioService.listarMaisVendidos());
+	}
+	@GetMapping("mais-populares")
+	public ResponseEntity<List<HistoricoAnuncio>> getMaisPopulares() {
+		return ResponseEntity.ok().body(anuncioService.listarMaisPopulares());
+	}
+	@GetMapping("mais-recentes")
+	public ResponseEntity<List<HistoricoAnuncio>> getMaisRecentes() {
+		return ResponseEntity.ok().body(anuncioService.listarMaisRecentes());
 	}
 }

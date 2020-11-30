@@ -99,4 +99,18 @@ public class PesquisaService {
 		search.setFilters(filters);
 		return search;
 	}
+	
+	public List<HistoricoAnuncio> listarMaisVendidos() {
+		Pageable pageable = PageRequest.of(0, 12);
+		return pesquisaRepository.getMaisVendidos(pageable).getContent();
+	}
+	public List<HistoricoAnuncio> listarMaisPopulares() {
+		Pageable pageable = PageRequest.of(0, 12);
+		return pesquisaRepository.getMaisPopulares(pageable).getContent();
+	}
+	public List<HistoricoAnuncio> listarMaisRecentes() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "dataModificacao");
+		Pageable pageable = PageRequest.of(0, 24, sort);
+		return pesquisaRepository.getMaisRecentes(pageable).getContent();
+	}
 }

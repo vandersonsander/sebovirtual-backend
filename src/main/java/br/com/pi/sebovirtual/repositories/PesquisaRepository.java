@@ -16,6 +16,24 @@ import br.com.pi.sebovirtual.entities.HistoricoAnuncio;
 @Transactional
 public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Integer> {
 	/**
+	 * Resultados da página inicial 
+	 */
+	@Query("SELECT p.historicoAnuncio "
+			+ "FROM PedidoTemAnuncio p "
+			+ "GROUP BY p.historicoAnuncio "
+			+ "ORDER BY COUNT(p.historicoAnuncio) DESC")
+	Page<HistoricoAnuncio> getMaisVendidos(Pageable pageable);
+	
+	@Query("SELECT a "
+			+ "FROM HistoricoAnuncio a ")
+	Page<HistoricoAnuncio> getMaisPopulares(Pageable pageable);
+	
+	@Query("SELECT a "
+			+ "FROM HistoricoAnuncio a "
+			+ "WHERE a.status IN (SELECT st FROM Status st WHERE st.id = 1)")
+	Page<HistoricoAnuncio> getMaisRecentes(Pageable pageable);
+	
+	/**
 	 * Pesquisa Geral <br>
 	 * pesquisa por: título, descrição, autor, artista e marca de eletcrônicos.
 	 * Além de que o anúncio precisa de estar ativo e não ter sido editado
