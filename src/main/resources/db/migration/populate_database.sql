@@ -79,12 +79,16 @@ VALUES ("Sony Music"),
 ("Warner Music");
 
 INSERT INTO sebo_virtual.Genero (nome)
-VALUES ("Musical"),
-("Terror"),
+VALUES 
+("Administração"),
+("Autoajuda"),
+("Heróis"),
+("Literatura"),
+("Policial"),
 ("Romance"),
-("Documentário"),
 ("Suspense"),
-("Ficção");
+("Ficção"),
+("Outro");
 
 INSERT INTO sebo_virtual.Legenda (nome)
 VALUES ("Português"),
@@ -94,16 +98,19 @@ VALUES ("Português"),
 ("Alemão");
 
 INSERT INTO sebo_virtual.Idioma (nome)
-VALUES ("Português"),
-("Inglês"),
-("Francês"),
+VALUES 
+("Alemão"),
 ("Espanhol"),
-("Alemão");
+("Francês"),
+("Inglês"),
+("Português"),
+("Outro");
 
 INSERT INTO sebo_virtual.Condicao (descricao)
-VALUES ("Usado"),
+VALUES 
+("Novo"),
 ("Seminovo"),
-("Novo");
+("Usado");
 
 #Cadastro de Produtos
 INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES 
@@ -147,8 +154,8 @@ INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
-((SELECT id from sebo_virtual.Produto WHERE titulo='O carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '1', '1'),
-((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '1', '1');
+((SELECT id from sebo_virtual.Produto WHERE titulo='O carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '5', '1'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '5', '1');
 
 INSERT INTO `sebo_virtual`.`Midia_tem_Legenda` (`fk_id_produto`, `fk_id_legenda`) 
 VALUES 
@@ -179,43 +186,43 @@ INSERT INTO `publicacao`
 `fk_id_editora`, `fk_id_formato_publicacao`, `fk_id_idioma`, `fk_id_genero`)
 VALUES
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'A Mão e a Luva'),
-  '1874-01-01', 145, 'comum', '', '', 1, 1, 1, 2),
+  '1874-01-01', 145, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'A Metamorfose'),
-  '1915-01-01', 44, 'comum', '', '', 1, 1, 1, 2),
+  '1915-01-01', 44, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'As Armas da Persuassão'),
-  '2012-01-01', 304, 'comum', '', '', 1, 1, 1, 2),
+  '2012-01-01', 304, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Clean Code'),
-  '2008-01-01', 464, 'comum', '', '', 1, 1, 2, 2),
+  '2008-01-01', 464, 'comum', '', '', 1, 1, 4, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Contos da Meia Noite'),
-  '2020-01-01', 85, 'comum', '', '', 4, 1, 1, 2),
+  '2020-01-01', 85, 'comum', '', '', 4, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Dom Casmurro'),
-  '1873-01-01', 223, 'comum', '', '', 2, 1, 1, 2),
+  '1873-01-01', 223, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Esaú e Jacó'),
-  '1904-01-01', 296, 'comum', '', '', 2, 1, 1, 2),
+  '1904-01-01', 296, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Helena'),
-  '1876-01-01', 219, 'comum', '', '', 2, 1, 1, 2),
+  '1876-01-01', 219, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Histórias da Meia Noite'),
-  '1873-01-01', 325, 'comum', '', '', 2, 1, 1, 2),
+  '1873-01-01', 325, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Laranja Mecânica'),
-  '1970-01-01', 288, 'dura', '', '', 3, 1, 1, 5),
+  '1970-01-01', 288, 'dura', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Marley e Eu'),
-  '2005-01-01', 317, 'dura', '', '', 3, 1, 1, 5),
+  '2005-01-01', 317, 'dura', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Memorial de Aires'),
-  '1908-01-01', 245, 'comum', '', '', 3, 1, 1, 5),
+  '1908-01-01', 245, 'comum', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Memórias Póstumas de Brás Cubas'),
-  '1881-01-01', 215, 'comum', '', '', 3, 1, 1, 5),
+  '1881-01-01', 215, 'comum', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Do Mil ao Milhão'),
-  '2018-01-01', 192, 'comum', '', '', 4, 1, 1, 5),
+  '2018-01-01', 192, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Mindset'),
-  '2017-01-01', 312, 'comum', '', '', 4, 1, 1, 5),
+  '2017-01-01', 312, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Quem Mexeu no Meu Queijo'),
-  '2017-01-01', 112, 'comum', '', '', 4, 1, 1, 5),
+  '2017-01-01', 112, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Quincas Borba'), 
-  '1886-01-01', 256, 'comum', '', '', 4, 1, 1, 6),
+  '1886-01-01', 256, 'comum', '', '', 4, 1, 5, 6),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Senhora'),
-  '1875-01-01', 132, 'comum', '', '', 3, 1, 1, 6),
+  '1875-01-01', 132, 'comum', '', '', 3, 1, 5, 6),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Vidas Secas'),
-  '1938-01-01', 117, 'comum', '', '', 2, 1, 1, 6);
+  '1938-01-01', 117, 'comum', '', '', 2, 1, 5, 6);
 
 INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo`, 
 `descricao`, `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 

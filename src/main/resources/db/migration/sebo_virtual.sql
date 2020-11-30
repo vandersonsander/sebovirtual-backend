@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Publicacao` (
   `isbn10` VARCHAR(10) NULL,
   `isbn13` VARCHAR(13) NULL,
   `edicao` VARCHAR(45) NULL,
-  `resumo` VARCHAR(200) NULL,
+  `resumo` VARCHAR(1000) NULL,
   `fk_id_editora` INT NULL,
   `fk_id_formato_publicacao` INT NOT NULL,
   `fk_id_idioma` INT NOT NULL,
@@ -556,7 +556,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Autor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  `sobrenome` VARCHAR(45) NOT NULL,
+  `sobrenome` VARCHAR(45) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
