@@ -34,10 +34,12 @@ public class PesquisaService {
 		if (query == null)
 			query = "";
 		query = query.replace(" ", "%");
-		if (categoria == null)
-			categoria = "";
-		if (condicao == null)
-			condicao = "";
+		if (categoria == null || categoria.isEmpty())
+			categoria = "livro,cd";
+		String[] parsedCategoria = categoria.split(",");
+		if (condicao == null || condicao.isEmpty())
+			condicao = "Usado,Novo,Seminovo";
+		String[] parsedCondicao = condicao.split(",");
 		if (precoMin == null)
 			precoMin = 0.0;
 		if (precoMax == null)
@@ -59,8 +61,8 @@ public class PesquisaService {
 		Page<HistoricoAnuncio> anuncios = 
 				pesquisaRepository.searchByQuery(
 						query,
-						categoria,
-						condicao,
+						parsedCategoria,
+						parsedCondicao,
 						precoMin,
 						precoMax,
 						pageable);
@@ -68,19 +70,27 @@ public class PesquisaService {
 		/* Filtros */
 		List<FilterOccurrencesDTO> condicaoOccu = pesquisaRepository.generateFiltersDescricao(
 				query,
-				categoria, 
-				condicao,
+				parsedCategoria, 
+				parsedCondicao,
 				precoMin,
 				precoMax);
 		List<FilterOccurrencesDTO> categoriaOccu = pesquisaRepository.generateFiltersCategoria(
 				query,
+				parsedCategoria, 
+				parsedCondicao,
+				precoMin,
+				precoMax);
+		/* Retornando resultado errado */
+		/*List<FilterOccurrencesDTO> estadoOccu = pesquisaRepository.generateFiltersEstado(
+				query,
 				categoria, 
 				condicao,
 				precoMin,
-				precoMax);
+				precoMax);//*/
 		List<FilterDTO> filters = new ArrayList<>();
 		filters.add(new FilterDTO("condicao", condicaoOccu));
-		filters.add(new FilterDTO("categoria", categoriaOccu));
+		filters.add(new FilterDTO("categoria", categoriaOccu));//*/
+		// filters.add(new FilterDTO("estado", estadoOccu));
 		
 		search.setContent(anuncios.getContent());
 		search.setResults(anuncios.getTotalElements());

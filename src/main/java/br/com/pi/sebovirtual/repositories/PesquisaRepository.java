@@ -30,22 +30,22 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "JOIN a.produto pd " 
 			+ "LEFT OUTER JOIN a.produto.autores au "
 			+ "LEFT OUTER JOIN a.condicao c "
-			+ "WHERE (pd.titulo LIKE %?1% "
-			+ "OR a.titulo LIKE %?1% "
-			+ "OR a.descricao LIKE %?1% "
-			+ "OR CONCAT(au.nome, ' ', au.sobrenome) LIKE %?1% "
-			+ "OR pd.artista LIKE %?1% "
-			+ "OR pd.marca IN (SELECT m FROM Marca m WHERE m.nome LIKE %?1%)) "
+			+ "WHERE (pd.titulo LIKE %:query% "
+			+ "OR a.titulo LIKE %:query% "
+			+ "OR a.descricao LIKE %:query% "
+			+ "OR CONCAT(au.nome, ' ', au.sobrenome) LIKE %:query% "
+			+ "OR pd.artista LIKE %:query% "
+			+ "OR pd.marca IN (SELECT m FROM Marca m WHERE m.nome LIKE %:query%)) "
 			+ "AND a.status IN (SELECT st FROM Status st WHERE st.id = 1) "
 			+ "AND a.estoque > 0 "
-			+ "AND pd.categoria LIKE %?2% "
-			+ "AND c.descricao LIKE %?3% "
-			+ "AND (a.preco >= ?4 AND a.preco <= ?5)";
-	@Query(value = "SELECT a " + queryJoin)
+			+ "AND pd.categoria IN :categoria "
+			+ "AND c.descricao IN :condicao "
+			+ "AND (a.preco >= :precoMin AND a.preco <= :precoMax)";
+	@Query(value = "SELECT DISTINCT a " + queryJoin)
 	Page<HistoricoAnuncio> searchByQuery(
 			String query, 
-			String categoria, 
-			String condicao,
+			String[] categoria, 
+			String[] condicao,
 			Double precoMin,
 			Double precoMax,
 			Pageable pageable);
@@ -55,14 +55,13 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 	 * @return
 	 */
 	@Query(value = ""
-			+ "SELECT "
-			+ "new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(c.descricao, COUNT(c.descricao)) "
+			+ "SELECT new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(c.descricao, COUNT(c.descricao)) "
 			+ queryJoin
 			+ "GROUP BY c.descricao ")
 	List<FilterOccurrencesDTO> generateFiltersDescricao(
 			String query,
-			String categoria, 
-			String condicao,
+			String[] categoria, 
+			String[] condicao,
 			Double precoMin,
 			Double precoMax);
 	
@@ -73,20 +72,23 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "GROUP BY pd.categoria ")
 	List<FilterOccurrencesDTO> generateFiltersCategoria(
 			String query,
-			String categoria, 
-			String condicao,
+			String[] categoria, 
+			String[] condicao,
 			Double precoMin,
 			Double precoMax);
 	
+	/* Verificar porque retorna resultado errado */
 	/*@Query(value = ""
 			+ "SELECT "
-			+ "new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(c.descricao, COUNT(c.descricao)) "
+			+ "new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(en.estado, COUNT(en.estado)) "
 			+ queryJoin
-			+ "GROUP BY c.descricao ")
+			+ " GROUP BY en.estado ")
 	List<FilterOccurrencesDTO> generateFiltersEstado(
 			String query,
 			String categoria, 
 			String condicao,
 			Double precoMin,
 			Double precoMax);*/
+	
+	/* Filtros Livros */
 }
