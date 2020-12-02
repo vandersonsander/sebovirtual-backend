@@ -37,13 +37,13 @@ data_modificacao, fk_id_status, fk_id_usuario, principal)
 VALUES 
 ("1", "Juliana Aquino", "22431-004", "Avenida Bartolomeu Mitre", "990",
 "Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1),
-("1", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
+("2", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
 "4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
-("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
+("3", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
 "", "Parangaba", "Fortaleza", "CE", "Sogra", now(), "1", "1", 0),
 ("1", "Vanderson Sander", "04116-040", "Rua Domingos Soto", "1000",
 "", "Jardim Vila Mariana", "São Paulo", "SP", "Casa", now(), "1", "2", 1),
-("1", "Vanderson Sander", "05409-010", "Rua Oscar Freire", "1291",
+("2", "Vanderson Sander", "05409-010", "Rua Oscar Freire", "1291",
 "", "Pinheiros", "São Paulo", "SP", "Casa dos Avós", now(), "1", "2", 0),
 ("1", "Guilherme Nunes", "01310-932", "Avenida Paulista", "2202",
 "", "Bela Vista", "São Paulo", "SP", "Casa dos Avós", now(), "1", "3", 1);
@@ -137,6 +137,10 @@ INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES
 ('Quincas Borba', 'livro'),
 ('Senhora', 'livro'),
 ('Vidas Secas', 'livro'),
+('O Guarani', 'livro'),
+('Iracema', 'livro'),
+('O Quinze', 'livro'),
+('Til', 'livro'),
 #Eletrônicos
 ('Super Nintendo', 'eletronico'),
 #Discos
@@ -154,7 +158,7 @@ INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
-((SELECT id from sebo_virtual.Produto WHERE titulo='O carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '5', '1'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='O Carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '5', '1'),
 ((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '5', '1');
 
 INSERT INTO `sebo_virtual`.`Midia_tem_Legenda` (`fk_id_produto`, `fk_id_legenda`) 
@@ -171,7 +175,10 @@ VALUES
 ('Virtude Livros'),
 ('Nova Aguilar'),
 ('Record'),
-('HarperCollins Bis');
+('HarperCollins Bis'),
+('Panda Books'),
+('Martin Claret'),
+('José Olympio');
 
 #Formato Publicação
 INSERT INTO `formato_publicacao`
@@ -186,112 +193,145 @@ INSERT INTO `publicacao`
 `fk_id_editora`, `fk_id_formato_publicacao`, `fk_id_idioma`, `fk_id_genero`)
 VALUES
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'A Mão e a Luva'),
-  '1874-01-01', 145, 'comum', '', '', 1, 1, 5, 2),
+  '1874', 145, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'A Metamorfose'),
-  '1915-01-01', 44, 'comum', '', '', 1, 1, 5, 2),
+  '1915', 44, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'As Armas da Persuassão'),
-  '2012-01-01', 304, 'comum', '', '', 1, 1, 5, 2),
+  '2012', 304, 'comum', '', '', 1, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Clean Code'),
-  '2008-01-01', 464, 'comum', '', '', 1, 1, 4, 2),
+  '2008', 464, 'comum', '', '', 1, 1, 4, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Contos da Meia Noite'),
-  '2020-01-01', 85, 'comum', '', '', 4, 1, 5, 2),
+  '2020', 85, 'comum', '', '', 4, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Dom Casmurro'),
-  '1873-01-01', 223, 'comum', '', '', 2, 1, 5, 2),
+  '1873', 223, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Esaú e Jacó'),
-  '1904-01-01', 296, 'comum', '', '', 2, 1, 5, 2),
+  '1904', 296, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Helena'),
-  '1876-01-01', 219, 'comum', '', '', 2, 1, 5, 2),
+  '1876', 219, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Histórias da Meia Noite'),
-  '1873-01-01', 325, 'comum', '', '', 2, 1, 5, 2),
+  '1873', 325, 'comum', '', '', 2, 1, 5, 2),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Laranja Mecânica'),
-  '1970-01-01', 288, 'dura', '', '', 3, 1, 5, 5),
+  '1970', 288, 'dura', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Marley e Eu'),
-  '2005-01-01', 317, 'dura', '', '', 3, 1, 5, 5),
+  '2005', 317, 'dura', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Memorial de Aires'),
-  '1908-01-01', 245, 'comum', '', '', 3, 1, 5, 5),
+  '1908', 245, 'comum', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Memórias Póstumas de Brás Cubas'),
-  '1881-01-01', 215, 'comum', '', '', 3, 1, 5, 5),
+  '1881', 215, 'comum', '', '', 3, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Do Mil ao Milhão'),
-  '2018-01-01', 192, 'comum', '', '', 4, 1, 5, 5),
+  '2018', 192, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Mindset'),
-  '2017-01-01', 312, 'comum', '', '', 4, 1, 5, 5),
+  '2017', 312, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Quem Mexeu no Meu Queijo'),
-  '2017-01-01', 112, 'comum', '', '', 4, 1, 5, 5),
+  '2017', 112, 'comum', '', '', 4, 1, 5, 5),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Quincas Borba'), 
-  '1886-01-01', 256, 'comum', '', '', 4, 1, 5, 6),
+  '1886', 256, 'comum', '', '', 4, 1, 5, 6),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Senhora'),
-  '1875-01-01', 132, 'comum', '', '', 3, 1, 5, 6),
+  '1875', 132, 'comum', '', '', 3, 1, 5, 6),
 ((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Vidas Secas'),
-  '1938-01-01', 117, 'comum', '', '', 2, 1, 5, 6);
+  '1938', 117, 'comum', '', '', 2, 1, 5, 6);
+  
+INSERT INTO `publicacao`
+(`id`, `ano`, `quantidade_paginas`, `tipo_capa`, `isbn10`, `isbn13`,
+`fk_id_editora`, `fk_id_formato_publicacao`, `fk_id_idioma`, `fk_id_genero`, resumo)
+VALUES
+((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'O Guarani'),
+  '2012', 380, 'comum', '8572323384', '9788572323383', 
+  (SELECT id FROM Editora WHERE nome='Panda Books'), 1, 5, 6,
+  'Publicado em 1865, Iracema é um dos textos fundamentais da cultura brasileira. Parte da trilogia indianista de José de Alencar (O guarani e Ubirajara são os outros livros), o romance guarda a multiplicidade dos clássicos: sua prosa é poética, seu tratamento da matéria é mítico, seu ar é de epopeia. Livro que durante muitos anos resumiu o éthos brasileiro nas letras, ainda hoje oferece muitos caminhos de interpretação na crítica literária, na historiografia, nos estudos culturais e de gênero. A história do amor de Iracema, a “virgem dos lábios de mel”, com Martim é a metáfora romântica do encontro entre a civilização e a cultura autóctone. Valorizando a paisagem brasileira e construindo um passado idealizado, José de Alencar criou um mito que perdura até hoje.'),
+((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Iracema'),
+  '2015', 168, 'comum', '8578885252', '9788578885250', 
+  (SELECT id FROM Editora WHERE nome='Martin Claret'), 1, 5, 6,
+  'O guarani – um dos romances mais importantes de José de Alencar – foi uma das primeiras obras criadas com o objetivo de fundar uma literatura brasileira autônoma em relação à tradição portuguesa. Foi inicialmente publicada em forma de folhetim, em meados de 1857, concedendo grande popularidade a Alencar. Quando, no final do mesmo ano, foi transformado em livro, sofreu pequenas modificações. Em meio à história de amor entre o índio Peri e a moça branca Ceci, José de Alencar cria uma narrativa épica, cheia de amor, aventura, traição, lutas e vingança, prendendo a atenção do leitor a cada nova página. O romance proclama a brasilidade, focando importantes aspectos da realidade brasileira do século XVII: o índio e o branco; a cidade e o campo; o sertão e o litoral.'),
+((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'O Quinze'),
+  '2012', 208, 'comum', '8503012928', '9788503012928', 
+  (SELECT id FROM Editora WHERE nome='Panda Books'), 1, 5, 6,
+  'Lançado originalmente em 1930, em edição financiada pela própria autora, O Quinze é o romance de estreia da aclamada escritora cearense Rachel de Queiroz. Gerou grande impacto na época não apenas por sua força narrativa, mas também pelo fato de ter sido escrito por uma mulher de apenas 20 anos de idade.  Ao narrar as histórias de Conceição, Vicente e a saga do vaqueiro Chico Bento e sua família, Rachel de Queiroz, imortal da Academia Brasileira de Letras,  expõe de maneira única e original o drama causado pela histórica seca de 1915, que assolou o Nordeste brasileiro.  O Quinze expressa uma questão atual: o duelo entre o homem e a terra. A história da seca nordestina, as expectativas e as angústias que ela provocou são aqui retratadas com simplicidade e força.'),
+((SELECT id FROM `sebo_virtual`.Produto WHERE `titulo` = 'Til'),
+  '2012', 264, 'comum', '8572328432', '9788572328432', 
+  (SELECT id FROM Editora WHERE nome='Martin Claret'), 1, 5, 6,
+  'Publicada pela primeira vez em 1872, Til pertence, ao lado de O gaúcho, O sertanejo e O tronco do Ipê, ao regionalismo de José de Alencar e retrata o interior paulista. Nesse romance, a idealização da natureza, a narrativa leve e o subjetivismo da linguagem criam uma atmosfera suave, em que a inocência dos personagens centrais contrasta com a trama emaranhada e sanguinolenta. A beleza da natureza, tão valorizada e enaltecida pelos contemporâneos de Alencar, divide lugar com a brutalidade da realidade regional. Til é o apelido de Berta, moça “pequena, esbelta, ligeira, buliçosa” que se envolve nas mais intricadas tramas, sempre buscando ajudar os que precisam. Trata-se do ideal de heroína: doce, meiga, caridosa, mas também de coragem e impetuosidade únicas na literatura brasileira. Capaz de enfrentar jagunços, Berta não mede esforços ao buscar a realização de seus intentos. Violências, mistérios e triângulos amorosos constituem esta complicada e bela história.');
 
 INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo`, 
 `descricao`, `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
-('1', '10', 'Promoção! CD O Carnaval de Ivete!!!', 
-'1 cd da Ivete Sangalo, O Carnaval', '24', now(), '1', '1', 
-'1', '1'), #1
-('1', '5', 'CD The Wonder Of You', 
-'1 cd do Elvis Presley - The Wonder Of You', '28', now(), '1', '1', 
-'1', '1'), #2
+('1', '10', 'Promoção! CD O Carnaval de Ivete!!!', '1 cd da Ivete Sangalo', '24', 
+  ('2020-11-01' + INTERVAL 1 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo = 'O Carnaval'), '1'), #1
+('1', '5', 'CD The Wonder Of You', '1 cd do Elvis Presley - The Wonder Of You', '28', 
+  ('2020-11-02' + INTERVAL 1 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo = 'The Wonder Of You'), '1'), #2
 #Livros
-(3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8,
-  '2020-11-9', 1, 1,
+(3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8, 
+  ('2020-11-03' + INTERVAL 1 DAY_MINUTE), 1, 1, 
   (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1), #3
-(4, 14, 'A Metamorfose', 'descricao', 12.8,
-  '2020-11-9', 1, 1,
+(4, 14, 'A Metamorfose', 'descricao', 12.8, 
+  ('2020-11-04' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1), #4
 (5, 16, 'As Armas da Persuassão', 'descricao', 23.5,
-  '2020-11-9', 1, 2,
+  ('2020-11-05' + INTERVAL 1 DAY_MINUTE), 1, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1), #%
 (6, 18, 'Clean Code', 'descricao', 88.2,
-  '2020-11-9', 1, 1,
+  ('2020-11-06' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1), #6
 (7, 20, 'Contos da Meia Noite', 'descricao', 11.9, 
-  '2020-11-9', 1, 1,
+  ('2020-11-07' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1), #7
 (8, 25, 'Dom Casmurro', 'descricao', 11.9,
-  '2020-11-9', 1, 1,
+  ('2020-11-08' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1), #8
 (9, 30, 'Esaú e Jacó', 'descricao', 11.9,
-  '2020-11-9', 1, 1,
+  ('2020-11-09' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1), #9
 (10, 27, 'Helena', 'descricao', 13.5,
-  '2020-11-9', 2, 1,
+  ('2020-11-10' + INTERVAL 1 DAY_MINUTE), 2, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1), #10
 (11, 23, 'Histórias da Meia Noite', 'Seminovo, lacrado!', 21.3,
-  '2020-11-9', 2, 2,
+  ('2020-11-11' + INTERVAL 1 DAY_MINUTE), 2, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1), #11
 (12, 23, 'Laranja Mecânica', 'descricao', 33.4,
-  '2020-11-9', 2, 3,
+  ('2020-11-12' + INTERVAL 1 DAY_MINUTE), 2, 3,
   (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1), #12
 (13, 23, 'Marley e Eu', 'descricao', 40.2,
-  '2020-11-9', 2, 3,
+  ('2020-11-13' + INTERVAL 1 DAY_MINUTE), 2, 3,
   (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1), #13
 (14, 33, 'Memorial de Aires', 'descricao', 12.5,
-  '2020-11-9', 2, 1,
+  ('2020-11-14' + INTERVAL 1 DAY_MINUTE), 2, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1), #14
 (15, 35, 'Memórias Póstumas de Brás Cubas', 'descricao', 9.5,
-  '2020-11-9', 2, 1,
+  ('2020-11-15' + INTERVAL 1 DAY_MINUTE), 2, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1), #15
 (16, 10, 'Do Mil ao Milhão - Sem cortar o cafezinho', 'descricao', 18.5,
-  '2020-11-9', 3, 2,
+  ('2020-11-16' + INTERVAL 1 DAY_MINUTE), 3, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1), #16
 (17, 28, 'Mindset', 'descricao', 40.2,
-  '2020-11-9', 3, 2,
+  ('2020-11-17' + INTERVAL 1 DAY_MINUTE), 3, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1), #17
 (18, 26, 'Quem Mexeu no Meu Queijo', 'descricao', 23.4,
-  '2020-11-9', 3, 2,
+  ('2020-11-18' + INTERVAL 1 DAY_MINUTE), 3, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1), #18
 (19, 29, 'Quincas Borba', 'Livro possui algumas dobras e amassados', 4.3,
-  '2020-11-9', 3, 1,
+  ('2020-11-19' + INTERVAL 1 DAY_MINUTE), 3, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1), #19
 (20, 9, 'Senhora', 'Em ótimo estado de conservação', 10.5,
-  '2020-11-9', 3, 2,
+  ('2020-11-20' + INTERVAL 1 DAY_MINUTE), 3, 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1), #20
 (21, 25, 'Vidas Secas', 'Edição especial autografada, para colecionadores', 152.5,
-  '2020-11-9', 3, 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1); #21
+  ('2020-11-21' + INTERVAL 1 DAY_MINUTE), 3, 2,
+  (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1), #21,
+(22, 10, 'Iracema', 'Edição especial autografada, para colecionadores', 22.9,
+  ('2020-11-22' + INTERVAL 1 DAY_MINUTE), 1, 1,
+  (SELECT id FROM `Produto` WHERE titulo = 'Iracema'), 1), #22
+(23, 11, 'O Guarani', 'Edição especial autografada, para colecionadores', 15.9,
+  ('2020-11-23' + INTERVAL 1 DAY_MINUTE), 1, 1,
+  (SELECT id FROM `Produto` WHERE titulo = 'O Guarani'), 1), #23
+(24, 5, 'O Quinze', 'Edição especial autografada, para colecionadores', 21.9,
+  ('2020-11-24' + INTERVAL 1 DAY_MINUTE), 1, 1,
+  (SELECT id FROM `Produto` WHERE titulo = 'O Quinze'), 1), #24
+(25, 2, 'Promoção Til', 'Edição especial autografada, para colecionadores', 21.9,
+  ('2020-11-25' + INTERVAL 1 DAY_MINUTE), 1, 1,
+  (SELECT id FROM `Produto` WHERE titulo = 'Til'), 1); #25
   
 INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
 VALUES 
@@ -315,7 +355,11 @@ VALUES
 ('4z9bAoUUltVUfAwtbj98wxVG.png', '18'), #Quem Mexeu no Meu Queijo?
 ('RwzBvGQaqQ7Bhz0H5xMeSDGl0Q==.jpg', '19'), #Quincas Borba
 ('dqOb5ol7Wdtk+frTtc6tLsG91bM=.png', '20'), #Senhora
-('mfwsqbCBMNuUbNg2vUf0j8gz0g==.png', '21'); #Vidas Secas
+('mfwsqbCBMNuUbNg2vUf0j8gz0g==.png', '21'), #Vidas Secas
+('XbhLBgyy098tWRidCTukgUqrhw==.jpg', '22'), #Iracema
+('blwnE85rFLBGD0lC5Dirku4FJdY=.jpg', '23'), #O Guarani
+('wwutZup0AsfrQ3ysoWWSjvYPYg==.jpg', '24'), #O Quinze
+('3bKHi21970dnHLoXkcrWLW9PnoA=.jpg', '25'); #Til
 
 #Autores
 INSERT INTO `Autor`
@@ -332,7 +376,8 @@ VALUE
 ('Samuel', 'Marcos Miranda'),
 ('Robert', 'C. Martin'),
 ('Robert', 'B. Cialdini'),
-('Franz', 'Kafka');
+('de Alencar', 'José'),
+('de Queiroz', 'Rachel');
 
 #Autores e Publicações
 INSERT INTO `Publicacao_Tem_Autor`
@@ -413,6 +458,22 @@ VALUES
 (
   (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'),
   (SELECT id FROM `Autor` WHERE nome = 'Graciliano' and sobrenome = 'Ramos')
+),
+(
+  (SELECT id FROM `Produto` WHERE titulo = 'O Guarani'),
+  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
+),
+(
+  (SELECT id FROM `Produto` WHERE titulo = 'Iracema'),
+  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
+),
+(
+  (SELECT id FROM `Produto` WHERE titulo = 'O Quinze'),
+  (SELECT id FROM `Autor` WHERE nome = 'de Queiroz' and sobrenome = 'Rachel')
+),
+(
+  (SELECT id FROM `Produto` WHERE titulo = 'Til'),
+  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
 );
 
 INSERT INTO `sebo_virtual`.`Motivo_Devolucao` (`descricao`)

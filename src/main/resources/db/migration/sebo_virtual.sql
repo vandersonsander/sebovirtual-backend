@@ -70,7 +70,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sebo_virtual`.`Publicacao` (
   `id` INT NOT NULL,
-  `ano` DATE NULL,
+  `ano` VARCHAR(4) NULL,
   `quantidade_paginas` INT NULL,
   `tipo_capa` VARCHAR(45) NULL,
   `isbn10` VARCHAR(10) NULL,
