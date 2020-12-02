@@ -26,16 +26,15 @@ public class HistoricoEnderecoService
 		// Obtém o id do usuário dono do endereço.
 		Integer userId = endereco.getUsuario().getId();
 		
-		// Se o ID é igual a null, significa que está cadastrando um novo endereco
-		Integer idEndereco;
+		// Se o idEndereco é igual a null, significa que está cadastrando 
+		// um novo endereco
 		if (endereco.getIdEndereco() == null) {
-			idEndereco = 1;
-		} else {
-			// Obtém o próximo idEndereco.
-			idEndereco = endereco.getIdEndereco() + 1;// = enderecoRepository.getNextIdEndereco(idUsuario);
-			//idEndereco = (idEndereco == null ? 1 : idEndereco);
-		}
-		endereco.setIdEndereco(idEndereco);
+			// Obtém o próximo idEndereco e o define no objeto endereco.
+			Integer idEndereco = 
+				enderecoRepository.getNextIdEndereco(userId);
+			endereco.setIdEndereco(
+				idEndereco == null ? 1 : idEndereco);
+		} 
 		
 		if (endereco.getPrincipal() == true) {
 		    Integer idMainActive = enderecoRepository.

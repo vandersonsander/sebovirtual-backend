@@ -15,7 +15,7 @@ public interface HistoricoEnderecoRepository extends BaseRepository<HistoricoEnd
 	 * @param idUsuario Id do usuário.
 	 * @return O próximo idEndereco desse usuário.
 	 */
-	@Query(value = "SELECT MAX(id_endereco) AS next_id FROM Historico_Endereco " +
+	@Query(value = "SELECT MAX(id_endereco) + 1 AS next_id FROM Historico_Endereco " +
 			 	   "WHERE fk_id_usuario = :idUsuario", nativeQuery=true)
 	public Integer getNextIdEndereco(int idUsuario);
 	

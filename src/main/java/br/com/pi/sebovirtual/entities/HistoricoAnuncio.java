@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,17 +40,17 @@ public class HistoricoAnuncio extends BaseEntity {
 	@LastModifiedDate
 	private LocalDateTime dataModificacao;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_produto")
 	@JsonIgnoreProperties("anuncios")
 	private Produto produto;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_condicao")
 	@JsonIgnoreProperties("historicoAnuncio")
 	private Condicao condicao;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_status")
 	@JsonIgnoreProperties("historicoAnuncio")
 	private Status status;
@@ -59,7 +58,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	/**
 	 * Usuário que criou o anúncio.
 	 */
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_id_usuario")
 	@JsonIgnoreProperties("historicoAnuncio")
 	@JsonIgnore(false)
@@ -72,7 +71,7 @@ public class HistoricoAnuncio extends BaseEntity {
 	/**
 	 * Conjunto de anúncios do pedido.
 	 */
-	@OneToMany(mappedBy="historicoAnuncio", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="historicoAnuncio")//, cascade = CascadeType.ALL)
 	@JsonIgnore(true)
 	private Set<PedidoTemAnuncio> itens =
 		new HashSet<>();
