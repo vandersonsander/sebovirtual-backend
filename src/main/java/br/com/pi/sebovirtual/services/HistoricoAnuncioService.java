@@ -102,4 +102,16 @@ public class HistoricoAnuncioService
 		return ResponseEntity.ok().body(anuncioRepository.findQuery(query));
 	}
 	
+	@Override
+	public void destroy(Integer id) {
+		// Não apaga o registro de fato, pois ele pode estar sendo
+		// referenciado por um pedido, mas seu status muda para excluído.
+		HistoricoAnuncio current = this.getOne(id);
+		Optional<Status> status = 
+			statusRepository.findOneByNome(Status.EXCLUIDO);
+		if (status.isPresent()) {
+			current.setStatus(status.get()); // Muda o status para excluido			
+		}
+	}
+	
 }
