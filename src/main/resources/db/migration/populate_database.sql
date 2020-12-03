@@ -2,13 +2,18 @@ INSERT INTO sebo_virtual.Usuario (email, senha, habilitado, autoridade)
 VALUES 
 ("juliana@gmail.com", "$2a$10$/neADC8gHtRb39wNtVV/de/2dBjpusdCbMkDv8hESnxvR5T2DeFva", "1", "USUARIO"),
 ("vanderson@gmail.com", "$2a$10$/neADC8gHtRb39wNtVV/de/2dBjpusdCbMkDv8hESnxvR5T2DeFva", "1", "USUARIO"),
-("guilherme@gmail.com", "$2a$10$/neADC8gHtRb39wNtVV/de/2dBjpusdCbMkDv8hESnxvR5T2DeFva", "1", "USUARIO");
+("guilherme@gmail.com", "$2a$10$/neADC8gHtRb39wNtVV/de/2dBjpusdCbMkDv8hESnxvR5T2DeFva", "1", "USUARIO"),
+("tudoderock@gmail.com", "$2a$10$/neADC8gHtRb39wNtVV/de/2dBjpusdCbMkDv8hESnxvR5T2DeFva", "1", "USUARIO");
 
 INSERT INTO sebo_virtual.Pessoa_Fisica (id, nome, sobrenome, data_nascimento, cpf, sexo)
 VALUES 
 ((SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), "Juliana", "Aquino", "1981-06-01", "532.533.684-32", "F"),
 ((SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), "Vanderson", "Sander", "1982-10-08", "913.646.577-16", "M"),
 ((SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), "Guilherme", "Nunes", "1985-12-15", "313.514.618-93", "M");
+
+INSERT INTO sebo_virtual.Pessoa_Juridica (id, nome_fantasia, cnpj, razao_social)
+VALUES 
+((SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), "Tudo de Rock", "31.718.516/0001-08", "Tudo de Rock S.A.");
 
 INSERT INTO sebo_virtual.Status (nome)
 VALUES 
@@ -33,26 +38,30 @@ VALUES
 
 INSERT INTO sebo_virtual.Historico_Endereco (id_endereco, nome_destinatario, 
 cep, logradouro, numero, complemento, bairro, cidade, estado, apelido,
-data_modificacao, fk_id_status, fk_id_usuario, principal)
+data_modificacao, fk_id_status, fk_id_usuario, principal, principal_envio)
 VALUES 
 ("1", "Juliana Aquino", "22431-004", "Avenida Bartolomeu Mitre", "990",
-"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1),
+"Apto 410", "Leblon", "Rio de Janeiro", "RJ", "Apartamento", now(), "1", "1", 1, 1),
 ("2", "Efigênia Aquino", "60532-620", "Rua 1004", "999",
-"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0),
+"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", "1", 0, 0),
 ("3", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
-"", "Parangaba", "Fortaleza", "CE", "Sogra", now(), "1", "1", 0),
+"", "Parangaba", "Fortaleza", "CE", "Sogra", now(), "1", "1", 0, 0),
 ("1", "Vanderson Sander", "04116-040", "Rua Domingos Soto", "1000",
-"", "Jardim Vila Mariana", "São Paulo", "SP", "Casa", now(), "1", "2", 1),
+"", "Jardim Vila Mariana", "São Paulo", "SP", "Casa", now(), "1", "2", 1, 1),
 ("2", "Vanderson Sander", "05409-010", "Rua Oscar Freire", "1291",
-"", "Pinheiros", "São Paulo", "SP", "Casa dos Avós", now(), "1", "2", 0),
+"", "Pinheiros", "São Paulo", "SP", "Casa dos Avós", now(), "1", "2", 0, 0),
 ("1", "Guilherme Nunes", "01310-932", "Avenida Paulista", "2202",
-"", "Bela Vista", "São Paulo", "SP", "Casa dos Avós", now(), "1", "3", 1);
+"", "Bela Vista", "São Paulo", "SP", "Casa dos Avós", now(), "1", "3", 1, 1),
+("1", "Tudo de Rock", "01310-932", "Avenida Paulista", "1000",
+"", "Bela Vista", "São Paulo", "SP", "Matriz", now(), "1", "4", 1, 1);
 
 INSERT INTO sebo_virtual.Telefone (ddi, ddd, numero, tipo, fk_id_usuario)
 VALUES ("55", "21", "980228740", "celular", "1"),
 	   ("55", "21", "39888740", "contato", "1"),
        ("55", "11", "945418250", "contato", "2"),
-       ("55", "11", "945418250", "celular", "2");
+       ("55", "11", "945418250", "celular", "2"),
+       ("55", "11", "945418250", "celular", "4"),
+       ("55", "11", "945418250", "contato", "4");
 
 INSERT INTO sebo_virtual.Marca (nome)
 VALUES ("Sony"),
@@ -146,21 +155,32 @@ INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES
 #Discos
 ('Tim Maia', 'disco'),
 ('Trash in Texas', 'disco'),
-('Elvis Presley', 'disco'),
+('Sun Singles', 'disco'),
 ('Evil Empire', 'disco'),
-('Hillbilly Rawhide', 'disco'),
+('My Name is Rattlesnake', 'disco'),
 ('Isso é Amor', 'disco'),
 ('Kiss', 'disco'),
-('Mickey', 'disco'),
-('Red Hot Mothers Milk', 'disco'),
+('Stoned', 'disco'),
+('Mothers Milk', 'disco'),
 ('Some People Have Real Problems', 'disco'),
-('Twist Uptown The Crystals', 'disco');
+('Twist Uptown', 'disco');
 
 INSERT INTO `sebo_virtual`.`Midia` (`id`,`quantidade_midias`, `ano`, `quantidade_faixas`, `tempo_execucao`, `artista`, `fk_id_gravadora`, `fk_id_formato_midia`, `fk_id_idioma`, `fk_id_genero`) 
 VALUES 
 ((SELECT id from sebo_virtual.Produto WHERE titulo='O Carnaval'),'1', '2019-01-01', '12', '00:01:30', 'Ivete Sangalo', '1', '1', '5', '1'),
-((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '5', '1');
-
+((SELECT id from sebo_virtual.Produto WHERE titulo='The Wonder Of You'),'1', '2020-01-01', '10', '00:01:25', 'Elvis Presley', '1', '1', '5', '1'),
+#discos
+((SELECT id from sebo_virtual.Produto WHERE titulo='Trash in Texas'), '2', '1987-01-01', '10', '00:01:25', 'Anthrax', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Sun Singles'), '1', '1955-01-01', '10', '00:01:30', 'Elvis Presley', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Evil Empire'), '1', '2000-01-01', '10', '00:01:45', 'Rage Against the Machine', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='My Name is Rattlesnake'), '2', '1980-01-01', '10', '00:02:30', 'Hillbilly Rawhide', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Isso é Amor'), '2', '2019-01-01', '12', '00:01:35', 'Ira', '1', '3', '5', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Kiss'), '1', '1985-01-01', '12', '00:01:35', 'Kiss', '1', '3', '5', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Stoned'), '2', '1991-01-01', '12', '00:01:30', 'Mickey Junkies', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Mothers Milk'), '1', '1995-01-01', '10', '00:01:30', 'Rage Against the Machine', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Some People Have Real Problems'), '1', '2000-01-01', '10', '00:01:30', 'Sia', '1', '3', '4', '3'),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Twist Uptown'), '1', '1975-01-01', '10', '00:01:30', 'The Crystals', '1', '3', '4', '3');
+  
 INSERT INTO `sebo_virtual`.`Midia_tem_Legenda` (`fk_id_produto`, `fk_id_legenda`) 
 VALUES 
 ('1', '1'),
@@ -332,6 +352,42 @@ VALUES
 (25, 2, 'Promoção Til', 'Edição especial autografada, para colecionadores', 21.9,
   ('2020-11-25' + INTERVAL 1 DAY_MINUTE), 1, 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Til'), 1); #25
+
+# Discos
+INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo`, 
+`descricao`, `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 
+`fk_id_produto`, `fk_id_status`) 
+VALUES 
+('1', '2', 'Promoção Anthrax! ', 'Disco importado', '168', 
+  ('2020-11-02' + INTERVAL 1 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Trash in Texas'), '1'),
+('1', '2', 'Promoção Elvis! ', 'Disco importado', '170', 
+  ('2020-11-02' + INTERVAL 2 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Sun Singles'), '1'),
+('1', '2', 'Promoção Evil Empire! ', 'Disco importado', '170', 
+  ('2020-11-02' + INTERVAL 3 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Evil Empire'), '1'),
+('1', '2', 'Promoção My Name is Rattlesnake! ', 'Disco importado', '94.9', 
+  ('2020-11-02' + INTERVAL 4 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'My Name is Rattlesnake'), '1'),
+('1', '2', 'Promoção Disco do Ira! ', 'Disco nacional', '129.9', 
+  ('2020-11-02' + INTERVAL 5 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Isso é Amor'), '1'),
+('1', '2', 'Kiss Importado! ', 'Disco importado em ótimas condições', '262.9', 
+  ('2020-11-02' + INTERVAL 6 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Kiss'), '1'),  
+('1', '2', 'Mickey Junkies Importado! ', 'Disco importado em ótimas condições', '94.9', 
+  ('2020-11-02' + INTERVAL 7 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Stoned'), '1'),    
+('1', '2', 'Mothers Milk Importado! ', 'Disco importado em ótimas condições', '94.9', 
+  ('2020-11-02' + INTERVAL 8 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Mothers Milk'), '1'),  
+('1', '2', 'Some People Have Real Problems Importado! ', 'Disco importado em ótimas condições', '94.9', 
+  ('2020-11-02' + INTERVAL 9 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Some People Have Real Problems'), '1'),    
+('1', '2', 'Raridade Twist Uptown!', 'Disco importado em ótimas condições', '123.9', 
+  ('2020-11-02' + INTERVAL 10 DAY_MINUTE), '4', '3', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Twist Uptown'), '1'); 
   
 INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
 VALUES 
@@ -359,7 +415,47 @@ VALUES
 ('XbhLBgyy098tWRidCTukgUqrhw==.jpg', '22'), #Iracema
 ('blwnE85rFLBGD0lC5Dirku4FJdY=.jpg', '23'), #O Guarani
 ('wwutZup0AsfrQ3ysoWWSjvYPYg==.jpg', '24'), #O Quinze
-('3bKHi21970dnHLoXkcrWLW9PnoA=.jpg', '25'); #Til
+('3bKHi21970dnHLoXkcrWLW9PnoA=.jpg', '25'), #Til
+('vinyl_disc_antrax.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Trash in Texas'))),
+('vinyl_disc_elvis_presley.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Sun Singles'))), 
+('vinyl_disc_evil_empire.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Evil Empire'))), 
+('vinyl_disc_hill.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'My Name is Rattlesnake'))), 
+('vinyl_disc_ira.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Isso é amor'))), 
+('vinyl_disc_kiss.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Kiss'))),
+('vinyl_disc_mickey.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Stoned'))), 
+('vinyl_disc_redhot.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Mothers Milk'))), 
+('vinyl_disc_sia.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Some People Have Real Problems'))),
+('vinyl_disc_thecrystals.jpg', 
+	(SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+	fk_id_produto IN 
+	(SELECT id FROM `Produto` WHERE titulo = 'Twist Uptown')));
 
 #Autores
 INSERT INTO `Autor`
@@ -376,8 +472,7 @@ VALUE
 ('Samuel', 'Marcos Miranda'),
 ('Robert', 'C. Martin'),
 ('Robert', 'B. Cialdini'),
-('de Alencar', 'José'),
-('de Queiroz', 'Rachel');
+('Rachel', 'de Queiroz');
 
 #Autores e Publicações
 INSERT INTO `Publicacao_Tem_Autor`
@@ -461,19 +556,19 @@ VALUES
 ),
 (
   (SELECT id FROM `Produto` WHERE titulo = 'O Guarani'),
-  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
+  (SELECT id FROM `Autor` WHERE nome = 'José' and sobrenome = 'de Alencar')
 ),
 (
   (SELECT id FROM `Produto` WHERE titulo = 'Iracema'),
-  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
+  (SELECT id FROM `Autor` WHERE nome = 'José' and sobrenome = 'de Alencar')
 ),
 (
   (SELECT id FROM `Produto` WHERE titulo = 'O Quinze'),
-  (SELECT id FROM `Autor` WHERE nome = 'de Queiroz' and sobrenome = 'Rachel')
+  (SELECT id FROM `Autor` WHERE nome = 'Rachel' and sobrenome = 'de Queiroz')
 ),
 (
   (SELECT id FROM `Produto` WHERE titulo = 'Til'),
-  (SELECT id FROM `Autor` WHERE nome = 'de Alencar' and sobrenome = 'José')
+  (SELECT id FROM `Autor` WHERE nome = 'José' and sobrenome = 'de Alencar')
 );
 
 INSERT INTO `sebo_virtual`.`Motivo_Devolucao` (`descricao`)
