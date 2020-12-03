@@ -87,7 +87,7 @@ public class Usuario extends BaseEntity {
 	 * Avaliações que o usuário fez.
 	 */
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnore
+	//@JsonIgnore
 	private Set<Avaliacao> avaliacoes = 
 		new HashSet<Avaliacao>();
 	
@@ -111,8 +111,9 @@ public class Usuario extends BaseEntity {
 	 * Anúncios publicados pelo usuário.
 	 */
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnore
-    private Collection<HistoricoAnuncio> anuncios = 
+	//@JsonIgnore
+	@JsonIgnoreProperties("usuario")
+  private Collection<HistoricoAnuncio> anuncios = 
 		new HashSet<HistoricoAnuncio>();
 	
 	/**
