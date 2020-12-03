@@ -1140,3 +1140,176 @@ VALUES
 ('12', '19', 1),
 ('13', '20', 1),
 ('13', '21', 1);
+
+#Cadastro de Produtos
+INSERT INTO `sebo_virtual`.`Produto` (`titulo`, `categoria`) VALUES 
+#Eletrônicos
+('Console Super Nintendo', 'eletronico'),
+('Console Playstation 4 Slim 1TB', 'eletronico'),
+('Console Playstation 4 Pro', 'eletronico'),
+('Console Xbox One fat 500gb', 'eletronico'),
+('Jogo Fifa 15 - PS4', 'eletronico'), 
+('Jogo Madden NFL 20 - PS4', 'eletronico'),
+('Jogo Batman Arkham Knight - PS4', 'eletronico'),
+('Vitrola Vintage Dvd/mp3/usb Bivolt','eletronico'), 
+('Vitrola CTX Classic','eletronico'), 
+('Vitrola Toca Discos Raveo','eletronico');
+
+INSERT INTO `sebo_virtual`.`Eletronico` (`id`,`fk_id_marca`, `fk_id_subcategoria`) 
+VALUES 
+((SELECT id from sebo_virtual.Produto WHERE titulo='Console Super Nintendo'), 
+	(SELECT id from sebo_virtual.Marca WHERE nome='Super Nintendo'), 
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Console')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Console Playstation 4 Slim 1TB'), 
+	(SELECT id from sebo_virtual.Marca WHERE nome='Playstation') ,
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Console')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Console Playstation 4 Pro'),
+	(SELECT id from sebo_virtual.Marca WHERE nome='Playstation') , 
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Console')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Console Xbox One fat 500gb'),
+	(SELECT id from sebo_virtual.Marca WHERE nome='Xbox') , 
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Console')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Jogo Fifa 15 - PS4'),
+	(SELECT id from sebo_virtual.Marca WHERE nome='Playstation') ,
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Jogo')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Jogo Madden NFL 20 - PS4'),
+	(SELECT id from sebo_virtual.Marca WHERE nome='Playstation') , 
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Jogo')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Jogo Batman Arkham Knight - PS4'), 
+	(SELECT id from sebo_virtual.Marca WHERE nome='Playstation') ,
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Jogo')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Vitrola Vintage Dvd/mp3/usb Bivolt'), 
+	(SELECT id from sebo_virtual.Marca WHERE nome='Oldway') ,
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Vitrola')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Vitrola CTX Classic'), 
+	(SELECT id from sebo_virtual.Marca WHERE nome='CTX') , 
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Vitrola')),
+((SELECT id from sebo_virtual.Produto WHERE titulo='Vitrola Toca Discos Raveo'),
+	(SELECT id from sebo_virtual.Marca WHERE nome='Raveo') ,
+	(SELECT id from sebo_virtual.Subcategoria WHERE nome='Vitrola'));
+    
+INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo`, 
+ `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 
+`fk_id_produto`, `fk_id_status`) 
+VALUES 
+('1', '2', 'Promoção Super Nintendo', '890', 
+  ('2020-11-03' + INTERVAL 30 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo = 'Console Super Nintendo'), '1'), 
+
+('1', '2', 'Promoção Console Playstation 4 Slim 1TB ', '1500', 
+  ('2020-11-03' + INTERVAL 31 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Console Playstation 4 Slim 1TB'), '1'), 
+
+('1', '2', 'Promoção Console Playstation 4 Pro ', '1400', 
+  ('2020-11-03' + INTERVAL 32 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Console Playstation 4 Pro'), '1'),
+
+('1', '2', 'Promoção Console Xbox One fat 500gb', '1699', 
+  ('2020-11-03' + INTERVAL 33 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Console Xbox One fat 500gb'), '1'), 
+
+('1', '2', 'Promoção Jogo Fifa 15 - PS4', '1699', 
+  ('2020-11-03' + INTERVAL 34 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Jogo Fifa 15 - PS4'), '1'),
+
+('1', '2', 'Promoção Jogo Madden NFL 20 - PS4', '39.99', 
+  ('2020-11-03' + INTERVAL 35 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Jogo Madden NFL 20 - PS4'), '1'),
+
+('1', '2', 'Promoção Jogo Batman Arkham Knight', '99.99', 
+  ('2020-11-03' + INTERVAL 36 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Jogo Batman Arkham Knight - PS4'), '1'),
+
+('1', '2', 'Promoção Vitrola Vintage', '2000', 
+  ('2020-11-03' + INTERVAL 37 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Vitrola Vintage Dvd/mp3/usb Bivolt'), '1'), #1
+
+('1', '2', 'Promoção Vitrola CTX Classic', '1700', 
+  ('2020-11-03' + INTERVAL 38 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Vitrola CTX Classic'), '1'), #1
+
+('1', '2', 'Promoção Vitrola Toca Discos Raveo', '1800', 
+  ('2020-11-03' + INTERVAL 39 DAY_MINUTE), '1', '1', 
+  (SELECT id FROM `Produto` WHERE titulo ='Vitrola Toca Discos Raveo'), '1');
+
+INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
+VALUES 
+('eletronico_console_super_nitendo.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Console Super Nintendo')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_console_playstation4slim_1TB.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Console Playstation 4 Slim 1TB')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+ 
+('eletronico_console_playstation4pro.jpg', 
+  (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 	
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Console Playstation 4 Pro')
+    AND
+ fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_console_xboxonefat500gb.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Console Xbox One fat 500gb')
+    AND
+	fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_jogo_fifa15_ps4.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Jogo Fifa 15 - PS4')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_jogo_madden_nfl20ps4.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Jogo Madden NFL 20 - PS4')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_jogo_batmanarkhamknight_ ps4.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Jogo Batman Arkham Knight - PS4')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_vitrola_vintage.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Vitrola Vintage Dvd/mp3/usb Bivolt')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_vitrolactxclassic.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Vitrola CTX Classic')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com'))),
+
+('eletronico_vitrolaraveo.jpg', 
+ (SELECT id FROM sebo_virtual.Historico_Anuncio WHERE 
+ fk_id_produto IN 
+ (SELECT id FROM Produto WHERE titulo = 'Vitrola Toca Discos Raveo')
+    AND
+    fk_id_usuario IN
+ (SELECT id FROM Usuario WHERE email = 'juliana@gmail.com')));
