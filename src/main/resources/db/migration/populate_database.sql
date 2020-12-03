@@ -65,10 +65,10 @@ VALUES
 "", "Bela Vista", "São Paulo", "SP", "Casa dos Avós", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 1, 1),
 #Jeanne
 ("1", "Jeanne Aquino", "60532-620", "Rua 1004", "999",
-"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa da Mãe", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), 0, 0),
+"4a etapa", "Conjunto Ceará", "Fortaleza", "CE", "Casa", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), 1, 1),
 #Henrique
 ("1", "Francisca Viana", "60710-570", "Rua Dinamarca", "1000",
-"", "Parangaba", "Fortaleza", "CE", "Sogra", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), 0, 0),
+"", "Parangaba", "Fortaleza", "CE", "Casa", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), 1, 1),
 #PJ
 ("1", "Tudo de Rock", "01310-932", "Avenida Paulista", "1000",
 "", "Bela Vista", "São Paulo", "SP", "Matriz", now(), "1", (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), 1, 1),
