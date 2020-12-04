@@ -30,9 +30,9 @@ public class Idioma extends BaseEntity {
 	 */
 	private String nome;
 	
-	@OneToMany(mappedBy = "idioma")
+	/*@OneToMany(mappedBy = "idioma")
 	@JsonIgnoreProperties("idioma")
 	@JsonIgnore
 	private Set<Midia> midias = 
-		new HashSet<Midia>();	
+		new HashSet<Midia>();	*/
 }
