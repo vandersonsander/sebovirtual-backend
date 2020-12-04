@@ -2,6 +2,7 @@ package br.com.pi.sebovirtual.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ import br.com.pi.sebovirtual.repositories.PesquisaRepository;
 public class PesquisaService {
 	@Autowired
 	private PesquisaRepository pesquisaRepository;
+	@Autowired
+	private ProdutoService produtoService;
 	
 	public SearchDTO findByQuery (
 			@Nullable String query,
@@ -34,9 +37,16 @@ public class PesquisaService {
 		if (query == null)
 			query = "";
 		query = query.replace(" ", "%");
+		
+		List<String> parsedCategoria = new ArrayList<>();
 		if (categoria == null || categoria.isEmpty())
-			categoria = "livro,cd";
-		String[] parsedCategoria = categoria.split(",");
+			produtoService.getAll().stream()
+				.forEach(categ -> parsedCategoria.add(categ.getCategoria()));
+		else
+			Stream.of(categoria.split(",")).forEach(categ -> {
+				parsedCategoria.add(categ);
+			});
+		
 		if (condicao == null || condicao.isEmpty())
 			condicao = "Usado,Novo,Seminovo";
 		String[] parsedCondicao = condicao.split(",");

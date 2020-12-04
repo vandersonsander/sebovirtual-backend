@@ -62,7 +62,7 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 	@Query(value = "SELECT DISTINCT a " + queryJoin)
 	Page<HistoricoAnuncio> searchByQuery(
 			String query, 
-			String[] categoria, 
+			List<String> categoria, 
 			String[] condicao,
 			Double precoMin,
 			Double precoMax,
@@ -78,7 +78,7 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "GROUP BY c.descricao ")
 	List<FilterOccurrencesDTO> generateFiltersDescricao(
 			String query,
-			String[] categoria, 
+			List<String> categoria, 
 			String[] condicao,
 			Double precoMin,
 			Double precoMax);
@@ -90,7 +90,7 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "GROUP BY pd.categoria ")
 	List<FilterOccurrencesDTO> generateFiltersCategoria(
 			String query,
-			String[] categoria, 
+			List<String> categoria, 
 			String[] condicao,
 			Double precoMin,
 			Double precoMax);
