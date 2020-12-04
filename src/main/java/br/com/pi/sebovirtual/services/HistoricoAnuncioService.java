@@ -95,7 +95,7 @@ public class HistoricoAnuncioService
 			System.out.println("Qtde de usuarios atuais: " + current.getUsuarios().size());
 		}*/
 		
-		return this.update(id, anuncio);
+		return super.update(id, anuncio);
 	}
 	
 	public ResponseEntity<List<HistoricoAnuncio>> findByFilters(Integer query) {

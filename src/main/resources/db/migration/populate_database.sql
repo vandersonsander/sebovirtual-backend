@@ -373,73 +373,97 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 #Livros
-(3, 12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8, 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) FROM Historico_Anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 
+  12, 'A Mão e a Luva', 'Bom estado de conservação', 20.8, 
   ('2020-11-03' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1, 
-  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1), #3
-(4, 14, 'A Metamorfose', 'descricao', 12.8, 
+  (SELECT id FROM `Produto` WHERE titulo = 'A Mão e a Luva'), 1),
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 14, 'A Metamorfose', 'descricao', 12.8, 
   ('2020-11-04' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
-  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1), #4
-(5, 16, 'As Armas da Persuassão', 'descricao', 23.5,
+  (SELECT id FROM `Produto` WHERE titulo = 'A Metamorfose'), 1),
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 16, 'As Armas da Persuassão', 'descricao', 23.5,
   ('2020-11-05' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'As Armas da Persuassão'), 1), #%
-(6, 18, 'Clean Code', 'descricao', 88.2,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 18, 'Clean Code', 'descricao', 88.2,
   ('2020-11-06' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Clean Code'), 1), #6
-(7, 20, 'Contos da Meia Noite', 'descricao', 11.9, 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 20, 'Contos da Meia Noite', 'descricao', 11.9, 
   ('2020-11-07' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Contos da Meia Noite'), 1), #7
-(8, 25, 'Dom Casmurro', 'descricao', 11.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 25, 'Dom Casmurro', 'descricao', 11.9,
   ('2020-11-08' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Dom Casmurro'), 1), #8
-(9, 30, 'Esaú e Jacó', 'descricao', 11.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 30, 'Esaú e Jacó', 'descricao', 11.9,
   ('2020-11-09' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Esaú e Jacó'), 1), #9
-(10, 27, 'Helena', 'descricao', 13.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 27, 'Helena', 'descricao', 13.5,
   ('2020-11-10' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Helena'), 1), #10
-(11, 23, 'Histórias da Meia Noite', 'Seminovo, lacrado!', 21.3,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 23, 'Histórias da Meia Noite', 'Seminovo, lacrado!', 21.3,
   ('2020-11-11' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Histórias da Meia Noite'), 1), #11
-(12, 23, 'Laranja Mecânica', 'descricao', 33.4,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 23, 'Laranja Mecânica', 'descricao', 33.4,
   ('2020-11-12' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 3,
   (SELECT id FROM `Produto` WHERE titulo = 'Laranja Mecânica'), 1), #12
-(13, 23, 'Marley e Eu', 'descricao', 40.2,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 23, 'Marley e Eu', 'descricao', 40.2,
   ('2020-11-13' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 3,
   (SELECT id FROM `Produto` WHERE titulo = 'Marley e Eu'), 1), #13
-(14, 33, 'Memorial de Aires', 'descricao', 12.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 33, 'Memorial de Aires', 'descricao', 12.5,
   ('2020-11-14' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Memorial de Aires'), 1), #14
-(15, 35, 'Memórias Póstumas de Brás Cubas', 'descricao', 9.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com")), 35, 'Memórias Póstumas de Brás Cubas', 'descricao', 9.5,
   ('2020-11-15' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="vanderson@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Memórias Póstumas de Brás Cubas'), 1), #15
-(16, 10, 'Do Mil ao Milhão - Sem cortar o cafezinho', 'descricao', 18.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 10, 'Do Mil ao Milhão - Sem cortar o cafezinho', 'descricao', 18.5,
   ('2020-11-16' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Do Mil ao Milhão'), 1), #16
-(17, 28, 'Mindset', 'descricao', 40.2,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 28, 'Mindset', 'descricao', 40.2,
   ('2020-11-17' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Mindset'), 1), #17
-(18, 26, 'Quem Mexeu no Meu Queijo', 'descricao', 23.4,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 26, 'Quem Mexeu no Meu Queijo', 'descricao', 23.4,
   ('2020-11-18' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 2,
-  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1), #18
-(19, 29, 'Quincas Borba', 'Livro possui algumas dobras e amassados', 4.3,
+  (SELECT id FROM `Produto` WHERE titulo = 'Quem Mexeu no Meu Queijo'), 1), 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 29, 'Quincas Borba', 'Livro possui algumas dobras e amassados', 4.3,
   ('2020-11-19' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Quincas Borba'), 1), #19
-(20, 9, 'Senhora', 'Em ótimo estado de conservação', 10.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 9, 'Senhora', 'Em ótimo estado de conservação', 10.5,
   ('2020-11-20' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Senhora'), 1), #20
-(21, 25, 'Vidas Secas', 'Edição especial autografada, para colecionadores', 152.5,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), 25, 'Vidas Secas', 'Edição especial autografada, para colecionadores', 152.5,
   ('2020-11-21' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), 2,
   (SELECT id FROM `Produto` WHERE titulo = 'Vidas Secas'), 1), #21,
-(22, 10, 'Iracema', 'Edição especial autografada, para colecionadores', 22.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 10, 'Iracema', 'Edição especial autografada, para colecionadores', 22.9,
   ('2020-11-22' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Iracema'), 1), #22
-(23, 11, 'O Guarani', 'Edição especial autografada, para colecionadores', 15.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 11, 'O Guarani', 'Edição especial autografada, para colecionadores', 15.9,
   ('2020-11-23' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'O Guarani'), 1), #23
-(24, 5, 'O Quinze', 'Edição especial autografada, para colecionadores', 21.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 5, 'O Quinze', 'Edição especial autografada, para colecionadores', 21.9,
   ('2020-11-24' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'O Quinze'), 1), #24
-(25, 2, 'Promoção Til', 'Edição especial autografada, para colecionadores', 21.9,
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), 2, 'Promoção Til', 'Edição especial autografada, para colecionadores', 21.9,
   ('2020-11-25' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), 1,
   (SELECT id FROM `Produto` WHERE titulo = 'Til'), 1); #25
 
@@ -448,34 +472,44 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 # Discos
-('1', '2', 'Promoção Anthrax! ', 'Disco importado', '168', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Promoção Anthrax! ', 'Disco importado', '168', 
   ('2020-11-26' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Trash in Texas'), '1'),
-('1', '2', 'Promoção Elvis! ', 'Disco importado', '170', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Promoção Elvis! ', 'Disco importado', '170', 
   ('2020-11-27' + INTERVAL 2 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Sun Singles'), '1'),
-('1', '2', 'Promoção Evil Empire! ', 'Disco importado', '170', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Promoção Evil Empire! ', 'Disco importado', '170', 
   ('2020-11-28' + INTERVAL 3 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Evil Empire'), '1'),
-('1', '2', 'Promoção My Name is Rattlesnake! ', 'Disco importado', '94.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Promoção My Name is Rattlesnake! ', 'Disco importado', '94.9', 
   ('2020-11-29' + INTERVAL 4 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'My Name is Rattlesnake'), '1'),
-('1', '2', 'Promoção Disco do Ira! ', 'Disco nacional', '129.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Promoção Disco do Ira! ', 'Disco nacional', '129.9', 
   ('2020-11-30' + INTERVAL 5 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Isso é Amor'), '1'),
-('1', '2', 'Kiss Importado! ', 'Disco importado em ótimas condições', '262.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Kiss Importado! ', 'Disco importado em ótimas condições', '262.9', 
   ('2020-11-30' + INTERVAL 6 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Kiss'), '1'),  
-('1', '2', 'Mickey Junkies Importado! ', 'Disco importado em ótimas condições', '94.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Mickey Junkies Importado! ', 'Disco importado em ótimas condições', '94.9', 
   ('2020-11-30' + INTERVAL 7 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Stoned'), '1'),    
-('1', '2', 'Mothers Milk Importado! ', 'Disco importado em ótimas condições', '94.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Mothers Milk Importado! ', 'Disco importado em ótimas condições', '94.9', 
   ('2020-11-30' + INTERVAL 8 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Mothers Milk'), '1'),  
-('1', '2', 'Some People Have Real Problems Importado! ', 'Disco importado em ótimas condições', '94.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Some People Have Real Problems Importado! ', 'Disco importado em ótimas condições', '94.9', 
   ('2020-11-30' + INTERVAL 9 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Some People Have Real Problems'), '1'),    
-('1', '2', 'Raridade Twist Uptown!', 'Disco importado em ótimas condições', '123.9', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com")), '2', 'Raridade Twist Uptown!', 'Disco importado em ótimas condições', '123.9', 
   ('2020-11-30' + INTERVAL 10 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="tudoderock@gmail.com"), '3', 
   (SELECT id FROM `Produto` WHERE titulo = 'Twist Uptown'), '1');
   
@@ -484,34 +518,44 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 #Quadrinhos
-('1', '2', 'Promoção Hulk #094', '4.99', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com")), '2', 'Promoção Hulk #094', '4.99', 
   ('2020-12-01' + INTERVAL 1 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Hulk #094'), '1'), 
-('1', '2', 'Promoção Hulk Anual #1', '5.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com")), '2', 'Promoção Hulk Anual #1', '5.90', 
   ('2020-12-01' + INTERVAL 2 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Hulk Anual #1'), '1'), 
-('1', '2', 'Promoção Universo Marvel - 4ª Série #08', '3.99', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com")), '2', 'Promoção Universo Marvel - 4ª Série #08', '3.99', 
   ('2020-12-01' + INTERVAL 3 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Universo Marvel - 4ª Série #08'), '1'), 
-('1', '2', 'Promoção Liga da Justiça - 3ª Série #04', '4.50', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com")), '2', 'Promoção Liga da Justiça - 3ª Série #04', '4.50', 
   ('2020-12-01' + INTERVAL 4 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Liga da Justiça - 3ª Série #04'), '1'), 
-('1', '2', 'Promoção Liga da Justiça - 3ª Série #03', '4.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com")), '2', 'Promoção Liga da Justiça - 3ª Série #03', '4.90', 
   ('2020-12-01' + INTERVAL 5 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="soquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Liga da Justiça - 3ª Série #03'), '1'), 
-('1', '2', 'Promoção Savanna Game - Segunda Temporada #04 ', '4.50', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com")), '2', 'Promoção Savanna Game - Segunda Temporada #04 ', '4.50', 
   ('2020-12-01' + INTERVAL 6 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Savanna Game - Segunda Temporada #04'), '1'), 
-('1', '2', 'Promoção Savanna Game #2 ', '4.80', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com")), '2', 'Promoção Savanna Game #2 ', '4.80', 
   ('2020-12-02' + INTERVAL 7 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Savanna Game #2'), '1'), 
-('1', '2', 'Promoção Fairy Tail Zero ', '4.70', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com")), '2', 'Promoção Fairy Tail Zero ', '4.70', 
   ('2020-12-02' + INTERVAL 8 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Fairy Tail Zero'), '1'), 
-('1', '2', 'Promoção Yu Yu Hakusho - 2ª Edição #12', '4.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com")), '2', 'Promoção Yu Yu Hakusho - 2ª Edição #12', '4.90', 
   ('2020-12-02' + INTERVAL 9 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Yu Yu Hakusho - 2ª Edição #12'), '1'),
-('1', '2', 'Promoção Ultraman # 01 - 2ª Edição #12', '3.00', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com")), '2', 'Promoção Ultraman # 01 - 2ª Edição #12', '3.00', 
   ('2020-12-02' + INTERVAL 10 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="aquitemquadrinhos@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Ultraman # 01'), '1');
 
@@ -520,47 +564,61 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
 #CDs
-('1', '10', 'Promoção! CD O Carnaval de Ivete!!!', '24', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), '10', 'Promoção! CD O Carnaval de Ivete!!!', '24', 
   ('2020-12-03' + INTERVAL 11 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'O Carnaval'), '1'), 
-('1', '5', 'CD The Wonder Of You', '28', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com")), '5', 'CD The Wonder Of You', '28', 
   ('2020-12-03' + INTERVAL 12 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="guilherme@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'The Wonder Of You'), '1'), 
-('1', '2', 'Promoção Badlands (Deluxe)', '24.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção Badlands (Deluxe)', '24.90', 
   ('2020-12-03' + INTERVAL 13 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Badlands (Deluxe)'), '1'),
-('1', '2', 'Promoção Greatest Hits', '33.99', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção Greatest Hits', '33.99', 
   ('2020-12-03' + INTERVAL 14 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Greatest Hits'), '1'),
-('1', '2', 'Promoção Painkiller', '25.50', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção Painkiller', '25.50', 
   ('2020-12-03' + INTERVAL 15 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Painkiller'), '1'),
-('1', '2', 'Promoção All the Best', '22.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção All the Best', '22.90', 
   ('2020-12-03' + INTERVAL 16 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'All the Best'), '1'),
-('1', '2', 'Promoção Standard ', '29.99', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção Standard ', '29.99', 
   ('2020-12-03' + INTERVAL 17 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Standard'), '1'),
-('1', '2', 'Promoção Thank U Next', '34.90', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção Thank U Next', '34.90', 
   ('2020-12-03' + INTERVAL 18 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Thank U Next'), '1'),
 #DVDs
-('1', '2', 'Promoção Aladdin ', '25.00', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção Aladdin ', '25.00', 
   ('2020-12-03' + INTERVAL 19 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Aladdin'), '1'),
-('1', '2', 'Promoção Moana ', '20.00', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção Moana ', '20.00', 
   ('2020-12-03' + INTERVAL 20 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Moana'), '1'),
-('1', '2', 'Promoção O Rei Leão ', '15.00', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com")), '2', 'Promoção O Rei Leão ', '15.00', 
   ('2020-12-03' + INTERVAL 21 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="jeanne@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'O Rei Leão'), '1'),
-('1', '2', 'Promoção Vingadores: Ultimato ', '22.00', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção Vingadores: Ultimato ', '22.00', 
   ('2020-12-03' + INTERVAL 22 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Vingadores: Ultimato'), '1'),
-('1', '2', 'Promoção Vingadores: Guerra Infinita', '18.50', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção Vingadores: Guerra Infinita', '18.50', 
   ('2020-12-03' + INTERVAL 23 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Vingadores: Guerra Infinita'), '1'),
-('1', '2', 'Promoção Vingadores: Era de Ultron', '19.99', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com")), '2', 'Promoção Vingadores: Era de Ultron', '19.99', 
   ('2020-12-03' + INTERVAL 24 DAY_MINUTE), (SELECT id from sebo_virtual.Usuario WHERE email="henrique@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Vingadores: Era de Ultron'), '1');
   
@@ -1192,44 +1250,64 @@ INSERT INTO `sebo_virtual`.`Historico_Anuncio` (`id_anuncio`, `estoque`, `titulo
  `preco`, `data_modificacao`, `fk_id_usuario`, `fk_id_condicao`, 
 `fk_id_produto`, `fk_id_status`) 
 VALUES 
-('1', '2', 'Promoção Super Nintendo', '890', 
-  ('2020-11-03' + INTERVAL 30 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Super Nintendo', '890', 
+  ('2020-11-03' + INTERVAL 30 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo = 'Console Super Nintendo'), '1'), 
 
-('1', '2', 'Promoção Console Playstation 4 Slim 1TB ', '1500', 
-  ('2020-11-03' + INTERVAL 31 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Console Playstation 4 Slim 1TB ', '1500', 
+  ('2020-11-03' + INTERVAL 31 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Console Playstation 4 Slim 1TB'), '1'), 
 
-('1', '2', 'Promoção Console Playstation 4 Pro ', '1400', 
-  ('2020-11-03' + INTERVAL 32 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Console Playstation 4 Pro ', '1400', 
+  ('2020-11-03' + INTERVAL 32 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Console Playstation 4 Pro'), '1'),
 
-('1', '2', 'Promoção Console Xbox One fat 500gb', '1699', 
-  ('2020-11-03' + INTERVAL 33 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Console Xbox One fat 500gb', '1699', 
+  ('2020-11-03' + INTERVAL 33 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Console Xbox One fat 500gb'), '1'), 
 
-('1', '2', 'Promoção Jogo Fifa 15 - PS4', '1699', 
-  ('2020-11-03' + INTERVAL 34 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Jogo Fifa 15 - PS4', '1699', 
+  ('2020-11-03' + INTERVAL 34 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Jogo Fifa 15 - PS4'), '1'),
 
-('1', '2', 'Promoção Jogo Madden NFL 20 - PS4', '39.99', 
-  ('2020-11-03' + INTERVAL 35 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Jogo Madden NFL 20 - PS4', '39.99', 
+  ('2020-11-03' + INTERVAL 35 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Jogo Madden NFL 20 - PS4'), '1'),
 
-('1', '2', 'Promoção Jogo Batman Arkham Knight', '99.99', 
-  ('2020-11-03' + INTERVAL 36 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Jogo Batman Arkham Knight', '99.99', 
+  ('2020-11-03' + INTERVAL 36 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Jogo Batman Arkham Knight - PS4'), '1'),
 
-('1', '2', 'Promoção Vitrola Vintage', '2000', 
-  ('2020-11-03' + INTERVAL 37 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Vitrola Vintage', '2000', 
+  ('2020-11-03' + INTERVAL 37 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Vitrola Vintage Dvd/mp3/usb Bivolt'), '1'), #1
 
-('1', '2', 'Promoção Vitrola CTX Classic', '1700', 
-  ('2020-11-03' + INTERVAL 38 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Vitrola CTX Classic', '1700', 
+  ('2020-11-03' + INTERVAL 38 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Vitrola CTX Classic'), '1'), #1
 
-('1', '2', 'Promoção Vitrola Toca Discos Raveo', '1800', 
-  ('2020-11-03' + INTERVAL 39 DAY_MINUTE), '1', '1', 
+((SELECT (IFNULL(MAX(a.id_anuncio), 0) + 1) AS next_id FROM historico_anuncio a
+  WHERE a.fk_id_usuario = (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com")), '2', 'Promoção Vitrola Toca Discos Raveo', '1800', 
+  ('2020-11-03' + INTERVAL 39 DAY_MINUTE), 
+  (SELECT id from sebo_virtual.Usuario WHERE email="juliana@gmail.com"), '1', 
   (SELECT id FROM `Produto` WHERE titulo ='Vitrola Toca Discos Raveo'), '1');
 
 INSERT INTO `sebo_virtual`.`Imagem` (`url`, `fk_id_anuncio`) 
