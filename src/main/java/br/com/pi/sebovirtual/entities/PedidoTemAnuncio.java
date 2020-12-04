@@ -25,17 +25,17 @@ import lombok.ToString;
 public class PedidoTemAnuncio extends BaseEntity {
 	
 	@ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_pedido")
+	@JoinColumn(name = "id_pedido")
 	@JsonIgnore(false)
 	@JsonIgnoreProperties("itens")
-    private Pedido pedido;
+	private Pedido pedido;
 	
-    @ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_anuncio")
-    @JsonIgnore(false)
-    private HistoricoAnuncio historicoAnuncio;
+	@ManyToOne(cascade=CascadeType.ALL)//(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "id_anuncio")
+	@JsonIgnore(false)
+  private HistoricoAnuncio historicoAnuncio;
  
 	@JoinColumn(name = "quantidade")
-    private Integer quantidade;
+	private Integer quantidade;
 	
 }
