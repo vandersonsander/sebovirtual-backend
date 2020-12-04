@@ -24,6 +24,8 @@ public class PesquisaService {
 	private PesquisaRepository pesquisaRepository;
 	@Autowired
 	private ProdutoService produtoService;
+	@Autowired
+	private HistoricoEnderecoService enderecoService;
 	
 	public SearchDTO findByQuery (
 			@Nullable String query,
@@ -32,6 +34,8 @@ public class PesquisaService {
 			@Nullable Double precoMin,
 			@Nullable Double precoMax,
 			@Nullable Integer pagina,
+			@Nullable String estado,
+			@Nullable String cidade,
 			@Nullable String orderBy,
 			@Nullable Integer resultsPerPage) {
 		if (query == null)
@@ -46,6 +50,24 @@ public class PesquisaService {
 			Stream.of(categoria.split(",")).forEach(categ -> {
 				parsedCategoria.add(categ);
 			});
+		
+		List<String> parsedEstado = new ArrayList<>();
+		if (estado == null || estado.isEmpty())
+			enderecoService.getAll().stream()
+				.forEach(endereco -> parsedEstado.add(endereco.getEstado()));
+		else
+			Stream.of(estado.split(",")).forEach(est -> {
+				parsedEstado.add(est);
+			});
+
+		List<String> parsedCidade = new ArrayList<>();
+		if (cidade == null || cidade.isEmpty())
+			enderecoService.getAll().stream()
+				.forEach(cid -> parsedCidade.add(cid.getCidade()));
+		else
+			Stream.of(cidade.split(",")).forEach(cid -> {
+				parsedCidade.add(cid);
+			});//*/
 		
 		if (condicao == null || condicao.isEmpty())
 			condicao = "Usado,Novo,Seminovo";
@@ -75,32 +97,53 @@ public class PesquisaService {
 						parsedCondicao,
 						precoMin,
 						precoMax,
+						parsedEstado,
+						parsedCidade,
 						pageable);
 		
 		/* Filtros */
+		
 		List<FilterOccurrencesDTO> condicaoOccu = pesquisaRepository.generateFiltersDescricao(
 				query,
 				parsedCategoria, 
 				parsedCondicao,
 				precoMin,
-				precoMax);
+				precoMax,
+				parsedEstado,
+				parsedCidade);
 		List<FilterOccurrencesDTO> categoriaOccu = pesquisaRepository.generateFiltersCategoria(
 				query,
 				parsedCategoria, 
 				parsedCondicao,
 				precoMin,
-				precoMax);
-		/* Retornando resultado errado */
-		/*List<FilterOccurrencesDTO> estadoOccu = pesquisaRepository.generateFiltersEstado(
+				precoMax,
+				parsedEstado,
+				parsedCidade);
+
+		List<FilterOccurrencesDTO> estadoOccu = pesquisaRepository.generateFiltersEstado(
 				query,
-				categoria, 
-				condicao,
+				parsedCategoria, 
+				parsedCondicao,
 				precoMin,
-				precoMax);//*/
+				precoMax,
+				parsedEstado,
+				parsedCidade);
+
+		List<FilterOccurrencesDTO> cidadeOccu = pesquisaRepository.generateFiltersCidade(
+				query,
+				parsedCategoria, 
+				parsedCondicao,
+				precoMin,
+				precoMax,
+				parsedEstado,
+				parsedCidade);
+		
 		List<FilterDTO> filters = new ArrayList<>();
+		
 		filters.add(new FilterDTO("condicao", condicaoOccu));
-		filters.add(new FilterDTO("categoria", categoriaOccu));//*/
-		// filters.add(new FilterDTO("estado", estadoOccu));
+		filters.add(new FilterDTO("categoria", categoriaOccu));
+		filters.add(new FilterDTO("estado", estadoOccu));
+		filters.add(new FilterDTO("cidade", cidadeOccu));
 		
 		search.setContent(anuncios.getContent());
 		search.setResults(anuncios.getTotalElements());

@@ -41,6 +41,8 @@ public class PesquisaController {
 				precoMin,
 				precoMax,
 				pagina,
+				estado,
+				cidade,
 				orderBy,
 				resultadosPorPagina));
 	}

@@ -44,7 +44,8 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 	 * @param pageable
 	 * @return
 	 */
-	String queryJoin = " FROM HistoricoAnuncio a "
+	String queryJoin = ""
+			+ "FROM HistoricoAnuncio a, HistoricoEndereco en "
 			+ "JOIN a.produto pd " 
 			+ "LEFT OUTER JOIN a.produto.autores au "
 			+ "LEFT OUTER JOIN a.condicao c "
@@ -58,7 +59,11 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			+ "AND a.estoque > 0 "
 			+ "AND pd.categoria IN :categoria "
 			+ "AND c.descricao IN :condicao "
-			+ "AND (a.preco >= :precoMin AND a.preco <= :precoMax)";
+			+ "AND (a.preco >= :precoMin AND a.preco <= :precoMax)"
+			+ "AND en.principalParaEnvio = true "
+			+ "AND a.usuario = en.usuario "
+			+ "AND en.estado IN :estado "
+			+ "AND en.cidade IN :cidade ";
 	@Query(value = "SELECT DISTINCT a " + queryJoin)
 	Page<HistoricoAnuncio> searchByQuery(
 			String query, 
@@ -66,6 +71,8 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			String[] condicao,
 			Double precoMin,
 			Double precoMax,
+			List<String> estado,
+			List<String> cidade,
 			Pageable pageable);
 	
 	/**
@@ -81,7 +88,9 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			List<String> categoria, 
 			String[] condicao,
 			Double precoMin,
-			Double precoMax);
+			Double precoMax,
+			List<String> estado,
+			List<String> cidade);
 	
 	@Query(value = ""
 			+ "SELECT "
@@ -93,20 +102,74 @@ public interface PesquisaRepository extends JpaRepository<HistoricoAnuncio, Inte
 			List<String> categoria, 
 			String[] condicao,
 			Double precoMin,
-			Double precoMax);
+			Double precoMax,
+			List<String> estado,
+			List<String> cidade);
 	
-	/* Verificar porque retorna resultado errado */
-	/*@Query(value = ""
+	/* Filtros Cidade Estado */
+	@Query(value = ""
 			+ "SELECT "
 			+ "new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(en.estado, COUNT(en.estado)) "
-			+ queryJoin
-			+ " GROUP BY en.estado ")
+			+ "FROM HistoricoAnuncio a, HistoricoEndereco en "
+			+ "JOIN a.produto pd " 
+			+ "LEFT OUTER JOIN a.produto.autores au "
+			+ "LEFT OUTER JOIN a.condicao c "
+			+ "WHERE (pd.titulo LIKE %:query% "
+			+ "OR a.titulo LIKE %:query% "
+			+ "OR a.descricao LIKE %:query% "
+			+ "OR CONCAT(au.nome, ' ', au.sobrenome) LIKE %:query% "
+			+ "OR pd.artista LIKE %:query% "
+			+ "OR pd.marca IN (SELECT m FROM Marca m WHERE m.nome LIKE %:query%)) "
+			+ "AND a.status IN (SELECT st FROM Status st WHERE st.id = 1) "
+			+ "AND a.estoque > 0 "
+			+ "AND pd.categoria IN :categoria "
+			+ "AND c.descricao IN :condicao "
+			+ "AND (a.preco >= :precoMin AND a.preco <= :precoMax) "
+			+ "AND en.principalParaEnvio = true "
+			+ "AND a.usuario = en.usuario "
+			+ "AND en.estado IN :estado "
+			+ "AND en.cidade IN :cidade "
+			+ "GROUP BY en.estado ")
 	List<FilterOccurrencesDTO> generateFiltersEstado(
 			String query,
-			String categoria, 
-			String condicao,
+			List<String> categoria, 
+			String[] condicao,
 			Double precoMin,
-			Double precoMax);*/
+			Double precoMax,
+			List<String> estado,
+			List<String> cidade);
+	
+	@Query(value = ""
+			+ "SELECT "
+			+ "new br.com.pi.sebovirtual.dto.FilterOccurrencesDTO(en.cidade, COUNT(en.cidade)) "
+			+ "FROM HistoricoAnuncio a, HistoricoEndereco en "
+			+ "JOIN a.produto pd " 
+			+ "LEFT OUTER JOIN a.produto.autores au "
+			+ "LEFT OUTER JOIN a.condicao c "
+			+ "WHERE (pd.titulo LIKE %:query% "
+			+ "OR a.titulo LIKE %:query% "
+			+ "OR a.descricao LIKE %:query% "
+			+ "OR CONCAT(au.nome, ' ', au.sobrenome) LIKE %:query% "
+			+ "OR pd.artista LIKE %:query% "
+			+ "OR pd.marca IN (SELECT m FROM Marca m WHERE m.nome LIKE %:query%)) "
+			+ "AND a.status IN (SELECT st FROM Status st WHERE st.id = 1) "
+			+ "AND a.estoque > 0 "
+			+ "AND pd.categoria IN :categoria "
+			+ "AND c.descricao IN :condicao "
+			+ "AND (a.preco >= :precoMin AND a.preco <= :precoMax) "
+			+ "AND en.principalParaEnvio = true "
+			+ "AND a.usuario = en.usuario "
+			+ "AND en.estado IN :estado "
+			+ "AND en.cidade IN :cidade "
+			+ "GROUP BY en.cidade ")
+	List<FilterOccurrencesDTO> generateFiltersCidade(
+			String query,
+			List<String> categoria, 
+			String[] condicao,
+			Double precoMin,
+			Double precoMax,
+			List<String> estado,
+			List<String> cidade);
 	
 	/* Filtros Livros */
 }
