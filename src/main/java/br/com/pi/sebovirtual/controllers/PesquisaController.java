@@ -46,6 +46,62 @@ public class PesquisaController {
 				orderBy,
 				resultadosPorPagina));
 	}
+	@GetMapping("livro")
+	public ResponseEntity<SearchDTO> getLivros(
+			@Nullable @RequestParam String condicao,
+			@Nullable @RequestParam String autor,
+			@Nullable @RequestParam String editora,
+			@Nullable @RequestParam String idioma,
+			@Nullable @RequestParam Double precoMin,
+			@Nullable @RequestParam Double precoMax,
+			@Nullable @RequestParam Integer pagina,
+			@Nullable @RequestParam String estado,
+			@Nullable @RequestParam String cidade,
+			@Nullable @RequestParam String orderBy,
+			@Nullable @RequestParam Integer resultadosPorPagina) {
+		return ResponseEntity.ok().body(anuncioService.getPublicacao(
+				"livro",
+				condicao,
+				autor,
+				editora,
+				idioma,
+				precoMin,
+				precoMax,
+				pagina,
+				estado,
+				cidade,
+				orderBy,
+				resultadosPorPagina));
+	}
+	
+	@GetMapping("quadrinho")
+	public ResponseEntity<SearchDTO> getQuadrinhos(
+			@Nullable @RequestParam String condicao,
+			@Nullable @RequestParam String autor,
+			@Nullable @RequestParam String editora,
+			@Nullable @RequestParam String genero,
+			@Nullable @RequestParam Double precoMin,
+			@Nullable @RequestParam Double precoMax,
+			@Nullable @RequestParam Integer pagina,
+			@Nullable @RequestParam String estado,
+			@Nullable @RequestParam String cidade,
+			@Nullable @RequestParam String orderBy,
+			@Nullable @RequestParam Integer resultadosPorPagina) {
+		return ResponseEntity.ok().body(anuncioService.getPublicacao(
+				"quadrinho",
+				condicao,
+				autor,
+				editora,
+				genero,
+				precoMin,
+				precoMax,
+				pagina,
+				estado,
+				cidade,
+				orderBy,
+				resultadosPorPagina));
+	}
+	
 	@GetMapping("mais-vendidos")
 	public ResponseEntity<List<HistoricoAnuncio>> getMaisVendidos() {
 		return ResponseEntity.ok().body(anuncioService.listarMaisVendidos());

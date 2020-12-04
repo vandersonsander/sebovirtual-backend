@@ -26,6 +26,10 @@ public class PesquisaService {
 	private ProdutoService produtoService;
 	@Autowired
 	private HistoricoEnderecoService enderecoService;
+	@Autowired
+	private AutorService autorService;
+	@Autowired
+	private EditoraService editoraService;
 	
 	public SearchDTO findByQuery (
 			@Nullable String query,
@@ -152,6 +156,152 @@ public class PesquisaService {
 		search.setFilters(filters);
 		return search;
 	}
+	
+	/* Livros */
+	public SearchDTO getPublicacao (
+			@Nullable String categoria,
+			@Nullable String condicao,
+			@Nullable String autor,
+			@Nullable String editora,
+			@Nullable String genero,
+			@Nullable Double precoMin,
+			@Nullable Double precoMax,
+			@Nullable Integer pagina,
+			@Nullable String estado,
+			@Nullable String cidade,
+			@Nullable String orderBy,
+			@Nullable Integer resultsPerPage) {
+		
+		List<String> parsedEstado = new ArrayList<>();
+		if (estado == null || estado.isEmpty())
+			enderecoService.getAll().stream()
+				.forEach(endereco -> parsedEstado.add(endereco.getEstado()));
+		else
+			Stream.of(estado.split(",")).forEach(est -> {
+				parsedEstado.add(est);
+			});
+
+		List<String> parsedCidade = new ArrayList<>();
+		if (cidade == null || cidade.isEmpty())
+			enderecoService.getAll().stream()
+				.forEach(cid -> parsedCidade.add(cid.getCidade()));
+		else
+			Stream.of(cidade.split(",")).forEach(cid -> {
+				parsedCidade.add(cid);
+			});
+		
+		List<String> parsedAutor = new ArrayList<>();
+		if (autor == null || autor.isEmpty())
+			autorService.getAll().stream()
+				.forEach(aut -> parsedAutor.add(aut.getNome() + " " + aut.getSobrenome()));
+		else
+			Stream.of(autor.split(",")).forEach(aut -> {
+				parsedAutor.add(aut);
+			});
+		parsedAutor.add(" ");
+		
+		List<String> parsedEditora = new ArrayList<>();
+		if (editora == null || editora.isEmpty())
+			editoraService.getAll().stream()
+				.forEach(edi -> parsedEditora.add(edi.getNome()));
+		else
+			Stream.of(editora.split(",")).forEach(edi -> {
+				parsedEditora.add(edi);
+			});
+		
+		if (condicao == null || condicao.isEmpty())
+			condicao = "Usado,Novo,Seminovo";
+		String[] parsedCondicao = condicao.split(",");
+		if (precoMin == null)
+			precoMin = 0.0;
+		if (precoMax == null)
+			precoMax = 9999999999.0;
+		if (pagina == null)
+			pagina = 0;
+		if (orderBy == null)
+			orderBy = "";
+		if (resultsPerPage == null)
+			resultsPerPage = 16;
+		Sort sorteable = Sort.unsorted();
+		if (orderBy.equals("minPrice"))
+			sorteable = Sort.by(Sort.Direction.ASC, "preco");
+		else if (orderBy.equals("maxPrice"))
+			sorteable = Sort.by(Sort.Direction.DESC, "preco");
+		
+		Pageable pageable = PageRequest.of(pagina, resultsPerPage, sorteable);
+		SearchDTO search = new SearchDTO();
+		Page<HistoricoAnuncio> anuncios = pesquisaRepository.getPublicacao(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora,
+				pageable);
+		
+		/* Filtros */
+		List<FilterOccurrencesDTO> condicaoOccu = pesquisaRepository.getPublicacaoFiltersDescricao(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora);
+		List<FilterOccurrencesDTO> estadoOccu = pesquisaRepository.getPublicacaoFiltersEstado(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora);
+		List<FilterOccurrencesDTO> cidadeOccu = pesquisaRepository.getPublicacaoFiltersCidade(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora);
+		List<FilterOccurrencesDTO> autorOccu = pesquisaRepository.getPublicacaoFiltersAutor(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora);//*/
+		List<FilterOccurrencesDTO> editoraOccu = pesquisaRepository.getPublicacaoFiltersEditora(
+				categoria,
+				precoMin,
+				precoMax,
+				parsedCondicao,
+				parsedAutor,
+				parsedEstado,
+				parsedCidade,
+				parsedEditora);
+		
+		List<FilterDTO> filters = new ArrayList<>();
+		filters.add(new FilterDTO("condicao", condicaoOccu));
+		filters.add(new FilterDTO("estado", estadoOccu));
+		filters.add(new FilterDTO("cidade", cidadeOccu));
+		filters.add(new FilterDTO("autor", autorOccu));
+		filters.add(new FilterDTO("editora", editoraOccu));
+		
+		search.setContent(anuncios.getContent());
+		search.setResults(anuncios.getTotalElements());
+		search.setPages(anuncios.getTotalPages());
+		search.setCurrentPage(anuncios.getNumber());
+		search.setFilters(filters);
+		return search;
+	}//*/
 	
 	public List<HistoricoAnuncio> listarMaisVendidos() {
 		Pageable pageable = PageRequest.of(0, 6);
