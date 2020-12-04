@@ -29,7 +29,14 @@ public class VendedorService {
 	
 	public SearchDTO getAll(
 			@Nullable String estado,
-			@Nullable	String cidade) {
+			@Nullable	String cidade,
+			@Nullable Integer pagina,
+			@Nullable Integer resultadosPorPagina) {
+		if (pagina == null)
+			pagina = 0;
+		if (resultadosPorPagina == null)
+			resultadosPorPagina = 16;
+		
 		List<String> parsedEstado = new ArrayList<>();
 		if (estado == null || estado.isEmpty())
 			enderecoService.getAll().stream()
@@ -49,7 +56,7 @@ public class VendedorService {
 			});//*/
 			
 		SearchDTO search = new SearchDTO();
-		Pageable pageable = PageRequest.of(0, 16); 
+		Pageable pageable = PageRequest.of(pagina, resultadosPorPagina); 
 		Page<Usuario> result = repository.getAll(parsedEstado, parsedCidade, pageable);
 		search.setContent(result.getContent());
 		search.setPages(result.getTotalPages());

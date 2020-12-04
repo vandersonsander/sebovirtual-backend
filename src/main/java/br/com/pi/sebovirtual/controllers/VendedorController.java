@@ -24,8 +24,10 @@ public class VendedorController {
 	@GetMapping
 	public ResponseEntity<SearchDTO> getAll(
 			@Nullable @RequestParam String estado,
-			@Nullable @RequestParam String cidade) {
-		return ResponseEntity.ok().body(service.getAll(estado, cidade));
+			@Nullable @RequestParam String cidade,
+			@Nullable @RequestParam Integer pagina,
+			@Nullable @RequestParam Integer resultadosPorPagina) {
+		return ResponseEntity.ok().body(service.getAll(estado, cidade, pagina, resultadosPorPagina));
 	}
 	
 	@GetMapping("{id}")
